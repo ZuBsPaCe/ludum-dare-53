@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://celmmw250jlul"]
+
+[ext_resource type="Texture2D" uid="uid://cighj5mxitlcd" path="res://Gui/Overlays/CityMapSprites/PlayerMapTex.png" id="1_vjrm0"]
+
+[node name="PlayerMapSprite" type="Sprite2D"]
+modulate = Color(0.0509804, 0.270588, 0.411765, 1)
+texture = ExtResource("1_vjrm0")

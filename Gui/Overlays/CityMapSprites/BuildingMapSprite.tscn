@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bno6mal3tlvlm"]
+
+[ext_resource type="Texture2D" uid="uid://brwnxy2j5rneg" path="res://Gui/Overlays/CityMapSprites/BuildingMapTex.png" id="1_f2ke1"]
+
+[node name="BuildingMapTex" type="Sprite2D"]
+texture = ExtResource("1_f2ke1")

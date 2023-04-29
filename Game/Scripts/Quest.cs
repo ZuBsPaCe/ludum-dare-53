@@ -10,4 +10,5 @@ public class Quest
     public Vector2I Coord { get; }
 
     public Node3D Objective { get; set; }
+    public Sprite2D QuestSprite { get; internal set; }
 }

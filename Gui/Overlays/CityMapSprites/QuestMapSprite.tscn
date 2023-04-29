@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdmuauyaiunw6"]
+
+[ext_resource type="Texture2D" uid="uid://bdm4bf1e5lw6k" path="res://Gui/Overlays/CityMapSprites/QuestMapTex.png" id="1_35std"]
+
+[node name="QuestMapSprite" type="Sprite2D"]
+modulate = Color(0.6, 0.25098, 1, 1)
+texture = ExtResource("1_35std")

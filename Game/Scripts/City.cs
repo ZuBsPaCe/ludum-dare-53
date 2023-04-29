@@ -65,6 +65,8 @@ public partial class City : Node3D
     }
 
 	private Map<TileType, Tile> _map;
+	private CityMap _cityMap;
+	private PlayerTruck _playerTruck;
 
 
     public override void _Ready()
@@ -73,6 +75,8 @@ public partial class City : Node3D
 		{ 
 			return; 
 		}
+
+		_playerTruck = GetNode<PlayerTruck>("%PlayerTruck");
 
         var root = GetNode<Node3D>(_genPath);
         foreach (var child in root.GetChildren())
@@ -94,6 +98,17 @@ public partial class City : Node3D
         GenerateTiles(root, _map);
     }
 
+    public override void _Process(double delta)
+    {
+		_cityMap.UpdatePlayerPos(_playerTruck.GlobalPosition, -_playerTruck.GlobalRotation.Y);
+    }
+
+    public void Setup(CityMap cityMap)
+	{
+		_cityMap = cityMap;
+		_cityMap.Setup(_map, _tileSize);
+    }
+
 	public bool TryGetRandomCoord(HashSet<TileType> tileTypes, out Vector2I coord)
 	{
 		return _map.TryGetRandomCoord(tileTypes, out coord);
@@ -106,13 +121,14 @@ public partial class City : Node3D
 		objective.GlobalPosition = GetRandomPosInCoord(quest.Coord);
 
 		quest.Objective = objective;
+
+		_cityMap.AddQuest(quest);
     }
 
 	private Vector3 GetRandomPosInCoord(Vector2I coord)
     {
         return new Vector3(coord.X * _tileSize + GD.RandPosInt() % _tileSize, 0, coord.Y * _tileSize + GD.RandPosInt() % _tileSize);
     }
-
 
     private void RunGenerate(bool debug)
     {

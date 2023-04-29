@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg4qv1ynj1ts7"]
+[gd_scene load_steps=6 format=3 uid="uid://dg4qv1ynj1ts7"]
 
 [ext_resource type="Script" path="res://Game/Scripts/Level.cs" id="1_y7fik"]
 [ext_resource type="PackedScene" uid="uid://bwo32hgng7lfi" path="res://Scenes/City.tscn" id="2_bcatt"]
 [ext_resource type="PackedScene" uid="uid://thy7el8r112x" path="res://Base/Framework/StateMachine.tscn" id="2_lxsuu"]
+[ext_resource type="PackedScene" uid="uid://c4pg2yd6b5kal" path="res://Gui/Overlays/CityMap.tscn" id="4_v1eu2"]
+[ext_resource type="PackedScene" uid="uid://b8tuljyi1sqsm" path="res://Gui/Overlays/DrivingOverlay.tscn" id="5_wcoc3"]
 
 [node name="Level" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_y7fik")
 _sceneStateMachine = ExtResource("2_lxsuu")
 _sceneCity = ExtResource("2_bcatt")
+
+[node name="CityMap" parent="." instance=ExtResource("4_v1eu2")]
+
+[node name="DrivingOverlay" parent="." instance=ExtResource("5_wcoc3")]

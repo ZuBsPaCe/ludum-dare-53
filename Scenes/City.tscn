@@ -39,6 +39,7 @@ _smoothing = 3.0
 current = true
 
 [node name="PlayerTruck" parent="." instance=ExtResource("6_m11b1")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 8.58693, 240)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cj8loufbngjxq" path="res://Gui/Menus/MainMenu.tscn" id="3_2d3mo"]
 [ext_resource type="PackedScene" uid="uid://dg4qv1ynj1ts7" path="res://Scenes/Level.tscn" id="4_unqcp"]
 [ext_resource type="PackedScene" uid="uid://b3pp16r1lhk4a" path="res://Game/Sounds/SoundStore.tscn" id="4_veahi"]
-[ext_resource type="PackedScene" uid="uid://dgo1qw5xjy3o4" path="res://Gui/Menus/PauseMenu.tscn" id="5_wvk86"]
+[ext_resource type="PackedScene" uid="uid://b3vy06p0ir4u3" path="res://Gui/Menus/PauseMenu.tscn" id="5_wvk86"]
 
 [node name="Main" type="Node"]
 process_mode = 3

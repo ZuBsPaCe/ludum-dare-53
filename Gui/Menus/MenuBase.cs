@@ -108,11 +108,14 @@ public abstract partial class MenuBase : CanvasLayer
 
         if (_currentControl != null)
         {
-            Tween hideTween = _currentControl.CreateTween();
+            // Need a local vor for QueueFree()
+            Control control = _currentControl;
+
+            Tween hideTween = control.CreateTween();
             hideTween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-            hideTween.TweenProperty(_currentControl, "position", new Vector2(0, 1080), TRANSITION_DURATION);
-            hideTween.Parallel().TweenProperty(_currentControl, "modulate", new Color(1, 1, 1, 0), TRANSITION_DURATION);
-            hideTween.TweenCallback(Callable.From(() => _currentControl.QueueFree()));
+            hideTween.TweenProperty(control, "position", new Vector2(0, 1080), TRANSITION_DURATION);
+            hideTween.Parallel().TweenProperty(control, "modulate", new Color(1, 1, 1, 0), TRANSITION_DURATION);
+            hideTween.TweenCallback(Callable.From(() => control.QueueFree()));
 
             _currentControl = null;
         }
@@ -129,10 +132,10 @@ public abstract partial class MenuBase : CanvasLayer
             _currentControl.Modulate = new Color(1, 1, 1, 0);
             AddChild(_currentControl);
 
-            Tween show_tween = _currentControl.CreateTween();
+            Tween show_tween = nextControl.CreateTween();
             show_tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-            show_tween.TweenProperty(_currentControl, "position", new Vector2(0, 0), TRANSITION_DURATION);
-            show_tween.Parallel().TweenProperty(_currentControl, "modulate", new Color(1, 1, 1, 1), TRANSITION_DURATION);
+            show_tween.TweenProperty(nextControl, "position", new Vector2(0, 0), TRANSITION_DURATION);
+            show_tween.Parallel().TweenProperty(nextControl, "modulate", new Color(1, 1, 1, 1), TRANSITION_DURATION);
 
             Sounds.PlaySound(SoundType.MainMenuSelect);
         }

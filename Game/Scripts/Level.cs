@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Level : Node3D
@@ -8,6 +7,9 @@ public partial class Level : Node3D
     [Export] private PackedScene _sceneCity;
 
     private City _city;
+    private CityMap _cityMap;
+    private DrivingOverlay _drivingOverlay;
+
     private StateMachine _levelStateMachine;
 
 
@@ -16,6 +18,11 @@ public partial class Level : Node3D
 
     public override void _Ready()
     {
+        _cityMap = GetNode<CityMap>("CityMap");
+        _drivingOverlay = GetNode<DrivingOverlay>("DrivingOverlay");
+
+        _drivingOverlay.Setup(_cityMap.GetTexture());
+
         _streetTileTypes.Add(TileType.StreetHor);
         _streetTileTypes.Add(TileType.StreetVer);
         _streetTileTypes.Add(TileType.StreetCrossing);
@@ -26,6 +33,7 @@ public partial class Level : Node3D
         _levelStateMachine = _sceneStateMachine.Instantiate<StateMachine>();
         AddChild(_levelStateMachine, false, InternalMode.Front);
         _levelStateMachine.Setup(LevelState.Init, SwitchLevelState);
+
 
         GD.Randomize();
     }
@@ -49,6 +57,9 @@ public partial class Level : Node3D
 
                         _city = _sceneCity.Instantiate<City>();
                         AddChild(_city);
+
+                        _city.Setup(_cityMap);
+
 
                         EventHub.EmitSwitchLevelState(LevelState.Running);
                     }
@@ -74,7 +85,6 @@ public partial class Level : Node3D
             default:
                 {
                     Debug.Fail($"Unknown enum [{enumValue}]");
-
                 }
                 break;
         }

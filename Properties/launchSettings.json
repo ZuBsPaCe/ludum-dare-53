@@ -7,7 +7,7 @@
       "commandName": "Executable",
       "executablePath": "C:\\special\\godot\\official\\Godot_v4.0.2-stable_mono_win64\\Godot_v4.0.2-stable_mono_win64.exe",
       "commandLineArgs": "--path . --verbose",
-      "workingDirectory": "C:\\code\\personal\\godot\\2023\\13-csharp-base"
+      "workingDirectory": "C:\\code\\personal\\github.com\\ludum-dare-53"
     }
   }
 }

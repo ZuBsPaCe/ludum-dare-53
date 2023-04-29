@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c88v4bim6v711"]
+
+[ext_resource type="PackedScene" uid="uid://cbrtpicyyidpg" path="res://Game/Truck/TruckWheel.blend" id="1_tpjd8"]
+[ext_resource type="Material" uid="uid://dv5161llx6xdt" path="res://Game/Truck/TruckWheelMaterial.tres" id="2_k7a2k"]
+
+[node name="TruckWheel" instance=ExtResource("1_tpjd8")]
+
+[node name="TruckWheel" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_k7a2k")

@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://ptsmjv3mjisf"]
+
+[ext_resource type="PackedScene" uid="uid://56jlt84osiqe" path="res://Game/Truck/Truck.tscn" id="1_botde"]
+[ext_resource type="Script" path="res://Game/Truck/PlayerTruck.cs" id="1_ojfq6"]
+[ext_resource type="PackedScene" uid="uid://c88v4bim6v711" path="res://Game/Truck/TruckWheel.tscn" id="2_re51u"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_km1iv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqvt7"]
+size = Vector3(3.5, 2, 6)
+
+[node name="PlayerTruck" type="VehicleBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_km1iv")
+script = ExtResource("1_ojfq6")
+_maxForce = 100.0
+
+[node name="WheelFrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -7.8501, 5.6)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 0.8
+wheel_friction_slip = 4.0
+suspension_travel = 2.0
+suspension_stiffness = 40.0
+damping_compression = 0.88
+damping_relaxation = 0.95
+
+[node name="TruckWheel" parent="WheelFrontLeft" instance=ExtResource("2_re51u")]
+
+[node name="WheelFrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, -7.8501, 5.6)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 0.8
+wheel_friction_slip = 4.0
+suspension_travel = 2.0
+suspension_stiffness = 40.0
+damping_compression = 0.88
+damping_relaxation = 0.95
+
+[node name="TruckWheel" parent="WheelFrontRight" instance=ExtResource("2_re51u")]
+
+[node name="WheelBackLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -7.8501, 1.6)
+wheel_roll_influence = 0.8
+wheel_friction_slip = 1.5
+suspension_travel = 2.0
+suspension_stiffness = 40.0
+damping_compression = 0.88
+damping_relaxation = 0.95
+
+[node name="TruckWheel" parent="WheelBackLeft" instance=ExtResource("2_re51u")]
+
+[node name="WheelBackRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, -7.8501, 1.6)
+wheel_roll_influence = 0.8
+wheel_friction_slip = 1.5
+suspension_travel = 2.0
+suspension_stiffness = 40.0
+damping_compression = 0.88
+damping_relaxation = 0.95
+
+[node name="TruckWheel" parent="WheelBackRight" instance=ExtResource("2_re51u")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.2501, 3.6)
+shape = SubResource("BoxShape3D_jqvt7")
+
+[node name="Truck" parent="." instance=ExtResource("1_botde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2501, 3.6)

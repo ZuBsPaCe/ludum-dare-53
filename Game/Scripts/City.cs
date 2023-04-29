@@ -92,13 +92,6 @@ public partial class City : Node3D
                 tile.Position = new Vector3(x, 0, y);
                 root.AddChild(tile);
                 tile.Owner = this;
-
-
-
-				//var streetVer = _sceneStreetVer.Instantiate<Node3D>();
-				//streetVer.Position = new Vector3(x, 0, y);
-				//root.AddChild(streetVer);
-				//streetVer.Owner = this;
 			}
 		}
     }

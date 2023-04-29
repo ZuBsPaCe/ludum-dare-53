@@ -16,6 +16,21 @@ sky_material = SubResource("ProceduralSkyMaterial_jf4rs")
 [sub_resource type="Environment" id="Environment_t7m01"]
 background_mode = 2
 sky = SubResource("Sky_psxqe")
+tonemap_mode = 2
+tonemap_exposure = 0.7
+tonemap_white = 1.04
+ssao_enabled = true
+ssao_intensity = 4.0
+ssil_radius = 3.02
+ssil_intensity = 2.32
+sdfgi_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_emission = Color(0.376471, 0.796078, 0.933333, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.83
+adjustment_contrast = 1.17
+adjustment_saturation = 0.67
 
 [node name="City" type="Node3D"]
 script = ExtResource("1_8udbb")
@@ -38,8 +53,6 @@ _smoothing = 5.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t7m01")
-
-[node name="LightmapGI" type="LightmapGI" parent="."]
 
 [node name="Generated" type="Node3D" parent="."]
 

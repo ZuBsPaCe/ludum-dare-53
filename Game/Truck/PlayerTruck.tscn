@@ -12,7 +12,6 @@ size = Vector3(3.5, 2, 6)
 [node name="PlayerTruck" type="VehicleBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
 script = ExtResource("1_ojfq6")
-_maxForce = 100.0
 
 [node name="WheelFrontLeft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -7.8501, 5.6)

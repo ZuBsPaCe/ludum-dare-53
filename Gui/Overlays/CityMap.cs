@@ -79,7 +79,7 @@ public partial class CityMap : SubViewport
         AddChild(questSprite);
         questSprite.Scale = new Vector2(_textureScale, _textureScale);
 
-        questSprite.Position = GetScalePos(quest.Objective.GlobalPosition);
+        questSprite.Position = GetScalePos(quest.QuestMarker.GlobalPosition);
 
         quest.QuestSprite = questSprite;
     }

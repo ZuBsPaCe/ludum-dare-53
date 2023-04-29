@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System.Collections;
 using System.Collections.Generic;
 
 [Tool]
@@ -34,7 +33,7 @@ public partial class City : Node3D
 	private Array<PackedScene> _sceneBuildings;
 
 	[Export]
-	private PackedScene _sceneObjective;
+	private PackedScene _sceneQuestMarker;
 
 
 	[Export]
@@ -100,7 +99,12 @@ public partial class City : Node3D
 
     public override void _Process(double delta)
     {
-		_cityMap.UpdatePlayerPos(_playerTruck.GlobalPosition, -_playerTruck.GlobalRotation.Y);
+        if (Engine.IsEditorHint())
+        {
+            return;
+        }
+
+        _cityMap.UpdatePlayerPos(_playerTruck.GlobalPosition, -_playerTruck.GlobalRotation.Y);
     }
 
     public void Setup(CityMap cityMap)
@@ -116,11 +120,11 @@ public partial class City : Node3D
 
     public void AddQuest(Quest quest)
     {
-		Node3D objective = _sceneObjective.Instantiate<Node3D>();
-		AddChild(objective);
-		objective.GlobalPosition = GetRandomPosInCoord(quest.Coord);
+		Node3D questMarker = _sceneQuestMarker.Instantiate<Node3D>();
+		AddChild(questMarker);
+		questMarker.GlobalPosition = GetRandomPosInCoord(quest.Coord);
 
-		quest.Objective = objective;
+		quest.QuestMarker = questMarker;
 
 		_cityMap.AddQuest(quest);
     }

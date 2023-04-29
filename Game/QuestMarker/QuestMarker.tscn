@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b83xl5jdd7ce6"]
+
+[ext_resource type="PackedScene" uid="uid://4ybr4pi21owk" path="res://Game/QuestMarker/QuestMarker.blend" id="1_xnrgh"]
+[ext_resource type="Material" uid="uid://b74a7ybxx24hu" path="res://Game/QuestMarker/QuestMarkerMaterial.tres" id="2_dejhu"]
+
+[node name="QuestMarker" instance=ExtResource("1_xnrgh")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_dejhu")

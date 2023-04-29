@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://qqp1d1uy6yfa"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b74a7ybxx24hu"]
 
-[ext_resource type="Shader" path="res://Game/Objective/ObjectiveMaterialShader.gdshader" id="1_1vwfu"]
+[ext_resource type="Shader" path="res://Game/QuestMarker/QuestMarkerMaterialShader.gdshader" id="1_1vwfu"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_t8f5g"]
 domain_warp_enabled = true

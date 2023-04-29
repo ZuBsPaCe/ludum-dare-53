@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://4ybr4pi21owk"
-path="res://.godot/imported/Objective.blend-8724de8f0a04412da061530de3047225.scn"
+path="res://.godot/imported/QuestMarker.blend-dbc37f5ccce12046fe6b711baf237dd7.scn"
 
 [deps]
 
-source_file="res://Game/Objective/Objective.blend"
-dest_files=["res://.godot/imported/Objective.blend-8724de8f0a04412da061530de3047225.scn"]
+source_file="res://Game/QuestMarker/QuestMarker.blend"
+dest_files=["res://.godot/imported/QuestMarker.blend-dbc37f5ccce12046fe6b711baf237dd7.scn"]
 
 [params]
 

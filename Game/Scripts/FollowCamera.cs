@@ -7,6 +7,7 @@ public partial class FollowCamera : Camera3D
 	[Export] private Vector3 _offset;
 	[Export] private float _smoothing = 1;
 
+	[Export] private float _fixedHeight = 15f;
 
 	private Node3D _target;
 
@@ -18,6 +19,7 @@ public partial class FollowCamera : Camera3D
     public override void _PhysicsProcess(double delta)
     {
 		var targetGlobalTransform = _target.GlobalTransform.TranslatedLocal(_offset);
+		targetGlobalTransform.Origin.Y = _fixedHeight;
 		GlobalTransform = GlobalTransform.InterpolateWith(targetGlobalTransform, (float)(_smoothing * delta));
 
 		LookAt(_target.GlobalTransform.Origin, Vector3.Up);

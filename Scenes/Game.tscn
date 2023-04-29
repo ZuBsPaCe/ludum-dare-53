@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg4qv1ynj1ts7"]
+
+[ext_resource type="Script" path="res://Game/Scripts/Game.cs" id="1_gfurf"]
+[ext_resource type="PackedScene" uid="uid://bwo32hgng7lfi" path="res://Scenes/City.tscn" id="2_bcatt"]
+
+[node name="Game" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_gfurf")
+
+[node name="City" parent="." instance=ExtResource("2_bcatt")]

@@ -10,6 +10,8 @@ public partial class StateMachine : Node
     private Queue<int> _stateQueue = new();
     private int _state = -1;
 
+    private bool _disabled;
+
     public delegate void StateMachineFunc(StateMachine stateMachine);
 
     public StateMachineAction Action { get; private set; }
@@ -17,7 +19,7 @@ public partial class StateMachine : Node
     public void Setup<T>(T initialState, Action<StateMachine> callback) where T : Enum
     {
         _callback = callback;
-        SetState(initialState);
+        SetStateImmediate(initialState);
     }
 
     public override void _Process(double delta)
@@ -47,12 +49,43 @@ public partial class StateMachine : Node
         return Unsafe.As<int, T>(ref _state);
     }
 
+    public bool IsState<T>(T state) where T : Enum
+    {
+        int checkState = Unsafe.As<T, int>(ref state);
+        return checkState == _state;
+    }
+
     public void SetState<T>(T newState) where T : Enum
     {
+        if (_disabled)
+            return;
+
         // https://stackoverflow.com/a/60022245/998987
         int intState = Unsafe.As<T, int>(ref newState);
 
         Debug.Assert(intState >= 0);
         _stateQueue.Enqueue(intState);
+    }
+
+    public void SetStateImmediate<T>(T newState) where T : Enum
+    {
+        if (_disabled)
+            return;
+
+        // https://stackoverflow.com/a/60022245/998987
+        int intState = Unsafe.As<T, int>(ref newState);
+
+        Debug.Assert(intState >= 0);
+        _stateQueue.Clear();
+
+        _state = intState;
+        Action = StateMachineAction.Start;
+        _callback?.Invoke(this);
+        Action = StateMachineAction.Process;
+    }
+
+    public void SetDisabled(bool disabled)
+    {
+        _disabled = disabled;
     }
 }

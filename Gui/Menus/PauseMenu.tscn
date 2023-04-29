@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgo1qw5xjy3o4"]
+
+[ext_resource type="Script" path="res://Game/Scripts/PauseMenu.cs" id="1_t3xki"]
+[ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="3_5mh5n"]
+[ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="4_ovlci"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_t3xki")
+_sceneSettingsControl = ExtResource("3_5mh5n")
+
+[node name="ButtonBar" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 1344.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("4_ovlci")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonBar"]
+layout_mode = 2
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
+toggle_mode = true
+text = "Continue"
+
+[node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MainMenuButton")
+toggle_mode = true
+text = "Settings"
+
+[node name="Spacer" type="Control" parent="ButtonBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../ContinueButton")
+toggle_mode = true
+text = "Exit to Main Menu"

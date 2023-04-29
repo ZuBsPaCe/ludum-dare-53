@@ -1,6 +1,5 @@
 ﻿using Godot;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 public class Runner
@@ -16,7 +15,7 @@ public class Runner
         _aborted = true;
 
         foreach (var animationPlayer in _animationPlayers)
-            animationPlayer.Stop(false);
+            animationPlayer.Stop(true);
 
         _animationPlayers.Clear();
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dovqjv2urrfmh"]
+
+[ext_resource type="PackedScene" uid="uid://ipdpg10ae221" path="res://Game/Street/StreetStraight.tscn" id="1_uy76x"]
+
+[node name="StreetHor" type="Node3D"]
+
+[node name="StreetStraight" parent="." instance=ExtResource("1_uy76x")]

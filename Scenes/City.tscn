@@ -1,0 +1,1761 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwo32hgng7lfi"]
+
+[ext_resource type="Script" path="res://Game/Scripts/City.cs" id="1_8udbb"]
+[ext_resource type="PackedScene" uid="uid://j8dvlrelfe3u" path="res://Game/Street/StreetCrossing.tscn" id="1_58f1t"]
+[ext_resource type="PackedScene" uid="uid://dovqjv2urrfmh" path="res://Game/Street/StreetHor.tscn" id="2_122oa"]
+[ext_resource type="PackedScene" uid="uid://b137nl5do1ci" path="res://Game/Building/SkyScraper01.tscn" id="3_ar6hr"]
+[ext_resource type="PackedScene" uid="uid://cid3a15xbea1p" path="res://Game/Street/StreetVer.tscn" id="4_k44w8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jf4rs"]
+
+[sub_resource type="Sky" id="Sky_psxqe"]
+sky_material = SubResource("ProceduralSkyMaterial_jf4rs")
+
+[sub_resource type="Environment" id="Environment_t7m01"]
+background_mode = 2
+sky = SubResource("Sky_psxqe")
+
+[node name="City" type="Node3D"]
+script = ExtResource("1_8udbb")
+_xSectionCount = 4
+_ySectionCount = 4
+_tileSize = 20
+_genPath = NodePath("Generated")
+_sceneStreetHor = ExtResource("2_122oa")
+_sceneStreetVer = ExtResource("4_k44w8")
+_sceneStreetCrossing = ExtResource("1_58f1t")
+_sceneBuildings = [ExtResource("3_ar6hr")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t7m01")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+
+[node name="Generated" type="Node3D" parent="."]
+
+[node name="@StreetCrossing@93042" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+
+[node name="@StreetHor@93043" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="@StreetHor@93044" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
+
+[node name="@StreetHor@93045" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0)
+
+[node name="@StreetHor@93046" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0)
+
+[node name="@StreetHor@93047" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="StreetVer" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+
+[node name="@SkyScraper01@93048" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 20)
+
+[node name="@SkyScraper01@93049" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 20)
+
+[node name="@SkyScraper01@93050" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 20)
+
+[node name="@SkyScraper01@93051" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 20)
+
+[node name="@SkyScraper01@93052" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 20)
+
+[node name="@StreetVer@93053" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="@SkyScraper01@93054" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 40)
+
+[node name="@SkyScraper01@93055" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 40)
+
+[node name="@SkyScraper01@93056" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 40)
+
+[node name="@SkyScraper01@93057" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 40)
+
+[node name="@SkyScraper01@93058" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 40)
+
+[node name="@StreetVer@93059" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60)
+
+[node name="@SkyScraper01@93060" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 60)
+
+[node name="@SkyScraper01@93061" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 60)
+
+[node name="@SkyScraper01@93062" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 60)
+
+[node name="@SkyScraper01@93063" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 60)
+
+[node name="@SkyScraper01@93064" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 60)
+
+[node name="@StreetVer@93065" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 80)
+
+[node name="@SkyScraper01@93066" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 80)
+
+[node name="@SkyScraper01@93067" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 80)
+
+[node name="@SkyScraper01@93068" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 80)
+
+[node name="@SkyScraper01@93069" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 80)
+
+[node name="@SkyScraper01@93070" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 80)
+
+[node name="@StreetVer@93071" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+
+[node name="@SkyScraper01@93072" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 100)
+
+[node name="@SkyScraper01@93073" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 100)
+
+[node name="@SkyScraper01@93074" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 100)
+
+[node name="@SkyScraper01@93075" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 100)
+
+[node name="@SkyScraper01@93076" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 100)
+
+[node name="@StreetCrossing@93077" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 0)
+
+[node name="@StreetHor@93078" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 0)
+
+[node name="@StreetHor@93079" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 0)
+
+[node name="@StreetHor@93080" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 0)
+
+[node name="@StreetHor@93081" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
+
+[node name="@StreetHor@93082" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 0)
+
+[node name="@StreetVer@93083" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 20)
+
+[node name="@SkyScraper01@93084" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 20)
+
+[node name="@SkyScraper01@93085" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 20)
+
+[node name="@SkyScraper01@93086" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 20)
+
+[node name="@SkyScraper01@93087" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 20)
+
+[node name="@SkyScraper01@93088" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 20)
+
+[node name="@StreetVer@93089" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 40)
+
+[node name="@SkyScraper01@93090" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 40)
+
+[node name="@SkyScraper01@93091" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 40)
+
+[node name="@SkyScraper01@93092" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 40)
+
+[node name="@SkyScraper01@93093" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 40)
+
+[node name="@SkyScraper01@93094" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 40)
+
+[node name="@StreetVer@93095" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 60)
+
+[node name="@SkyScraper01@93096" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 60)
+
+[node name="@SkyScraper01@93097" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 60)
+
+[node name="@SkyScraper01@93098" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 60)
+
+[node name="@SkyScraper01@93099" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 60)
+
+[node name="@SkyScraper01@93100" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 60)
+
+[node name="@StreetVer@93101" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 80)
+
+[node name="@SkyScraper01@93102" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 80)
+
+[node name="@SkyScraper01@93103" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 80)
+
+[node name="@SkyScraper01@93104" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 80)
+
+[node name="@SkyScraper01@93105" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 80)
+
+[node name="@SkyScraper01@93106" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 80)
+
+[node name="@StreetVer@93107" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 100)
+
+[node name="@SkyScraper01@93108" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 100)
+
+[node name="@SkyScraper01@93109" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 100)
+
+[node name="@SkyScraper01@93110" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 100)
+
+[node name="@SkyScraper01@93111" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 100)
+
+[node name="@SkyScraper01@93112" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 100)
+
+[node name="@StreetCrossing@93113" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 0)
+
+[node name="@StreetHor@93114" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 0)
+
+[node name="@StreetHor@93115" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 0)
+
+[node name="@StreetHor@93116" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 0)
+
+[node name="@StreetHor@93117" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 0)
+
+[node name="@StreetHor@93118" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 0)
+
+[node name="@StreetVer@93119" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 20)
+
+[node name="@SkyScraper01@93120" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 20)
+
+[node name="@SkyScraper01@93121" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 20)
+
+[node name="@SkyScraper01@93122" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 20)
+
+[node name="@SkyScraper01@93123" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 20)
+
+[node name="@SkyScraper01@93124" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 20)
+
+[node name="@StreetVer@93125" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 40)
+
+[node name="@SkyScraper01@93126" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 40)
+
+[node name="@SkyScraper01@93127" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 40)
+
+[node name="@SkyScraper01@93128" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 40)
+
+[node name="@SkyScraper01@93129" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 40)
+
+[node name="@SkyScraper01@93130" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 40)
+
+[node name="@StreetVer@93131" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 60)
+
+[node name="@SkyScraper01@93132" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 60)
+
+[node name="@SkyScraper01@93133" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 60)
+
+[node name="@SkyScraper01@93134" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 60)
+
+[node name="@SkyScraper01@93135" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 60)
+
+[node name="@SkyScraper01@93136" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 60)
+
+[node name="@StreetVer@93137" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 80)
+
+[node name="@SkyScraper01@93138" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 80)
+
+[node name="@SkyScraper01@93139" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 80)
+
+[node name="@SkyScraper01@93140" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 80)
+
+[node name="@SkyScraper01@93141" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 80)
+
+[node name="@SkyScraper01@93142" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 80)
+
+[node name="@StreetVer@93143" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 100)
+
+[node name="@SkyScraper01@93144" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 100)
+
+[node name="@SkyScraper01@93145" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 100)
+
+[node name="@SkyScraper01@93146" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 100)
+
+[node name="@SkyScraper01@93147" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 100)
+
+[node name="@SkyScraper01@93148" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 100)
+
+[node name="@StreetCrossing@93149" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 0)
+
+[node name="@StreetHor@93150" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 0)
+
+[node name="@StreetHor@93151" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 0)
+
+[node name="@StreetHor@93152" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 0)
+
+[node name="@StreetHor@93153" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 0)
+
+[node name="@StreetHor@93154" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 0)
+
+[node name="@StreetVer@93155" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 20)
+
+[node name="@SkyScraper01@93156" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 20)
+
+[node name="@SkyScraper01@93157" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 20)
+
+[node name="@SkyScraper01@93158" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 20)
+
+[node name="@SkyScraper01@93159" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 20)
+
+[node name="@SkyScraper01@93160" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 20)
+
+[node name="@StreetVer@93161" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 40)
+
+[node name="@SkyScraper01@93162" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 40)
+
+[node name="@SkyScraper01@93163" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 40)
+
+[node name="@SkyScraper01@93164" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 40)
+
+[node name="@SkyScraper01@93165" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 40)
+
+[node name="@SkyScraper01@93166" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 40)
+
+[node name="@StreetVer@93167" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 60)
+
+[node name="@SkyScraper01@93168" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 60)
+
+[node name="@SkyScraper01@93169" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 60)
+
+[node name="@SkyScraper01@93170" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 60)
+
+[node name="@SkyScraper01@93171" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 60)
+
+[node name="@SkyScraper01@93172" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 60)
+
+[node name="@StreetVer@93173" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 80)
+
+[node name="@SkyScraper01@93174" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 80)
+
+[node name="@SkyScraper01@93175" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 80)
+
+[node name="@SkyScraper01@93176" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 80)
+
+[node name="@SkyScraper01@93177" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 80)
+
+[node name="@SkyScraper01@93178" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 80)
+
+[node name="@StreetVer@93179" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 100)
+
+[node name="@SkyScraper01@93180" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 100)
+
+[node name="@SkyScraper01@93181" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 100)
+
+[node name="@SkyScraper01@93182" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 100)
+
+[node name="@SkyScraper01@93183" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 100)
+
+[node name="@SkyScraper01@93184" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 100)
+
+[node name="@StreetCrossing@93185" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 120)
+
+[node name="@StreetHor@93186" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 120)
+
+[node name="@StreetHor@93187" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 120)
+
+[node name="@StreetHor@93188" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 120)
+
+[node name="@StreetHor@93189" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 120)
+
+[node name="@StreetHor@93190" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 120)
+
+[node name="@StreetVer@93191" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 140)
+
+[node name="@SkyScraper01@93192" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 140)
+
+[node name="@SkyScraper01@93193" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 140)
+
+[node name="@SkyScraper01@93194" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 140)
+
+[node name="@SkyScraper01@93195" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 140)
+
+[node name="@SkyScraper01@93196" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 140)
+
+[node name="@StreetVer@93197" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 160)
+
+[node name="@SkyScraper01@93198" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 160)
+
+[node name="@SkyScraper01@93199" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 160)
+
+[node name="@SkyScraper01@93200" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 160)
+
+[node name="@SkyScraper01@93201" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 160)
+
+[node name="@SkyScraper01@93202" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 160)
+
+[node name="@StreetVer@93203" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 180)
+
+[node name="@SkyScraper01@93204" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 180)
+
+[node name="@SkyScraper01@93205" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 180)
+
+[node name="@SkyScraper01@93206" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 180)
+
+[node name="@SkyScraper01@93207" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 180)
+
+[node name="@SkyScraper01@93208" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 180)
+
+[node name="@StreetVer@93209" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 200)
+
+[node name="@SkyScraper01@93210" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 200)
+
+[node name="@SkyScraper01@93211" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 200)
+
+[node name="@SkyScraper01@93212" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 200)
+
+[node name="@SkyScraper01@93213" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 200)
+
+[node name="@SkyScraper01@93214" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 200)
+
+[node name="@StreetVer@93215" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 220)
+
+[node name="@SkyScraper01@93216" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 220)
+
+[node name="@SkyScraper01@93217" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 220)
+
+[node name="@SkyScraper01@93218" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 220)
+
+[node name="@SkyScraper01@93219" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 220)
+
+[node name="@SkyScraper01@93220" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 220)
+
+[node name="@StreetCrossing@93221" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 120)
+
+[node name="@StreetHor@93222" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 120)
+
+[node name="@StreetHor@93223" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 120)
+
+[node name="@StreetHor@93224" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 120)
+
+[node name="@StreetHor@93225" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 120)
+
+[node name="@StreetHor@93226" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 120)
+
+[node name="@StreetVer@93227" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 140)
+
+[node name="@SkyScraper01@93228" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 140)
+
+[node name="@SkyScraper01@93229" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 140)
+
+[node name="@SkyScraper01@93230" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 140)
+
+[node name="@SkyScraper01@93231" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 140)
+
+[node name="@SkyScraper01@93232" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 140)
+
+[node name="@StreetVer@93233" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 160)
+
+[node name="@SkyScraper01@93234" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 160)
+
+[node name="@SkyScraper01@93235" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 160)
+
+[node name="@SkyScraper01@93236" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 160)
+
+[node name="@SkyScraper01@93237" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 160)
+
+[node name="@SkyScraper01@93238" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 160)
+
+[node name="@StreetVer@93239" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 180)
+
+[node name="@SkyScraper01@93240" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 180)
+
+[node name="@SkyScraper01@93241" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 180)
+
+[node name="@SkyScraper01@93242" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 180)
+
+[node name="@SkyScraper01@93243" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 180)
+
+[node name="@SkyScraper01@93244" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 180)
+
+[node name="@StreetVer@93245" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 200)
+
+[node name="@SkyScraper01@93246" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 200)
+
+[node name="@SkyScraper01@93247" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 200)
+
+[node name="@SkyScraper01@93248" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 200)
+
+[node name="@SkyScraper01@93249" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 200)
+
+[node name="@SkyScraper01@93250" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 200)
+
+[node name="@StreetVer@93251" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 220)
+
+[node name="@SkyScraper01@93252" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 220)
+
+[node name="@SkyScraper01@93253" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 220)
+
+[node name="@SkyScraper01@93254" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 220)
+
+[node name="@SkyScraper01@93255" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 220)
+
+[node name="@SkyScraper01@93256" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 220)
+
+[node name="@StreetCrossing@93257" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 120)
+
+[node name="@StreetHor@93258" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 120)
+
+[node name="@StreetHor@93259" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 120)
+
+[node name="@StreetHor@93260" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 120)
+
+[node name="@StreetHor@93261" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 120)
+
+[node name="@StreetHor@93262" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 120)
+
+[node name="@StreetVer@93263" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 140)
+
+[node name="@SkyScraper01@93264" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 140)
+
+[node name="@SkyScraper01@93265" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 140)
+
+[node name="@SkyScraper01@93266" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 140)
+
+[node name="@SkyScraper01@93267" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 140)
+
+[node name="@SkyScraper01@93268" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 140)
+
+[node name="@StreetVer@93269" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 160)
+
+[node name="@SkyScraper01@93270" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 160)
+
+[node name="@SkyScraper01@93271" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 160)
+
+[node name="@SkyScraper01@93272" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 160)
+
+[node name="@SkyScraper01@93273" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 160)
+
+[node name="@SkyScraper01@93274" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 160)
+
+[node name="@StreetVer@93275" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 180)
+
+[node name="@SkyScraper01@93276" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 180)
+
+[node name="@SkyScraper01@93277" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 180)
+
+[node name="@SkyScraper01@93278" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 180)
+
+[node name="@SkyScraper01@93279" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 180)
+
+[node name="@SkyScraper01@93280" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 180)
+
+[node name="@StreetVer@93281" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 200)
+
+[node name="@SkyScraper01@93282" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 200)
+
+[node name="@SkyScraper01@93283" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 200)
+
+[node name="@SkyScraper01@93284" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 200)
+
+[node name="@SkyScraper01@93285" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 200)
+
+[node name="@SkyScraper01@93286" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 200)
+
+[node name="@StreetVer@93287" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 220)
+
+[node name="@SkyScraper01@93288" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 220)
+
+[node name="@SkyScraper01@93289" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 220)
+
+[node name="@SkyScraper01@93290" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 220)
+
+[node name="@SkyScraper01@93291" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 220)
+
+[node name="@SkyScraper01@93292" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 220)
+
+[node name="@StreetCrossing@93293" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 120)
+
+[node name="@StreetHor@93294" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 120)
+
+[node name="@StreetHor@93295" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 120)
+
+[node name="@StreetHor@93296" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 120)
+
+[node name="@StreetHor@93297" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 120)
+
+[node name="@StreetHor@93298" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 120)
+
+[node name="@StreetVer@93299" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 140)
+
+[node name="@SkyScraper01@93300" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 140)
+
+[node name="@SkyScraper01@93301" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 140)
+
+[node name="@SkyScraper01@93302" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 140)
+
+[node name="@SkyScraper01@93303" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 140)
+
+[node name="@SkyScraper01@93304" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 140)
+
+[node name="@StreetVer@93305" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 160)
+
+[node name="@SkyScraper01@93306" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 160)
+
+[node name="@SkyScraper01@93307" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 160)
+
+[node name="@SkyScraper01@93308" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 160)
+
+[node name="@SkyScraper01@93309" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 160)
+
+[node name="@SkyScraper01@93310" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 160)
+
+[node name="@StreetVer@93311" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 180)
+
+[node name="@SkyScraper01@93312" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 180)
+
+[node name="@SkyScraper01@93313" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 180)
+
+[node name="@SkyScraper01@93314" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 180)
+
+[node name="@SkyScraper01@93315" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 180)
+
+[node name="@SkyScraper01@93316" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 180)
+
+[node name="@StreetVer@93317" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 200)
+
+[node name="@SkyScraper01@93318" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 200)
+
+[node name="@SkyScraper01@93319" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 200)
+
+[node name="@SkyScraper01@93320" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 200)
+
+[node name="@SkyScraper01@93321" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 200)
+
+[node name="@SkyScraper01@93322" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 200)
+
+[node name="@StreetVer@93323" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 220)
+
+[node name="@SkyScraper01@93324" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 220)
+
+[node name="@SkyScraper01@93325" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 220)
+
+[node name="@SkyScraper01@93326" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 220)
+
+[node name="@SkyScraper01@93327" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 220)
+
+[node name="@SkyScraper01@93328" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 220)
+
+[node name="@StreetCrossing@93329" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 240)
+
+[node name="@StreetHor@93330" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 240)
+
+[node name="@StreetHor@93331" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 240)
+
+[node name="@StreetHor@93332" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 240)
+
+[node name="@StreetHor@93333" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 240)
+
+[node name="@StreetHor@93334" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 240)
+
+[node name="@StreetVer@93335" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 260)
+
+[node name="@SkyScraper01@93336" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 260)
+
+[node name="@SkyScraper01@93337" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 260)
+
+[node name="@SkyScraper01@93338" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 260)
+
+[node name="@SkyScraper01@93339" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 260)
+
+[node name="@SkyScraper01@93340" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 260)
+
+[node name="@StreetVer@93341" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 280)
+
+[node name="@SkyScraper01@93342" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 280)
+
+[node name="@SkyScraper01@93343" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 280)
+
+[node name="@SkyScraper01@93344" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 280)
+
+[node name="@SkyScraper01@93345" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 280)
+
+[node name="@SkyScraper01@93346" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 280)
+
+[node name="@StreetVer@93347" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 300)
+
+[node name="@SkyScraper01@93348" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 300)
+
+[node name="@SkyScraper01@93349" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 300)
+
+[node name="@SkyScraper01@93350" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 300)
+
+[node name="@SkyScraper01@93351" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 300)
+
+[node name="@SkyScraper01@93352" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 300)
+
+[node name="@StreetVer@93353" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 320)
+
+[node name="@SkyScraper01@93354" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 320)
+
+[node name="@SkyScraper01@93355" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 320)
+
+[node name="@SkyScraper01@93356" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 320)
+
+[node name="@SkyScraper01@93357" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 320)
+
+[node name="@SkyScraper01@93358" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 320)
+
+[node name="@StreetVer@93359" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 340)
+
+[node name="@SkyScraper01@93360" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 340)
+
+[node name="@SkyScraper01@93361" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 340)
+
+[node name="@SkyScraper01@93362" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 340)
+
+[node name="@SkyScraper01@93363" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 340)
+
+[node name="@SkyScraper01@93364" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 340)
+
+[node name="@StreetCrossing@93365" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 240)
+
+[node name="@StreetHor@93366" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 240)
+
+[node name="@StreetHor@93367" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 240)
+
+[node name="@StreetHor@93368" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 240)
+
+[node name="@StreetHor@93369" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 240)
+
+[node name="@StreetHor@93370" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 240)
+
+[node name="@StreetVer@93371" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 260)
+
+[node name="@SkyScraper01@93372" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 260)
+
+[node name="@SkyScraper01@93373" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 260)
+
+[node name="@SkyScraper01@93374" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 260)
+
+[node name="@SkyScraper01@93375" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 260)
+
+[node name="@SkyScraper01@93376" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 260)
+
+[node name="@StreetVer@93377" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 280)
+
+[node name="@SkyScraper01@93378" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 280)
+
+[node name="@SkyScraper01@93379" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 280)
+
+[node name="@SkyScraper01@93380" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 280)
+
+[node name="@SkyScraper01@93381" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 280)
+
+[node name="@SkyScraper01@93382" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 280)
+
+[node name="@StreetVer@93383" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 300)
+
+[node name="@SkyScraper01@93384" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 300)
+
+[node name="@SkyScraper01@93385" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 300)
+
+[node name="@SkyScraper01@93386" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 300)
+
+[node name="@SkyScraper01@93387" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 300)
+
+[node name="@SkyScraper01@93388" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 300)
+
+[node name="@StreetVer@93389" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 320)
+
+[node name="@SkyScraper01@93390" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 320)
+
+[node name="@SkyScraper01@93391" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 320)
+
+[node name="@SkyScraper01@93392" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 320)
+
+[node name="@SkyScraper01@93393" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 320)
+
+[node name="@SkyScraper01@93394" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 320)
+
+[node name="@StreetVer@93395" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 340)
+
+[node name="@SkyScraper01@93396" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 340)
+
+[node name="@SkyScraper01@93397" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 340)
+
+[node name="@SkyScraper01@93398" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 340)
+
+[node name="@SkyScraper01@93399" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 340)
+
+[node name="@SkyScraper01@93400" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 340)
+
+[node name="@StreetCrossing@93401" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 240)
+
+[node name="@StreetHor@93402" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 240)
+
+[node name="@StreetHor@93403" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 240)
+
+[node name="@StreetHor@93404" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 240)
+
+[node name="@StreetHor@93405" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 240)
+
+[node name="@StreetHor@93406" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 240)
+
+[node name="@StreetVer@93407" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 260)
+
+[node name="@SkyScraper01@93408" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)
+
+[node name="@SkyScraper01@93409" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 260)
+
+[node name="@SkyScraper01@93410" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 260)
+
+[node name="@SkyScraper01@93411" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 260)
+
+[node name="@SkyScraper01@93412" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 260)
+
+[node name="@StreetVer@93413" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 280)
+
+[node name="@SkyScraper01@93414" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 280)
+
+[node name="@SkyScraper01@93415" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 280)
+
+[node name="@SkyScraper01@93416" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 280)
+
+[node name="@SkyScraper01@93417" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 280)
+
+[node name="@SkyScraper01@93418" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 280)
+
+[node name="@StreetVer@93419" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 300)
+
+[node name="@SkyScraper01@93420" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 300)
+
+[node name="@SkyScraper01@93421" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 300)
+
+[node name="@SkyScraper01@93422" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 300)
+
+[node name="@SkyScraper01@93423" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 300)
+
+[node name="@SkyScraper01@93424" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 300)
+
+[node name="@StreetVer@93425" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 320)
+
+[node name="@SkyScraper01@93426" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 320)
+
+[node name="@SkyScraper01@93427" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 320)
+
+[node name="@SkyScraper01@93428" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 320)
+
+[node name="@SkyScraper01@93429" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 320)
+
+[node name="@SkyScraper01@93430" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 320)
+
+[node name="@StreetVer@93431" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 340)
+
+[node name="@SkyScraper01@93432" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 340)
+
+[node name="@SkyScraper01@93433" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 340)
+
+[node name="@SkyScraper01@93434" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 340)
+
+[node name="@SkyScraper01@93435" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 340)
+
+[node name="@SkyScraper01@93436" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 340)
+
+[node name="@StreetCrossing@93437" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 240)
+
+[node name="@StreetHor@93438" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 240)
+
+[node name="@StreetHor@93439" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 240)
+
+[node name="@StreetHor@93440" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 240)
+
+[node name="@StreetHor@93441" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 240)
+
+[node name="@StreetHor@93442" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 240)
+
+[node name="@StreetVer@93443" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 260)
+
+[node name="@SkyScraper01@93444" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 260)
+
+[node name="@SkyScraper01@93445" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 260)
+
+[node name="@SkyScraper01@93446" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 260)
+
+[node name="@SkyScraper01@93447" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 260)
+
+[node name="@SkyScraper01@93448" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 260)
+
+[node name="@StreetVer@93449" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 280)
+
+[node name="@SkyScraper01@93450" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 280)
+
+[node name="@SkyScraper01@93451" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 280)
+
+[node name="@SkyScraper01@93452" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 280)
+
+[node name="@SkyScraper01@93453" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 280)
+
+[node name="@SkyScraper01@93454" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 280)
+
+[node name="@StreetVer@93455" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 300)
+
+[node name="@SkyScraper01@93456" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 300)
+
+[node name="@SkyScraper01@93457" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 300)
+
+[node name="@SkyScraper01@93458" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 300)
+
+[node name="@SkyScraper01@93459" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 300)
+
+[node name="@SkyScraper01@93460" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 300)
+
+[node name="@StreetVer@93461" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 320)
+
+[node name="@SkyScraper01@93462" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 320)
+
+[node name="@SkyScraper01@93463" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 320)
+
+[node name="@SkyScraper01@93464" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 320)
+
+[node name="@SkyScraper01@93465" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 320)
+
+[node name="@SkyScraper01@93466" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 320)
+
+[node name="@StreetVer@93467" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 340)
+
+[node name="@SkyScraper01@93468" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 340)
+
+[node name="@SkyScraper01@93469" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 340)
+
+[node name="@SkyScraper01@93470" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 340)
+
+[node name="@SkyScraper01@93471" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 340)
+
+[node name="@SkyScraper01@93472" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 340)
+
+[node name="@StreetCrossing@93473" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 360)
+
+[node name="@StreetHor@93474" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 360)
+
+[node name="@StreetHor@93475" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 360)
+
+[node name="@StreetHor@93476" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 360)
+
+[node name="@StreetHor@93477" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 360)
+
+[node name="@StreetHor@93478" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 360)
+
+[node name="@StreetVer@93479" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 380)
+
+[node name="@SkyScraper01@93480" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 380)
+
+[node name="@SkyScraper01@93481" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 380)
+
+[node name="@SkyScraper01@93482" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 380)
+
+[node name="@SkyScraper01@93483" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 380)
+
+[node name="@SkyScraper01@93484" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 380)
+
+[node name="@StreetVer@93485" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 400)
+
+[node name="@SkyScraper01@93486" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 400)
+
+[node name="@SkyScraper01@93487" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 400)
+
+[node name="@SkyScraper01@93488" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 400)
+
+[node name="@SkyScraper01@93489" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 400)
+
+[node name="@SkyScraper01@93490" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 400)
+
+[node name="@StreetVer@93491" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 420)
+
+[node name="@SkyScraper01@93492" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 420)
+
+[node name="@SkyScraper01@93493" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 420)
+
+[node name="@SkyScraper01@93494" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 420)
+
+[node name="@SkyScraper01@93495" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 420)
+
+[node name="@SkyScraper01@93496" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 420)
+
+[node name="@StreetVer@93497" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 440)
+
+[node name="@SkyScraper01@93498" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 440)
+
+[node name="@SkyScraper01@93499" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 440)
+
+[node name="@SkyScraper01@93500" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 440)
+
+[node name="@SkyScraper01@93501" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 440)
+
+[node name="@SkyScraper01@93502" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 440)
+
+[node name="@StreetVer@93503" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 460)
+
+[node name="@SkyScraper01@93504" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 460)
+
+[node name="@SkyScraper01@93505" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 460)
+
+[node name="@SkyScraper01@93506" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 460)
+
+[node name="@SkyScraper01@93507" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 460)
+
+[node name="@SkyScraper01@93508" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 460)
+
+[node name="@StreetCrossing@93509" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 360)
+
+[node name="@StreetHor@93510" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 360)
+
+[node name="@StreetHor@93511" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 360)
+
+[node name="@StreetHor@93512" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 360)
+
+[node name="@StreetHor@93513" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 360)
+
+[node name="@StreetHor@93514" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 360)
+
+[node name="@StreetVer@93515" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 380)
+
+[node name="@SkyScraper01@93516" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 380)
+
+[node name="@SkyScraper01@93517" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 380)
+
+[node name="@SkyScraper01@93518" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 380)
+
+[node name="@SkyScraper01@93519" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 380)
+
+[node name="@SkyScraper01@93520" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 380)
+
+[node name="@StreetVer@93521" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 400)
+
+[node name="@SkyScraper01@93522" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 400)
+
+[node name="@SkyScraper01@93523" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 400)
+
+[node name="@SkyScraper01@93524" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 400)
+
+[node name="@SkyScraper01@93525" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 400)
+
+[node name="@SkyScraper01@93526" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 400)
+
+[node name="@StreetVer@93527" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 420)
+
+[node name="@SkyScraper01@93528" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 420)
+
+[node name="@SkyScraper01@93529" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 420)
+
+[node name="@SkyScraper01@93530" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 420)
+
+[node name="@SkyScraper01@93531" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 420)
+
+[node name="@SkyScraper01@93532" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 420)
+
+[node name="@StreetVer@93533" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 440)
+
+[node name="@SkyScraper01@93534" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 440)
+
+[node name="@SkyScraper01@93535" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 440)
+
+[node name="@SkyScraper01@93536" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 440)
+
+[node name="@SkyScraper01@93537" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 440)
+
+[node name="@SkyScraper01@93538" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 440)
+
+[node name="@StreetVer@93539" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 0, 460)
+
+[node name="@SkyScraper01@93540" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, 460)
+
+[node name="@SkyScraper01@93541" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160, 0, 460)
+
+[node name="@SkyScraper01@93542" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, 460)
+
+[node name="@SkyScraper01@93543" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 460)
+
+[node name="@SkyScraper01@93544" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, 460)
+
+[node name="@StreetCrossing@93545" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 360)
+
+[node name="@StreetHor@93546" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 360)
+
+[node name="@StreetHor@93547" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 360)
+
+[node name="@StreetHor@93548" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 360)
+
+[node name="@StreetHor@93549" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 360)
+
+[node name="@StreetHor@93550" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 360)
+
+[node name="@StreetVer@93551" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 380)
+
+[node name="@SkyScraper01@93552" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 380)
+
+[node name="@SkyScraper01@93553" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 380)
+
+[node name="@SkyScraper01@93554" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 380)
+
+[node name="@SkyScraper01@93555" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 380)
+
+[node name="@SkyScraper01@93556" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 380)
+
+[node name="@StreetVer@93557" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 400)
+
+[node name="@SkyScraper01@93558" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 400)
+
+[node name="@SkyScraper01@93559" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 400)
+
+[node name="@SkyScraper01@93560" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 400)
+
+[node name="@SkyScraper01@93561" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 400)
+
+[node name="@SkyScraper01@93562" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 400)
+
+[node name="@StreetVer@93563" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 420)
+
+[node name="@SkyScraper01@93564" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 420)
+
+[node name="@SkyScraper01@93565" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 420)
+
+[node name="@SkyScraper01@93566" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 420)
+
+[node name="@SkyScraper01@93567" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 420)
+
+[node name="@SkyScraper01@93568" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 420)
+
+[node name="@StreetVer@93569" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 440)
+
+[node name="@SkyScraper01@93570" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 440)
+
+[node name="@SkyScraper01@93571" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 440)
+
+[node name="@SkyScraper01@93572" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 440)
+
+[node name="@SkyScraper01@93573" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 440)
+
+[node name="@SkyScraper01@93574" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 440)
+
+[node name="@StreetVer@93575" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 0, 460)
+
+[node name="@SkyScraper01@93576" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 460)
+
+[node name="@SkyScraper01@93577" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280, 0, 460)
+
+[node name="@SkyScraper01@93578" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 460)
+
+[node name="@SkyScraper01@93579" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 0, 460)
+
+[node name="@SkyScraper01@93580" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 340, 0, 460)
+
+[node name="@StreetCrossing@93581" type="Node3D" parent="Generated" instance=ExtResource("1_58f1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 360)
+
+[node name="@StreetHor@93582" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 360)
+
+[node name="@StreetHor@93583" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 360)
+
+[node name="@StreetHor@93584" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 360)
+
+[node name="@StreetHor@93585" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 360)
+
+[node name="@StreetHor@93586" type="Node3D" parent="Generated" instance=ExtResource("2_122oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 360)
+
+[node name="@StreetVer@93587" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 380)
+
+[node name="@SkyScraper01@93588" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 380)
+
+[node name="@SkyScraper01@93589" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 380)
+
+[node name="@SkyScraper01@93590" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 380)
+
+[node name="@SkyScraper01@93591" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 380)
+
+[node name="@SkyScraper01@93592" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 380)
+
+[node name="@StreetVer@93593" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 400)
+
+[node name="@SkyScraper01@93594" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 400)
+
+[node name="@SkyScraper01@93595" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 400)
+
+[node name="@SkyScraper01@93596" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 400)
+
+[node name="@SkyScraper01@93597" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 400)
+
+[node name="@SkyScraper01@93598" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 400)
+
+[node name="@StreetVer@93599" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 420)
+
+[node name="@SkyScraper01@93600" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 420)
+
+[node name="@SkyScraper01@93601" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 420)
+
+[node name="@SkyScraper01@93602" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 420)
+
+[node name="@SkyScraper01@93603" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 420)
+
+[node name="@SkyScraper01@93604" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 420)
+
+[node name="@StreetVer@93605" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 440)
+
+[node name="@SkyScraper01@93606" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 440)
+
+[node name="@SkyScraper01@93607" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 440)
+
+[node name="@SkyScraper01@93608" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 440)
+
+[node name="@SkyScraper01@93609" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 440)
+
+[node name="@SkyScraper01@93610" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 440)
+
+[node name="@StreetVer@93611" type="Node3D" parent="Generated" instance=ExtResource("4_k44w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 360, 0, 460)
+
+[node name="@SkyScraper01@93612" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 380, 0, 460)
+
+[node name="@SkyScraper01@93613" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 460)
+
+[node name="@SkyScraper01@93614" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 420, 0, 460)
+
+[node name="@SkyScraper01@93615" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 460)
+
+[node name="@SkyScraper01@93616" type="Node3D" parent="Generated" instance=ExtResource("3_ar6hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 460)

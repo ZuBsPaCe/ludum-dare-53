@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwo32hgng7lfi"]
+[gd_scene load_steps=9 format=3 uid="uid://bwo32hgng7lfi"]
 
 [ext_resource type="Script" path="res://Game/Scripts/City.cs" id="1_8udbb"]
 [ext_resource type="PackedScene" uid="uid://j8dvlrelfe3u" path="res://Game/Street/StreetCrossing.tscn" id="1_58f1t"]
@@ -7,30 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cid3a15xbea1p" path="res://Game/Street/StreetVer.tscn" id="4_k44w8"]
 [ext_resource type="Script" path="res://Game/Scripts/FollowCamera.cs" id="6_h6kdy"]
 [ext_resource type="PackedScene" uid="uid://ptsmjv3mjisf" path="res://Game/Truck/PlayerTruck.tscn" id="6_m11b1"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jf4rs"]
-
-[sub_resource type="Sky" id="Sky_psxqe"]
-sky_material = SubResource("ProceduralSkyMaterial_jf4rs")
-
-[sub_resource type="Environment" id="Environment_t7m01"]
-background_mode = 2
-sky = SubResource("Sky_psxqe")
-tonemap_mode = 2
-tonemap_exposure = 0.7
-tonemap_white = 1.04
-ssao_enabled = true
-ssao_intensity = 4.0
-ssil_radius = 3.02
-ssil_intensity = 2.32
-sdfgi_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.005
-volumetric_fog_emission = Color(0.376471, 0.796078, 0.933333, 1)
-adjustment_enabled = true
-adjustment_brightness = 1.83
-adjustment_contrast = 1.17
-adjustment_saturation = 0.67
+[ext_resource type="Environment" uid="uid://d327lvlnis6se" path="res://Scenes/Environment.tres" id="8_bmhxo"]
 
 [node name="City" type="Node3D"]
 script = ExtResource("1_8udbb")
@@ -50,9 +27,6 @@ script = ExtResource("6_h6kdy")
 _targetPath = NodePath("../PlayerTruck")
 _offset = Vector3(0, 5, -5)
 _smoothing = 5.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_t7m01")
 
 [node name="Generated" type="Node3D" parent="."]
 
@@ -1784,4 +1758,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440, 0, 460)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 460, 0, 460)
 
 [node name="PlayerTruck" parent="." instance=ExtResource("6_m11b1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 8.58693, 360)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 8.58693, 240)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("8_bmhxo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.539326, -0.77348, -0.332951, 0.000649361, -0.395001, 0.91868, -0.842097, -0.495685, -0.212532, 240, 20, 240)
+light_color = Color(0.941176, 0.933333, 0.827451, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 250.0

@@ -52,4 +52,5 @@ Right={
 
 [rendering]
 
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5
 environment/defaults/default_clear_color=Color(0.137255, 0.137255, 0.137255, 1)

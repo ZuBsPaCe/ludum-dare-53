@@ -28,6 +28,9 @@ _targetPath = NodePath("../PlayerTruck")
 _offset = Vector3(0, 5, -5)
 _smoothing = 5.0
 
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+current = true
+
 [node name="Generated" type="Node3D" parent="."]
 
 [node name="@StreetCrossing@93042" parent="Generated" instance=ExtResource("1_58f1t")]

@@ -12,10 +12,13 @@ public partial class PlayerTruck : VehicleBody3D
 
 	[Export] private float _steerSmoothing = 5f;
 
+	private AudioStreamPlayer3D _motorSound;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_motorSound = GetNode<AudioStreamPlayer3D>("MotorSound");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,9 +36,10 @@ public partial class PlayerTruck : VehicleBody3D
 			engineForce -= _maxBackwardForce;
 		}
 
+		float velocity = LinearVelocity.Length();
 
-		float steering = 0;
-		float steeringDeg = Mathf.Lerp(_slowSteeringDeg, _fastSteeringDeg, Math.Clamp(LinearVelocity.Length() / _fastSteeringVelocity, 0, 1));
+        float steering = 0;
+		float steeringDeg = Mathf.Lerp(_slowSteeringDeg, _fastSteeringDeg, Math.Clamp(velocity / _fastSteeringVelocity, 0, 1));
 
 		if (Input.IsActionPressed("Left"))
 		{
@@ -52,6 +56,7 @@ public partial class PlayerTruck : VehicleBody3D
 		EngineForce = engineForce;
 		Steering = steering;
 
-		GD.Print(LinearVelocity.Length());
+
+		_motorSound.PitchScale = Mathf.Lerp(1f, 3f, Mathf.Clamp(velocity / 30f, 0f, 1f));
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
 {
@@ -87,6 +88,44 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
         int y = index / Width;
         int x = index - y * Width;
         return new Vector2I(x, y);
+    }
+
+    public bool TryGetRandomCoord(TYPE type, out Vector2I coord)
+    {
+        int index = GD.RandPosInt() % Size;
+
+        for (int i = 0; i < Size; ++i)
+        {
+            if (IsTypeIndexed(index, type))
+            {
+                coord = GetCoord(index);
+                return true;
+            }
+
+            index = Mathf.PosMod(index + 1, Size);
+        }
+
+        coord = Vector2I.Zero;
+        return false;
+    }
+
+    public bool TryGetRandomCoord(HashSet<TYPE> types, out Vector2I coord)
+    {
+        int index = GD.RandPosInt() % Size;
+
+        for (int i = 0; i < Size; ++i)
+        {
+            if (types.Contains(GetTypeIndexed(index)))
+            {
+                coord = GetCoord(index);
+                return true;
+            }
+
+            index = Mathf.PosMod(index + 1, Size);
+        }
+
+        coord = Vector2I.Zero;
+        return false;
     }
 
     public Vector2I PosModCoord(Vector2I coord)

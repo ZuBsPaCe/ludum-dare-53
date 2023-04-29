@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg4qv1ynj1ts7"]
+
+[ext_resource type="Script" path="res://Game/Scripts/Level.cs" id="1_y7fik"]
+[ext_resource type="PackedScene" uid="uid://bwo32hgng7lfi" path="res://Scenes/City.tscn" id="2_bcatt"]
+[ext_resource type="PackedScene" uid="uid://thy7el8r112x" path="res://Base/Framework/StateMachine.tscn" id="2_lxsuu"]
+
+[node name="Level" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_y7fik")
+_sceneStateMachine = ExtResource("2_lxsuu")
+_sceneCity = ExtResource("2_bcatt")

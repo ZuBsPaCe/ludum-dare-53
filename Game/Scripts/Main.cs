@@ -2,14 +2,14 @@ using Godot;
 
 public partial class Main : Node
 {
-    [Export] private PackedScene _sceneGameStateMachine;
+    [Export] private PackedScene _sceneStateMachine;
     [Export] private PackedScene _sceneMainMenu;
-    [Export] private PackedScene _sceneGame;
+    [Export] private PackedScene _sceneLevel;
     [Export] private PackedScene _scenePauseMenu;
 
     private StateMachine _gameStateMachine;
 
-    private Game _game;
+    private Level _game;
 
     public override void _Ready()
     {
@@ -25,7 +25,7 @@ public partial class Main : Node
 
 
         // Initialize GameState StateMachine
-        _gameStateMachine = _sceneGameStateMachine.Instantiate<StateMachine>();
+        _gameStateMachine = _sceneStateMachine.Instantiate<StateMachine>();
         AddChild(_gameStateMachine, false, InternalMode.Front);
         _gameStateMachine.Setup(GameState.MainMenu, SwitchGameState);
     }
@@ -37,7 +37,9 @@ public partial class Main : Node
 
     private void SwitchGameState(StateMachine stateMachine)
     {
-        switch (stateMachine.GetState<GameState>())
+        var enumValue = stateMachine.GetState<GameState>();
+
+        switch (enumValue)
         {
             case GameState.MainMenu:
                 if (stateMachine.Action == StateMachineAction.Start)
@@ -60,7 +62,7 @@ public partial class Main : Node
                 {
                     if (_game == null)
                     {
-                        _game = _sceneGame.Instantiate<Game>();
+                        _game = _sceneLevel.Instantiate<Level>();
                         AddChild(_game);
                     }
 
@@ -75,6 +77,13 @@ public partial class Main : Node
 
                     PauseMenu pauseMenu = _scenePauseMenu.Instantiate<PauseMenu>();
                     AddChild(pauseMenu);
+                }
+                break;
+
+            default:
+                {
+                    Debug.Fail($"Unknown enum [{enumValue}]");
+
                 }
                 break;
         }

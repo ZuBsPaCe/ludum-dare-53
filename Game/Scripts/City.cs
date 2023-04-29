@@ -1,5 +1,7 @@
 using Godot;
 using Godot.Collections;
+using System.Collections;
+using System.Collections.Generic;
 
 [Tool]
 public partial class City : Node3D
@@ -30,6 +32,9 @@ public partial class City : Node3D
 
 	[Export]
 	private Array<PackedScene> _sceneBuildings;
+
+	[Export]
+	private PackedScene _sceneObjective;
 
 
 	[Export]
@@ -88,6 +93,26 @@ public partial class City : Node3D
 
         GenerateTiles(root, _map);
     }
+
+	public bool TryGetRandomCoord(HashSet<TileType> tileTypes, out Vector2I coord)
+	{
+		return _map.TryGetRandomCoord(tileTypes, out coord);
+	}
+
+    public void AddQuest(Quest quest)
+    {
+		Node3D objective = _sceneObjective.Instantiate<Node3D>();
+		AddChild(objective);
+		objective.GlobalPosition = GetRandomPosInCoord(quest.Coord);
+
+		quest.Objective = objective;
+    }
+
+	private Vector3 GetRandomPosInCoord(Vector2I coord)
+    {
+        return new Vector3(coord.X * _tileSize + GD.RandPosInt() % _tileSize, 0, coord.Y * _tileSize + GD.RandPosInt() % _tileSize);
+    }
+
 
     private void RunGenerate(bool debug)
     {

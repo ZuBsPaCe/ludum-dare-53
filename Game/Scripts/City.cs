@@ -1,17 +1,25 @@
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using static System.Collections.Specialized.BitVector32;
 
 [Tool]
 public partial class City : Node3D
 {
+    [Export] private int _seed = 0;
+
 	[Export] private int _xSectionCount = 8;
 	[Export] private int _ySectionCount = 8;
 
 	[Export] private int _sectionTileSize = 6;
 
 	[Export] private int _tileSize = 10;
+
+	[Export] private Vector2I _downtownCoord;
+	[Export] private float _downtownRadius = 25;
+
+	[Export] private Rect2I _parkCoords;
 
 	[Export] private NodePath _genPath;
 
@@ -26,6 +34,7 @@ public partial class City : Node3D
     [Export] private PackedScene _sceneBoundaryCorner;
 
 	[Export] private PackedScene _sceneWater;
+	[Export] private PackedScene _scenePark;
 
     [Export] private Array<PackedScene> _sceneBuildings;
 
@@ -139,6 +148,8 @@ public partial class City : Node3D
 
     private Map<TileType, Tile> RunGenerate(bool debug)
     {
+		GD.Seed((ulong) _seed);
+
 		GD.Print($"Running Generate. Debug: [{debug}]");
 
 		var root = GetNode<Node3D>(_genPath);
@@ -219,6 +230,9 @@ public partial class City : Node3D
 
 	private void GenerateSection(Map<TileType, Tile> map, int xSection, int ySection)
 	{
+		bool hasHorStreet = GD.Randf() < 0.8f;
+		bool hasVerStreet = !hasHorStreet || GD.Randf() < 0.8f;
+
 		for (int yIndex = 0; yIndex < _sectionTileSize; ++yIndex)
 		{
 			int yTile = (ySection * _sectionTileSize + yIndex);
@@ -230,7 +244,11 @@ public partial class City : Node3D
 
 				TileType tileType;
 
-				if (yIndex == 0 || xIndex == 0)
+                if (_parkCoords.HasPoint(xTile, yTile))
+				{
+					tileType = TileType.Park;
+				}
+                else if (yIndex == 0 && hasVerStreet || xIndex == 0 && hasHorStreet)
                 {
 					tileType = TileType.Street;
 				}
@@ -247,6 +265,10 @@ public partial class City : Node3D
 
 	private void GenerateTiles(Node3D root, Map<TileType, Tile> map)
 	{
+		List<PackedScene> orderedBuildings = _sceneBuildings.OrderBy(building => (int) building._Get("Height")).ToList();
+
+		Vector2I? parkPos = null;
+
 		for (int yTile = 0; yTile < map.Height; ++yTile)
 		{
             int y = yTile * _tileSize;
@@ -261,8 +283,23 @@ public partial class City : Node3D
 
                 switch (tileType)
                 {
+					case TileType.Park:
+						if (parkPos == null)
+						{
+							parkPos = new Vector2I(x, y);
+						}
+						continue;
+
                     case TileType.Building:
-                        tile = _sceneBuildings.PickRandom().Instantiate<Node3D>();
+						float distance = (_downtownCoord - new Vector2I(xTile, yTile)).Length();
+
+						float factor = Mathf.Clamp(distance / _downtownRadius, 0.0f, 1.0f);
+
+						int minIndex = Mathf.Max((int)(factor * orderedBuildings.Count - 3), 0);
+						int maxIndex = minIndex + 2;
+
+                        //tile = _sceneBuildings.PickRandom().Instantiate<Node3D>();
+                        tile = orderedBuildings[GD.RandRange(minIndex, maxIndex)].Instantiate<Node3D>();
                         break;
 
                     case TileType.Street:
@@ -403,7 +440,15 @@ public partial class City : Node3D
         }
 
 
-        int waterRings = 3;
+		if (parkPos != null)
+		{
+			Node3D park = _scenePark.Instantiate<Node3D>();
+			root.AddChild(park);
+			park.Position = new Vector3(parkPos.Value.X, 0, parkPos.Value.Y) + new Vector3(40, 0, 40);
+		}
+
+
+		int waterRings = 3;
 
         for (int xSection = -waterRings; xSection < _xSectionCount + waterRings; ++xSection)
 			for (int ySection = -waterRings; ySection < _ySectionCount + waterRings; ++ySection)

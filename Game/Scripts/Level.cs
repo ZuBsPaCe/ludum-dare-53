@@ -7,6 +7,7 @@ public partial class Level : Node3D
     [Export] private PackedScene _sceneStateMachine;
     [Export] private PackedScene _sceneCity;
 
+
     private City _city;
     private CityMap _cityMap;
     private DrivingOverlay _drivingOverlay;
@@ -33,8 +34,6 @@ public partial class Level : Node3D
         AddChild(_levelStateMachine, false, InternalMode.Front);
         _levelStateMachine.Setup(LevelState.Init, SwitchLevelState);
 
-
-        GD.Randomize();
     }
 
     private void EventHub_SwitchLevelState(LevelState levelState)

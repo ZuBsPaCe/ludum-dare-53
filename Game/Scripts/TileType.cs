@@ -2,5 +2,6 @@
 {
     Building,
     Street,
-    Boundary
+    Boundary,
+    Park
 }

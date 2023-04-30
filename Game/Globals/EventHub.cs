@@ -7,6 +7,8 @@ public partial class EventHub : Node
     [Signal] public delegate void SwitchGameStateEventHandler(GameState gameState);
     [Signal] public delegate void SwitchLevelStateEventHandler(LevelState levelState);
 
+    [Signal] public delegate void QuestMarkerEnteredEventHandler(QuestMarker questMarker);
+
     public static void EmitSwitchGameState(GameState gameState)
     {
         Instance.EmitSignal(SignalName.SwitchGameState, (int) gameState);
@@ -15,5 +17,10 @@ public partial class EventHub : Node
     public static void EmitSwitchLevelState(LevelState levelState)
     {
         Instance.EmitSignal(SignalName.SwitchLevelState, (int)levelState);
+    }
+
+    internal static void EmitQuestMarkerEntered(QuestMarker questMarker)
+    {
+        Instance.EmitSignal(SignalName.QuestMarkerEntered, questMarker);
     }
 }

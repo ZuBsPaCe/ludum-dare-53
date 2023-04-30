@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_jqvt7"]
 size = Vector3(3.5, 2, 6)
 
-[node name="PlayerTruck" type="VehicleBody3D"]
+[node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
 script = ExtResource("1_ojfq6")
 

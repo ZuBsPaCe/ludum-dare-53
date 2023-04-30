@@ -120,8 +120,9 @@ public partial class City : Node3D
 
     public void AddQuest(Quest quest)
     {
-		Node3D questMarker = _sceneQuestMarker.Instantiate<Node3D>();
+        QuestMarker questMarker = _sceneQuestMarker.Instantiate<QuestMarker>();
 		AddChild(questMarker);
+		questMarker.Setup(quest);
 		questMarker.GlobalPosition = GetRandomPosInCoord(quest.Coord);
 
 		quest.QuestMarker = questMarker;

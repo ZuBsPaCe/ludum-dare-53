@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class Level : Node3D
@@ -15,6 +16,8 @@ public partial class Level : Node3D
 
     private HashSet<TileType> _streetTileTypes = new();
 
+    private List<Quest> _quests = new();
+
 
     public override void _Ready()
     {
@@ -28,6 +31,8 @@ public partial class Level : Node3D
         _streetTileTypes.Add(TileType.StreetCrossing);
         
         EventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
+        EventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
+
 
         // Initialize LevelState StateMachine
         _levelStateMachine = _sceneStateMachine.Instantiate<StateMachine>();
@@ -41,6 +46,16 @@ public partial class Level : Node3D
     private void EventHub_SwitchLevelState(LevelState levelState)
     {
         _levelStateMachine.SetState(levelState);
+    }
+
+    private void EventHub_QuestMarkerEntered(QuestMarker questMarker)
+    {
+        Debug.Assert(_quests.Contains(questMarker.Quest));
+
+        _quests.Remove(questMarker.Quest);
+        questMarker.Quest.Teardown();
+
+        CreateQuest();
     }
 
     private void SwitchLevelState(StateMachine stateMachine)
@@ -70,14 +85,7 @@ public partial class Level : Node3D
                 {
                     if (stateMachine.Action == StateMachineAction.Start)
                     {
-                        for (int i = 0; i < 10; ++i)
-                        {
-                            if (_city.TryGetRandomCoord(_streetTileTypes, out Vector2I coord))
-                            {
-                                Quest quest = new(coord);
-                                _city.AddQuest(quest);
-                            }
-                        }
+                        CreateQuest();
                     }
                 }
                 break;
@@ -93,5 +101,16 @@ public partial class Level : Node3D
     public void CloseGameAndFree()
     {
         QueueFree();
+    }
+
+    public void CreateQuest()
+    {
+        if (_city.TryGetRandomCoord(_streetTileTypes, out Vector2I coord))
+        {
+            Quest quest = new(coord);
+            _quests.Add(quest);
+
+            _city.AddQuest(quest);
+        }
     }
 }

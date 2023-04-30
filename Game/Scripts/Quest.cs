@@ -7,6 +7,12 @@ public class Quest
         Coord = coord;
     }
 
+    public void Teardown()
+    {
+        QuestMarker.QueueFree();
+        QuestSprite.QueueFree();
+    }
+
     public Vector2I Coord { get; }
 
     public Node3D QuestMarker { get; set; }

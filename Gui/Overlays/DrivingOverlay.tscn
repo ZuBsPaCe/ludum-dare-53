@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8tuljyi1sqsm"]
+[gd_scene load_steps=5 format=3 uid="uid://b8tuljyi1sqsm"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/DrivingOverlay.cs" id="1_mqwa3"]
+[ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="2_8w3be"]
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="2_otjna"]
+[ext_resource type="PackedScene" uid="uid://c1boai0amhgij" path="res://Gui/Menus/QuestControl.tscn" id="3_hw5a3"]
 
 [node name="DrivingOverlay" type="CanvasLayer"]
 script = ExtResource("1_mqwa3")
+_sceneSettingsControl = ExtResource("2_8w3be")
+_sceneQuestControl = ExtResource("3_hw5a3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -35,3 +39,54 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand_mode = 2
+
+[node name="ButtonBar" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 1344.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("2_otjna")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonBar"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuestInfoButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
+text = "Quest Info"
+
+[node name="AcceptButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
+text = "Accept Quest"
+
+[node name="DenyButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenuButton")
+text = "Skip Quest"
+
+[node name="Spacer2" type="Control" parent="ButtonBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MainMenuButton")
+text = "Settings"
+
+[node name="Spacer" type="Control" parent="ButtonBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../AcceptButton")
+text = "Exit to MainMenu"

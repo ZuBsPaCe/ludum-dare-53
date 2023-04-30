@@ -40,7 +40,7 @@ _subresources={
 }
 },
 "nodes": {
-"PATH:Floor": {
+"PATH:Base": {
 "generate/physics": true,
 "physics/shape_type": 2
 }

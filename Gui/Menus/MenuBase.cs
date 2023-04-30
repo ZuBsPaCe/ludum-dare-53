@@ -16,18 +16,12 @@ public abstract partial class MenuBase : CanvasLayer
     private Control _buttonBar;
     private Tween _buttonBarTween;
 
-    private bool _disabled;
+    private bool _disabled = true;
 
-    protected void InitButtonBar(Control buttonBar, float initialDelay = 0)
+    protected void InitButtonBar(Control buttonBar)
     {
         _buttonBar = buttonBar;
-
         _buttonBar.Position = new Vector2(1920, 0);
-
-        _buttonBarTween = _buttonBar.CreateTween();
-        _buttonBarTween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-
-        _buttonBarTween.TweenProperty(_buttonBar, "position", new Vector2(1344, 0), TRANSITION_DURATION);
     }
 
     protected void InitButton<T>(Button button, T newState) where T : Enum
@@ -39,8 +33,26 @@ public abstract partial class MenuBase : CanvasLayer
         _buttonToState[button] = intState;
 
         button.MouseEntered += () => Button_MouseEntered();
-        button.FocusEntered += () => Button_FocusEntered(button);
-        button.Toggled += (pressed) => Button_Toggled(button, pressed);
+        button.Pressed += () => Button_Pressed(button);
+    }
+
+    protected void ShowButtonBar(float initialDelay = 0)
+    {
+        _buttonBar.Position = new Vector2(1920, 0);
+
+        _buttonBarTween?.Kill();
+
+        _buttonBarTween = _buttonBar.CreateTween();
+        _buttonBarTween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+
+        if (initialDelay > 0)
+        {
+            _buttonBarTween.TweenInterval(initialDelay);
+        }
+
+        _buttonBarTween.TweenProperty(_buttonBar, "position", new Vector2(1344, 0), TRANSITION_DURATION);
+
+        _disabled = false;
     }
 
     public override void _UnhandledKeyInput(InputEvent @event)
@@ -54,14 +66,6 @@ public abstract partial class MenuBase : CanvasLayer
         }
     }
 
-    private void Button_FocusEntered(Button button)
-    {
-        if (_disabled)
-            return;
-
-        SetCurrentButton(button);
-    }
-
     private void Button_MouseEntered()
     {
         if (_disabled)
@@ -70,36 +74,37 @@ public abstract partial class MenuBase : CanvasLayer
         Sounds.PlaySound(SoundType.MainMenuHover);
     }
 
-    private void Button_Toggled(Button button, bool pressed)
+    private void Button_Pressed(Button button)
     {
         if (_disabled)
             return;
 
         SetCurrentButton(button);
 
-        if (pressed)
-        {
-            MenuButtonPressed(_buttonToState[button]);
-        }
+        MenuButtonPressed(_buttonToState[button]);
     }
 
     protected abstract Control InstantiateMenuButtonControl(int state);
     protected abstract void MenuButtonPressed(int state);
 
-    protected void CloseMenu()
+    protected void CloseMenu(bool queueFree = true)
     {
         _disabled = true;
 
-        _buttonBarTween.Kill();
+        SetCurrentButton(null);
+
+        _buttonBarTween?.Kill();
 
         _buttonBarTween = _buttonBar.CreateTween();
         _buttonBarTween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
 
         _buttonBarTween.TweenProperty(_buttonBar, "position", new Vector2(1920, 0), TRANSITION_DURATION);
-        _buttonBarTween.TweenCallback(Callable.From(() => QueueFree()));
+
+        if (queueFree)
+            _buttonBarTween.TweenCallback(Callable.From(() => QueueFree()));
     }
 
-    private void SetCurrentButton(Button button)
+    public void SetCurrentButton(Button button)
     {
         if (_currentButton == button)
         {
@@ -122,22 +127,25 @@ public abstract partial class MenuBase : CanvasLayer
 
         _currentButton = button;
 
-        Control nextControl = InstantiateMenuButtonControl(_buttonToState[button]);
-
-        if (nextControl != null)
+        if (button != null)
         {
-            _currentControl = nextControl;
+            Control nextControl = InstantiateMenuButtonControl(_buttonToState[button]);
 
-            _currentControl.Position = new Vector2(0, -1080);
-            _currentControl.Modulate = new Color(1, 1, 1, 0);
-            AddChild(_currentControl);
+            if (nextControl != null)
+            {
+                _currentControl = nextControl;
+                AddChild(_currentControl);
 
-            Tween show_tween = nextControl.CreateTween();
-            show_tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-            show_tween.TweenProperty(nextControl, "position", new Vector2(0, 0), TRANSITION_DURATION);
-            show_tween.Parallel().TweenProperty(nextControl, "modulate", new Color(1, 1, 1, 1), TRANSITION_DURATION);
+                _currentControl.Position = new Vector2(0, -1080);
+                _currentControl.Modulate = new Color(1, 1, 1, 0);
 
-            Sounds.PlaySound(SoundType.MainMenuSelect);
+                Tween show_tween = nextControl.CreateTween();
+                show_tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+                show_tween.TweenProperty(nextControl, "position", new Vector2(0, 0), TRANSITION_DURATION);
+                show_tween.Parallel().TweenProperty(nextControl, "modulate", new Color(1, 1, 1, 1), TRANSITION_DURATION);
+
+                Sounds.PlaySound(SoundType.MainMenuSelect);
+            }
         }
     }
 

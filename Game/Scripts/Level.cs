@@ -16,6 +16,7 @@ public partial class Level : Node3D
 
 
     private List<Quest> _quests = new();
+    private Quest _currentQuest;
 
 
     public override void _Ready()
@@ -27,6 +28,7 @@ public partial class Level : Node3D
 
         EventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
         EventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
+        EventHub.Instance.QuestAccepted += EventHub_QuestAccepted;
 
 
         // Initialize LevelState StateMachine
@@ -41,14 +43,42 @@ public partial class Level : Node3D
         _levelStateMachine.SetState(levelState);
     }
 
-    private void EventHub_QuestMarkerEntered(QuestMarker questMarker)
+    private void EventHub_QuestMarkerEntered(QuestMarker questMarker, bool isStart)
     {
         Debug.Assert(_quests.Contains(questMarker.Quest));
 
-        _quests.Remove(questMarker.Quest);
-        questMarker.Quest.Teardown();
+        if (isStart)
+        {
+            _drivingOverlay.ShowQuestMenu(questMarker.Quest);
+        }
+        else
+        {
+            _currentQuest.Teardown();
+            _currentQuest = null;
 
-        CreateQuest();
+            CreateQuests();
+        }
+    }
+
+    private void EventHub_QuestAccepted(QuestMarker questMarker)
+    {
+        Debug.Assert(_currentQuest == null);
+
+        Quest quest = questMarker.Quest;
+        quest.QuestMarker.QueueFree();
+        quest.QuestSprite.QueueFree();
+
+        foreach (Quest otherQuests in _quests)
+        {
+            if (otherQuests != quest)
+                otherQuests.Teardown();
+        }
+        _quests.Clear();
+
+
+        _city.AddQuestMarker(quest, quest.TargetCoord, false);
+
+        _currentQuest = quest;
     }
 
     private void SwitchLevelState(StateMachine stateMachine)
@@ -78,7 +108,7 @@ public partial class Level : Node3D
                 {
                     if (stateMachine.Action == StateMachineAction.Start)
                     {
-                        CreateQuest();
+                        CreateQuests();
                     }
                 }
                 break;
@@ -96,14 +126,24 @@ public partial class Level : Node3D
         QueueFree();
     }
 
-    public void CreateQuest()
+    public void CreateQuests()
     {
-        if (_city.TryGetRandomCoord(TileType.Street, out Vector2I coord))
+        HashSet<TileType> validTypes = new()
         {
-            Quest quest = new(coord);
-            _quests.Add(quest);
+            TileType.Street,
+            TileType.Park
+        };
 
-            _city.AddQuest(quest);
+        for (int i = 0; i < 50; ++i)
+        {
+            if (_city.TryGetRandomCoord(validTypes, out Vector2I coord) &&
+                _city.TryGetRandomCoord(validTypes, out Vector2I targetCoord))
+            {
+                Quest quest = new(coord, targetCoord);
+                _quests.Add(quest);
+
+                _city.AddQuestMarker(quest, quest.StartCoord, true);
+            }
         }
     }
 }

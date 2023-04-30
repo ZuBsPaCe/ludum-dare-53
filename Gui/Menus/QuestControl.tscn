@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1boai0amhgij"]
+
+[ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="1_gl4xx"]
+[ext_resource type="Script" path="res://Gui/Menus/QuestControl.cs" id="2_u4n4i"]
+
+[node name="QuestControl" type="MarginContainer"]
+offset_right = 1344.0
+offset_bottom = 1080.0
+theme = ExtResource("1_gl4xx")
+script = ExtResource("2_u4n4i")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="QuestLabel" type="Label" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+text = "Please deliver this. Thx!"
+autowrap_mode = 2
+text_overrun_behavior = 4

@@ -7,7 +7,9 @@ public partial class PauseMenu : MenuBase
     public override void _Ready()
     {
         Control buttonBar = GetNode<MarginContainer>("%ButtonBar");
+
         InitButtonBar(buttonBar);
+        ShowButtonBar();
 
         Button continueButton = GetNode<Button>("%ContinueButton");
         Button settingsButton = GetNode<Button>("%SettingsButton");

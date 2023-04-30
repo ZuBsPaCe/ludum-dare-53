@@ -7,7 +7,8 @@ public partial class MainMenu : MenuBase
     public override void _Ready()
     {
         Control buttonBar = GetNode<MarginContainer>("%ButtonBar");
-        InitButtonBar(buttonBar, 0.25f);
+        InitButtonBar(buttonBar);
+        ShowButtonBar(0.25f);
 
         Button startButton = GetNode<Button>("%StartButton");
         Button settingsButton = GetNode<Button>("%SettingsButton");

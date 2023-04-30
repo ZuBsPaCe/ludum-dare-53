@@ -132,12 +132,12 @@ public partial class City : Node3D
         return _map.TryGetRandomCoord(tileType, out coord);
     }
 
-    public void AddQuest(Quest quest)
+    public void AddQuestMarker(Quest quest, Vector2I coord, bool isStart)
     {
         QuestMarker questMarker = _sceneQuestMarker.Instantiate<QuestMarker>();
 		AddChild(questMarker);
-		questMarker.Setup(quest);
-		questMarker.GlobalPosition = GetRandomPosInCoord(quest.Coord);
+		questMarker.Setup(quest, isStart);
+		questMarker.GlobalPosition = GetRandomPosInCoord(coord);
 
 		quest.QuestMarker = questMarker;
 
@@ -301,14 +301,8 @@ public partial class City : Node3D
 						int minIndex = Mathf.Max((int)(factor * orderedBuildings.Count - 3), 0);
 						int maxIndex = minIndex + 2;
 
-                        //tile = _sceneBuildings.PickRandom().Instantiate<Node3D>();
                         tile = orderedBuildings[GD.RandRange(minIndex, maxIndex)].Instantiate<Node3D>();
 
-						if (tile.Name.ToString().Contains("Apartments01"))
-						{
-							GD.Print(tile.Name);
-							// do nothing
-						}
 						foreach (var child in tile.GetChildren())
 						{
 							if (child is MeshInstance3D meshInstance)

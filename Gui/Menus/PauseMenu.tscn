@@ -24,14 +24,12 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
-toggle_mode = true
 text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../MainMenuButton")
-toggle_mode = true
 text = "Settings"
 
 [node name="Spacer" type="Control" parent="ButtonBar/VBoxContainer"]
@@ -43,5 +41,4 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../SettingsButton")
 focus_neighbor_bottom = NodePath("../ContinueButton")
-toggle_mode = true
 text = "Exit to Main Menu"

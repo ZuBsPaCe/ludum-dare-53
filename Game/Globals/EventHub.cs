@@ -11,7 +11,8 @@ public partial class EventHub : Node
     [Signal] public delegate void SoundVolumeChangedEventHandler(float volume);
     [Signal] public delegate void FullscreenChangedEventHandler(bool fullscreen);
 
-    [Signal] public delegate void QuestMarkerEnteredEventHandler(QuestMarker questMarker);
+    [Signal] public delegate void QuestMarkerEnteredEventHandler(QuestMarker questMarker, bool isStart);
+    [Signal] public delegate void QuestAcceptedEventHandler(QuestMarker questMarker);
 
     public static void EmitSwitchGameState(GameState gameState)
     {
@@ -38,8 +39,13 @@ public partial class EventHub : Node
         Instance.EmitSignal(SignalName.FullscreenChanged, fullscreen);
     }
 
-    internal static void EmitQuestMarkerEntered(QuestMarker questMarker)
+    internal static void EmitQuestMarkerEntered(QuestMarker questMarker, bool isStart)
     {
-        Instance.EmitSignal(SignalName.QuestMarkerEntered, questMarker);
+        Instance.EmitSignal(SignalName.QuestMarkerEntered, questMarker, isStart);
+    }
+
+    internal static void EmitQuestAccepted(QuestMarker questMarker)
+    {
+        Instance.EmitSignal(SignalName.QuestAccepted, questMarker);
     }
 }

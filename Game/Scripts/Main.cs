@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class Main : Node
 {
@@ -22,17 +23,46 @@ public partial class Main : Node
         EventHub.Instance = new EventHub();
         AddChild(EventHub.Instance, false, InternalMode.Front);
         EventHub.Instance.SwitchGameState += EventHub_SwitchGameState;
+        EventHub.Instance.MusicVolumeChanged += EventHub_MusicVolumeChanged;
+        EventHub.Instance.SoundVolumeChanged += EventHub_SoundVolumeChanged;
+        EventHub.Instance.FullscreenChanged += EventHub_FullscreenChanged;
 
 
         // Initialize GameState StateMachine
         _gameStateMachine = _sceneStateMachine.Instantiate<StateMachine>();
         AddChild(_gameStateMachine, false, InternalMode.Front);
         _gameStateMachine.Setup(GameState.MainMenu, SwitchGameState);
+
+
+        // Initialize UserSettings Singleton
+        UserSettings.Instance = new UserSettings();
+        AddChild(Sounds.Instance, false, InternalMode.Front);
+
+        UserSettings.Load();
     }
 
     private void EventHub_SwitchGameState(GameState gameState)
     {
         _gameStateMachine.SetState(gameState);
+    }
+
+    private void EventHub_FullscreenChanged(bool fullscreen)
+    {
+        if (fullscreen)
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+        else
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+    }
+
+    private void EventHub_SoundVolumeChanged(float volume)
+    {
+        Sounds.SetVolume("Motor", volume);
+        Sounds.SetVolume("Sound", volume);
+    }
+
+    private void EventHub_MusicVolumeChanged(float volume)
+    {
+        Sounds.SetVolume("Music", volume);
     }
 
     private void SwitchGameState(StateMachine stateMachine)

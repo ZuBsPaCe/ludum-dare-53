@@ -378,6 +378,8 @@ _UpgradeReport_Files*/
 *.blend1
 *.unwrap_cache
 
+UserSettings.json
+
 
 # NuGet Packages
 *.nupkg
@@ -397,5 +399,3 @@ assets/Rooms.tres
 
 # Exceptions:
 # https://stackoverflow.com/a/30606460/998987
-
-

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://vteul8ntf2p0"]
+
+[ext_resource type="PackedScene" uid="uid://wb6gliu13gwm" path="res://Game/Building/SkyScraper02.blend" id="1_o5wvg"]
+[ext_resource type="Script" path="res://Game/Building/Building.cs" id="2_o2af4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p60fn"]
+size = Vector3(12.4082, 20.0705, 12.4221)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p6xw4"]
+size = Vector3(10.62, 20.0899, 10.6724)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m70hp"]
+size = Vector3(5.30173, 4.47644, 5.34745)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yvmlh"]
+size = Vector3(0.88531, 11.9759, 1.63708)
+
+[node name="SkyScraper02" instance=ExtResource("1_o5wvg")]
+script = ExtResource("2_o2af4")
+Height = 70.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.9642, 0)
+shape = SubResource("BoxShape3D_p60fn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33.9947, 0)
+shape = SubResource("BoxShape3D_p60fn")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 53.9473, 0)
+shape = SubResource("BoxShape3D_p6xw4")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 65.7367, 0)
+shape = SubResource("BoxShape3D_m70hp")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 73.8995, 0)
+shape = SubResource("BoxShape3D_yvmlh")

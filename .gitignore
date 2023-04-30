@@ -361,7 +361,7 @@ MigrationBackup/
 
 _install/
 _ReSharper*/
-Build*/
+Build/
 _Debug*/
 _Release*/
 UpgradeLog.htm
@@ -375,6 +375,8 @@ _UpgradeReport_Files*/
 .import/
 .godot/
 *.leo
+*.blend1
+*.unwrap_cache
 
 
 # NuGet Packages

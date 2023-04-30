@@ -223,7 +223,7 @@ public partial class City : Node3D
                 switch (tileType)
                 {
                     case TileType.Building:
-                        tile = _sceneBuildings[0].Instantiate<Node3D>();
+                        tile = _sceneBuildings.PickRandom().Instantiate<Node3D>();
                         break;
 
                     case TileType.StreetVer:

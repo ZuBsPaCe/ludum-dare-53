@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6wtptj7roorf"]
+[gd_scene load_steps=16 format=3 uid="uid://6wtptj7roorf"]
 
 [ext_resource type="Script" path="res://Game/Scripts/City.cs" id="1_8udbb"]
 [ext_resource type="PackedScene" uid="uid://j8dvlrelfe3u" path="res://Game/Street/StreetCrossing.tscn" id="1_58f1t"]
@@ -8,7 +8,13 @@
 [ext_resource type="Script" path="res://Game/Scripts/FollowCamera.cs" id="6_h6kdy"]
 [ext_resource type="PackedScene" uid="uid://ptsmjv3mjisf" path="res://Game/Truck/PlayerTruck.tscn" id="6_m11b1"]
 [ext_resource type="PackedScene" uid="uid://b83xl5jdd7ce6" path="res://Game/QuestMarker/QuestMarker.tscn" id="6_nwgrh"]
+[ext_resource type="PackedScene" uid="uid://vteul8ntf2p0" path="res://Game/Building/SkyScraper02.tscn" id="6_xwrel"]
+[ext_resource type="PackedScene" uid="uid://jh0he0c7hwes" path="res://Game/Building/Apartments01.tscn" id="7_0pfhq"]
+[ext_resource type="PackedScene" uid="uid://8qpx4qnqkdqh" path="res://Game/Building/SkyScraper03.tscn" id="8_8sfx3"]
 [ext_resource type="Environment" uid="uid://d327lvlnis6se" path="res://Scenes/Environment.tres" id="8_bmhxo"]
+[ext_resource type="PackedScene" uid="uid://d3j8maaouo50c" path="res://Game/Building/Apartments02.tscn" id="9_r5nr3"]
+[ext_resource type="PackedScene" uid="uid://b5f5v4wwhjrvf" path="res://Game/Building/Apartments03.tscn" id="10_ki4hw"]
+[ext_resource type="PackedScene" uid="uid://kxvnbfqjnrif" path="res://Game/Building/Apartments04.tscn" id="11_t38fx"]
 
 [node name="City" type="Node3D"]
 script = ExtResource("1_8udbb")
@@ -19,7 +25,7 @@ _genPath = NodePath("Generated")
 _sceneStreetHor = ExtResource("2_122oa")
 _sceneStreetVer = ExtResource("4_k44w8")
 _sceneStreetCrossing = ExtResource("1_58f1t")
-_sceneBuildings = [ExtResource("3_ar6hr")]
+_sceneBuildings = [ExtResource("3_ar6hr"), ExtResource("6_xwrel"), ExtResource("7_0pfhq"), ExtResource("8_8sfx3"), ExtResource("9_r5nr3"), ExtResource("10_ki4hw"), ExtResource("11_t38fx")]
 _sceneQuestMarker = ExtResource("6_nwgrh")
 _levelData = {
 "MapHeight": 24,

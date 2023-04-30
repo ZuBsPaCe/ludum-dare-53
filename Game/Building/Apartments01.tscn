@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://jh0he0c7hwes"]
+
+[ext_resource type="PackedScene" uid="uid://c522k4pdis5x" path="res://Game/Building/Apartments01.blend" id="1_lki6u"]
+[ext_resource type="Script" path="res://Game/Building/Building.cs" id="2_1rlb4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mf172"]
+size = Vector3(17.0133, 7.21814, 17.0693)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cptk1"]
+size = Vector3(14.6282, 23.4561, 14.586)
+
+[node name="Apartments01" instance=ExtResource("1_lki6u")]
+script = ExtResource("2_1rlb4")
+Height = 30.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.42313, 0)
+shape = SubResource("BoxShape3D_mf172")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.5216, 0)
+shape = SubResource("BoxShape3D_cptk1")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b137nl5do1ci"]
+[gd_scene load_steps=6 format=3 uid="uid://dab2pmrih7l3u"]
 
 [ext_resource type="PackedScene" uid="uid://bw4twbf2hm6sx" path="res://Game/Building/SkyScraper01.blend" id="1_btqtp"]
 [ext_resource type="Material" uid="uid://bn0vbgdiest8" path="res://Game/Building/WallMaterial.tres" id="2_6d3mh"]
 [ext_resource type="Script" path="res://Game/Building/Building.cs" id="2_bcoua"]
-[ext_resource type="Material" uid="uid://de41mmb1jkcj5" path="res://Game/Building/WindowMaterial.tres" id="3_kwup2"]
+[ext_resource type="Material" uid="uid://de41mmb1jkcj5" path="res://Game/Materials/WindowMaterial.tres" id="4_fnqnk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f8gp1"]
 size = Vector3(17, 50, 17)
@@ -22,7 +22,7 @@ material_override = ExtResource("2_6d3mh")
 material_override = ExtResource("2_6d3mh")
 
 [node name="Windows" parent="." index="3"]
-surface_material_override/0 = ExtResource("3_kwup2")
+surface_material_override/0 = ExtResource("4_fnqnk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
 

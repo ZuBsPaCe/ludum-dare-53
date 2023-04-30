@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhvqdodtxxiet"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" uid="uid://51i7w6dxu270" path="res://Game/Street/StreetCorner.blend" id="1_vmawk"]
-[ext_resource type="Material" uid="uid://bm526jgmelq17" path="res://Game/Street/StreetCornerMaterial.tres" id="2_gwjq8"]
+[ext_resource type="Material" uid="uid://bm526jgmelq17" path="res://Game/Materials/StreetCornerMaterial.tres" id="2_gwjq8"]
 
 [node name="StreetCorner" instance=ExtResource("1_vmawk")]
 

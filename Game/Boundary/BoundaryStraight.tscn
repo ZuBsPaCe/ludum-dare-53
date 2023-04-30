@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" uid="uid://do3187u62y6li" path="res://Game/Boundary/BoundaryStraight.blend" id="1_r5y2m"]
-[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Street/FloorMaterial.tres" id="2_pgm0r"]
+[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Materials/FloorMaterial.tres" id="2_pgm0r"]
 
 [node name="BoundaryStraight" instance=ExtResource("1_r5y2m")]
 

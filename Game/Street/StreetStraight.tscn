@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ipdpg10ae221"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dqeoo4ayulj6o" path="res://Game/Street/StreetStraight.blend" id="1_ep5yl"]
-[ext_resource type="Material" uid="uid://b1qs6cog8u8sg" path="res://Game/Street/StreetStraightMaterial.tres" id="2_8nhct"]
+[ext_resource type="Material" uid="uid://b1qs6cog8u8sg" path="res://Game/Materials/StreetStraightMaterial.tres" id="2_8nhct"]
 
 [node name="StreetStraight" instance=ExtResource("1_ep5yl")]
 

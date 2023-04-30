@@ -37,8 +37,11 @@ public partial class City : Node3D
 	[Export] private PackedScene _scenePark;
 
     [Export] private Array<PackedScene> _sceneBuildings;
+    [Export] private Array<Material> _concreteMaterials;
+	[Export] private Material _baseMaterial;
+	[Export] private Material _windowMaterial;
 
-	[Export] private PackedScene _sceneQuestMarker;
+    [Export] private PackedScene _sceneQuestMarker;
 
 
 	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
@@ -300,7 +303,31 @@ public partial class City : Node3D
 
                         //tile = _sceneBuildings.PickRandom().Instantiate<Node3D>();
                         tile = orderedBuildings[GD.RandRange(minIndex, maxIndex)].Instantiate<Node3D>();
-                        break;
+
+						if (tile.Name.ToString().Contains("Apartments01"))
+						{
+							GD.Print(tile.Name);
+							// do nothing
+						}
+						foreach (var child in tile.GetChildren())
+						{
+							if (child is MeshInstance3D meshInstance)
+							{
+								if (child.Name.ToString().Contains("Window"))
+								{
+									meshInstance.MaterialOverride = _windowMaterial;
+								}
+								else if (child.Name.ToString().Contains("Base"))
+								{
+									meshInstance.MaterialOverride = _baseMaterial;
+								}
+								else
+								{
+									meshInstance.MaterialOverride = _concreteMaterials.PickRandom();
+								}
+							}
+						}
+						break;
 
                     case TileType.Street:
 						bool topStreet = map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street);

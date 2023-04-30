@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
+using static System.Collections.Specialized.BitVector32;
 
 [Tool]
 public partial class City : Node3D
@@ -23,6 +24,8 @@ public partial class City : Node3D
 
     [Export] private PackedScene _sceneBoundaryStraight;
     [Export] private PackedScene _sceneBoundaryCorner;
+
+	[Export] private PackedScene _sceneWater;
 
     [Export] private Array<PackedScene> _sceneBuildings;
 
@@ -205,9 +208,6 @@ public partial class City : Node3D
 		_levelData["TileTypeArray"] = tileTypeArray;
 		_levelData["MapWidth"] = map.Width;
 		_levelData["MapHeight"] = map.Height;
-
-        GD.Print($"Width {_levelData["MapWidth"]}");
-        GD.Print($"Height {_levelData["MapHeight"]}");
 
 		if (debug)
 		{
@@ -397,9 +397,24 @@ public partial class City : Node3D
 
                 map.SetItem(xTile, yTile, new Tile());
 
-                tile.Position = new Vector3(x, 0, y);
                 root.AddChild(tile);
+                tile.Position = new Vector3(x, 0, y);
             }
         }
+
+
+        int waterRings = 3;
+
+        for (int xSection = -waterRings; xSection < _xSectionCount + waterRings; ++xSection)
+			for (int ySection = -waterRings; ySection < _ySectionCount + waterRings; ++ySection)
+			{
+				if (xSection >= 0 && xSection < _xSectionCount && ySection >= 0 && ySection < _ySectionCount)
+					continue;
+
+                Node3D waterSection = _sceneWater.Instantiate<Node3D>();
+
+                root.AddChild(waterSection);
+                waterSection.Position = new Vector3((xSection + 0.5f) * _sectionTileSize, 0, (ySection + 0.5f) * _sectionTileSize) * _tileSize;
+            }
     }
 }

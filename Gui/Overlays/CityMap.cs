@@ -46,6 +46,9 @@ public partial class CityMap : SubViewport
                         sprite = _sceneStreet.Instantiate<Sprite2D>();
                         break;
 
+                    case TileType.Boundary:
+                        continue;
+
                     default:
                         Debug.Fail($"Unknown enum [{tileType}]");
                         continue;

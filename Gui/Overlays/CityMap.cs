@@ -5,6 +5,7 @@ public partial class CityMap : SubViewport
     [Export] private float _textureSize = 16;
     [Export] private PackedScene _sceneStreet;
     [Export] private PackedScene _sceneBuilding;
+    [Export] private PackedScene _scenePark;
     [Export] private PackedScene _scenePlayer;
     [Export] private PackedScene _sceneQuest;
 
@@ -20,8 +21,8 @@ public partial class CityMap : SubViewport
     {
         _tileSize = tileSize;
 
-        float xScale = Size.X / (map.Width * tileSize);
-        float yScale = Size.Y / (map.Height * tileSize);
+        float xScale = Size.X / (float)(map.Width * tileSize);
+        float yScale = Size.Y / (float)(map.Height * tileSize);
 
         _scale = Mathf.Min(xScale, yScale);
         _scaledTileSize = _scale * tileSize;
@@ -47,6 +48,10 @@ public partial class CityMap : SubViewport
                         break;
 
                     case TileType.Boundary:
+                        continue;
+
+                    case TileType.Park:
+                        sprite = _scenePark.Instantiate<Sprite2D>();
                         continue;
 
                     default:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4pg2yd6b5kal"]
+[gd_scene load_steps=7 format=3 uid="uid://c4pg2yd6b5kal"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/CityMap.cs" id="1_vy3nv"]
 [ext_resource type="PackedScene" uid="uid://c2wt7hwlikjxc" path="res://Gui/Overlays/CityMapSprites/StreetMapSprite.tscn" id="2_f6nhf"]
 [ext_resource type="PackedScene" uid="uid://bno6mal3tlvlm" path="res://Gui/Overlays/CityMapSprites/BuildingMapSprite.tscn" id="3_ypktd"]
 [ext_resource type="PackedScene" uid="uid://celmmw250jlul" path="res://Gui/Overlays/CityMapSprites/PlayerMapSprite.tscn" id="4_5ppva"]
+[ext_resource type="PackedScene" uid="uid://cw87rtnvoh0t4" path="res://Gui/Overlays/CityMapSprites/ParkMapSprite.tscn" id="4_7bohc"]
 [ext_resource type="PackedScene" uid="uid://bdmuauyaiunw6" path="res://Gui/Overlays/CityMapSprites/QuestMapSprite.tscn" id="5_gx43s"]
 
 [node name="CityMap" type="SubViewport"]
@@ -14,6 +15,7 @@ render_target_update_mode = 4
 script = ExtResource("1_vy3nv")
 _sceneStreet = ExtResource("2_f6nhf")
 _sceneBuilding = ExtResource("3_ypktd")
+_scenePark = ExtResource("4_7bohc")
 _scenePlayer = ExtResource("4_5ppva")
 _sceneQuest = ExtResource("5_gx43s")
 

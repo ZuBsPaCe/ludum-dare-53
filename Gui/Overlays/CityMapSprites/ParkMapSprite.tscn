@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw87rtnvoh0t4"]
+
+[ext_resource type="Texture2D" uid="uid://2eoe537gnibs" path="res://Gui/Overlays/CityMapSprites/ParkMapTex.png" id="1_5loov"]
+
+[node name="ParkMapSprite" type="Sprite2D"]
+texture = ExtResource("1_5loov")

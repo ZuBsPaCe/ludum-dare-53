@@ -444,7 +444,7 @@ public partial class City : Node3D
 		{
 			Node3D park = _scenePark.Instantiate<Node3D>();
 			root.AddChild(park);
-			park.Position = new Vector3(parkPos.Value.X, 0, parkPos.Value.Y) + new Vector3(40, 0, 40);
+			park.Position = new Vector3(parkPos.Value.X, 0, parkPos.Value.Y) - new Vector3(10, 0, 10);
 		}
 
 

@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dblj3hshcjquy"]
-
-[ext_resource type="PackedScene" uid="uid://b54y814erslcj" path="res://Game/Park/Park.blend" id="1_uvnel"]
-
-[node name="Park" instance=ExtResource("1_uvnel")]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://ipdpg10ae221"]
 
 [ext_resource type="PackedScene" uid="uid://dqeoo4ayulj6o" path="res://Game/Street/StreetStraight.blend" id="1_ep5yl"]
-[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Street/StreetMaterial.tres" id="2_2c7yp"]
+[ext_resource type="Material" uid="uid://b1qs6cog8u8sg" path="res://Game/Street/StreetStraightMaterial.tres" id="2_8nhct"]
 
 [node name="StreetStraight" instance=ExtResource("1_ep5yl")]
 
 [node name="StreetStraight" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_2c7yp")
+surface_material_override/0 = ExtResource("2_8nhct")

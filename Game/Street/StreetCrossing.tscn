@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://j8dvlrelfe3u"]
+[gd_scene load_steps=3 format=3 uid="uid://cgh10ugmxhr2"]
 
 [ext_resource type="PackedScene" uid="uid://ckcpnsc2cat4j" path="res://Game/Street/StreetCrossing.blend" id="1_23dlh"]
-[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Street/StreetMaterial.tres" id="2_ammpd"]
+[ext_resource type="Material" uid="uid://26u760kfyotv" path="res://Game/Street/StreetCrossingMaterial.tres" id="2_dyfe0"]
 
 [node name="StreetCrossing" instance=ExtResource("1_23dlh")]
 
 [node name="StreetCrossing" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_ammpd")
+surface_material_override/0 = ExtResource("2_dyfe0")

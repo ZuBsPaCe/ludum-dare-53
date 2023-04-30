@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm008owlot1bp"]
+[gd_scene load_steps=3 format=3 uid="uid://c8ar7a1yryy37"]
 
 [ext_resource type="PackedScene" uid="uid://b6iu81w4yvtm2" path="res://Game/Street/StreetTeeShape.blend" id="1_q83uu"]
-[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Street/StreetMaterial.tres" id="2_6hjkg"]
+[ext_resource type="Material" uid="uid://clk50csvfr78a" path="res://Game/Street/StreetTeeShapeMaterial.tres" id="2_dnlnf"]
 
 [node name="StreetTeeShape" instance=ExtResource("1_q83uu")]
 
 [node name="StreetStraight" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_6hjkg")
+surface_material_override/0 = ExtResource("2_dnlnf")

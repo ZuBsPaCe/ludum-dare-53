@@ -40,7 +40,7 @@ _subresources={
 },
 "Stairs": {
 "use_external/enabled": true,
-"use_external/path": "res://Game/Street/StreetMaterial.tres"
+"use_external/path": "res://Game/Materials/ConcreteMaterial01.tres"
 }
 },
 "nodes": {

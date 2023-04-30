@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://26u760kfyotv"]
+
+[ext_resource type="Texture2D" uid="uid://d3gnwgp3loq7w" path="res://Game/Street/StreetCrossing.png" id="1_y5tlj"]
+
+[resource]
+albedo_texture = ExtResource("1_y5tlj")

@@ -5,39 +5,31 @@ using System.Collections.Generic;
 [Tool]
 public partial class City : Node3D
 {
-	[Export]
-	private int _xSectionCount = 8;
+	[Export] private int _xSectionCount = 8;
+	[Export] private int _ySectionCount = 8;
 
-	[Export]
-	private int _ySectionCount = 8;
+	[Export] private int _sectionTileSize = 6;
 
-	[Export]
-	private int _sectionTileSize = 6;
+	[Export] private int _tileSize = 10;
 
-	[Export]
-	private int _tileSize = 10;
+	[Export] private NodePath _genPath;
 
-	[Export]
-	private NodePath _genPath;
+	[Export] private PackedScene _sceneStreetHor;
+	[Export] private PackedScene _sceneStreetVer;
+	[Export] private PackedScene _sceneStreetCrossing;
+	[Export] private PackedScene _sceneStreetTeeShape;
+	[Export] private PackedScene _sceneStreetDeadEnd;
+	[Export] private PackedScene _sceneStreetCorner;
 
-	[Export]
-	private PackedScene _sceneStreetHor;
+    [Export] private PackedScene _sceneBoundaryStraight;
+    [Export] private PackedScene _sceneBoundaryCorner;
 
-	[Export]
-	private PackedScene _sceneStreetVer;
+    [Export] private Array<PackedScene> _sceneBuildings;
 
-	[Export]
-	private PackedScene _sceneStreetCrossing;
-
-	[Export]
-	private Array<PackedScene> _sceneBuildings;
-
-	[Export]
-	private PackedScene _sceneQuestMarker;
+	[Export] private PackedScene _sceneQuestMarker;
 
 
-	[Export]
-	private Godot.Collections.Dictionary<string, Variant> _levelData;
+	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
 
 
 	[Export]
@@ -85,14 +77,16 @@ public partial class City : Node3D
 		if (_levelData == null || _levelData.Count == 0)
 			return;
 
-        var tileTypeArray = (Array<int>)_levelData["TileTypeArray"];
+		var tileTypeArray = (Array<int>)_levelData["TileTypeArray"];
 
-        _map = new((int)_levelData["MapWidth"], (int)_levelData["MapHeight"], TileType.Building);
+		_map = new((int)_levelData["MapWidth"], (int)_levelData["MapHeight"], TileType.Building);
 
-        for (int index = 0; index < _map.Size; ++index)
-        {
-            _map.SetTypeIndex(index, (TileType)tileTypeArray[index]);
-        }
+		for (int index = 0; index < _map.Size; ++index)
+		{
+			_map.SetTypeIndex(index, (TileType)tileTypeArray[index]);
+		}
+
+		//_map = RunGenerate(false);
 
         GenerateTiles(root, _map);
     }
@@ -118,6 +112,11 @@ public partial class City : Node3D
 		return _map.TryGetRandomCoord(tileTypes, out coord);
 	}
 
+    public bool TryGetRandomCoord(TileType tileType, out Vector2I coord)
+    {
+        return _map.TryGetRandomCoord(tileType, out coord);
+    }
+
     public void AddQuest(Quest quest)
     {
         QuestMarker questMarker = _sceneQuestMarker.Instantiate<QuestMarker>();
@@ -135,7 +134,7 @@ public partial class City : Node3D
         return new Vector3(coord.X * _tileSize + GD.RandPosInt() % _tileSize, 0, coord.Y * _tileSize + GD.RandPosInt() % _tileSize);
     }
 
-    private void RunGenerate(bool debug)
+    private Map<TileType, Tile> RunGenerate(bool debug)
     {
 		GD.Print($"Running Generate. Debug: [{debug}]");
 
@@ -143,13 +142,56 @@ public partial class City : Node3D
 		foreach (var child in root.GetChildren())
 			child.QueueFree();
 
-		Map<TileType, Tile> map = new(_xSectionCount * _sectionTileSize, _ySectionCount * _sectionTileSize, TileType.Building);
+		int width = _xSectionCount * _sectionTileSize;
+		int height = _ySectionCount * _sectionTileSize;
+
+        Map<TileType, Tile> map = new(width, height, TileType.Building);
 
 		for (int ySection = 0; ySection < _ySectionCount; ++ySection)
 			for (int xSection = 0; xSection < _xSectionCount; ++xSection)
 			{
 				GenerateSection(map, xSection, ySection);
 			}
+
+
+		{
+			// Streets on the bottom and right boundary
+			width += 1;
+			height += 1;
+
+			// Boundary tiles
+			width += 2;
+			height += 2;
+
+			Map<TileType, Tile> mapWithBorder = new(width, height, TileType.Building);
+			mapWithBorder.SetAllTypes(TileType.Boundary);
+
+			for (int y = 0; y < height; ++y)
+				mapWithBorder.SetType(width - 1, y, TileType.Boundary);
+
+			for (int x = 0; x < width; ++x)
+				mapWithBorder.SetType(x, height - 1, TileType.Boundary);
+
+			for (int y = 1; y < height - 1; ++y)
+			{
+				mapWithBorder.SetType(1, y, TileType.Street);
+				mapWithBorder.SetType(width - 2, y, TileType.Street);
+			}
+
+			for (int x = 1; x < width - 1; ++x)
+			{
+				mapWithBorder.SetType(x, 1, TileType.Street);
+				mapWithBorder.SetType(x, height - 2, TileType.Street);
+			}
+
+			for (int y = 0; y < map.Height; ++y)
+				for (int x = 0; x < map.Width; ++x)
+					mapWithBorder.SetType(x + 1, y + 1, map.GetType(x, y));
+
+			map = mapWithBorder;
+		}
+
+
 
 		Array<int> tileTypeArray = new();
 
@@ -164,10 +206,15 @@ public partial class City : Node3D
 		_levelData["MapWidth"] = map.Width;
 		_levelData["MapHeight"] = map.Height;
 
+        GD.Print($"Width {_levelData["MapWidth"]}");
+        GD.Print($"Height {_levelData["MapHeight"]}");
+
 		if (debug)
 		{
 			GenerateTiles(root, map);
 		}
+
+		return map;
     }
 
 	private void GenerateSection(Map<TileType, Tile> map, int xSection, int ySection)
@@ -183,17 +230,9 @@ public partial class City : Node3D
 
 				TileType tileType;
 
-				if (yIndex == 0 && xIndex == 0)
+				if (yIndex == 0 || xIndex == 0)
                 {
-					tileType = TileType.StreetCrossing;
-				}
-				else if (yIndex == 0)
-				{
-					tileType = TileType.StreetHor;
-				}
-				else if (xIndex == 0)
-				{
-					tileType = TileType.StreetVer;
+					tileType = TileType.Street;
 				}
 				else
 				{
@@ -226,16 +265,129 @@ public partial class City : Node3D
                         tile = _sceneBuildings.PickRandom().Instantiate<Node3D>();
                         break;
 
-                    case TileType.StreetVer:
-                        tile = _sceneStreetVer.Instantiate<Node3D>();
-                        break;
+                    case TileType.Street:
+						bool topStreet = map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street);
+						bool bottomStreet = map.IsTypeAtDir4(xTile, yTile, Direction4.S, TileType.Street);
 
-                    case TileType.StreetHor:
-                        tile = _sceneStreetHor.Instantiate<Node3D>();
-                        break;
+						bool rightStreet = map.IsTypeAtDir4(xTile, yTile, Direction4.E, TileType.Street);
+						bool leftStreet = map.IsTypeAtDir4(xTile, yTile, Direction4.W, TileType.Street);
 
-                    case TileType.StreetCrossing:
-                        tile = _sceneStreetCrossing.Instantiate<Node3D>();
+						if (topStreet && bottomStreet && rightStreet && leftStreet)
+						{
+							tile = _sceneStreetCrossing.Instantiate<Node3D>();
+						}
+                        else if (topStreet && bottomStreet && !rightStreet && !leftStreet)
+						{
+							tile = _sceneStreetVer.Instantiate<Node3D>();
+						}
+						else if (!topStreet && !bottomStreet && rightStreet && leftStreet)
+						{
+							tile = _sceneStreetHor.Instantiate<Node3D>();
+						}
+						else if (!topStreet && bottomStreet && rightStreet && !leftStreet)
+						{
+							// BR
+							tile = _sceneStreetCorner.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.5f);
+						}
+						else if (!topStreet && bottomStreet && !rightStreet && leftStreet)
+						{
+							// BL
+							tile = _sceneStreetCorner.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.25f);
+						}
+                        else if (topStreet && !bottomStreet && !rightStreet && leftStreet)
+                        {
+                            // TL
+                            tile = _sceneStreetCorner.Instantiate<Node3D>();
+                        }
+                        else if (topStreet && !bottomStreet && rightStreet && !leftStreet)
+                        {
+                            // TR
+                            tile = _sceneStreetCorner.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.75f);
+                        }
+						else if (!topStreet && bottomStreet && rightStreet && leftStreet)
+						{
+							// Tee Bottom
+							tile = _sceneStreetTeeShape.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.5f);
+						}
+                        else if (topStreet && !bottomStreet && rightStreet && leftStreet)
+                        {
+                            // Tee Top
+                            tile = _sceneStreetTeeShape.Instantiate<Node3D>();
+                        }
+                        else if (topStreet && bottomStreet && rightStreet && !leftStreet)
+                        {
+                            // Tee Right
+                            tile = _sceneStreetTeeShape.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.75f);
+                        }
+						else if (topStreet && bottomStreet && !rightStreet && leftStreet)
+						{
+							// Tee Left
+							tile = _sceneStreetTeeShape.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.25f);
+						}
+						else
+						{
+							//Debug.Fail("Unknown street tile");
+							continue;
+						}
+						break;
+
+                    case TileType.Boundary:
+						bool topBoundary = map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Boundary);
+						bool bottomBoundary = map.IsTypeAtDir4(xTile, yTile, Direction4.S, TileType.Boundary);
+
+						bool leftBoundary = map.IsTypeAtDir4(xTile, yTile, Direction4.E, TileType.Boundary);
+						bool rightBoundary = map.IsTypeAtDir4(xTile, yTile, Direction4.W, TileType.Boundary);
+
+						if (topBoundary && bottomBoundary && !leftBoundary && !rightBoundary)
+						{
+							tile = _sceneBoundaryStraight.Instantiate<Node3D>();
+
+                            if (map.IsValid(xTile + 1, yTile))
+                                tile.RotateY(Mathf.Tau * 0.75f);
+                            else
+                                tile.RotateY(Mathf.Tau * 0.25f);
+                        }
+						else if (!topBoundary && !bottomBoundary && leftBoundary && rightBoundary)
+						{
+							tile = _sceneBoundaryStraight.Instantiate<Node3D>();
+
+							if (map.IsValid(xTile, yTile + 1))
+								tile.RotateY(Mathf.Tau * 0.5f);
+						}
+						else if (!topBoundary && bottomBoundary && !leftBoundary && rightBoundary)
+						{
+							// TL
+							tile = _sceneBoundaryCorner.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.5f);
+						}
+						else if (!topBoundary && bottomBoundary && leftBoundary && !rightBoundary)
+						{
+							// TR
+							tile = _sceneBoundaryCorner.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.75f);
+						}
+						else if (topBoundary && !bottomBoundary && leftBoundary && !rightBoundary)
+						{
+							// BR
+							tile = _sceneBoundaryCorner.Instantiate<Node3D>();
+						}
+						else if (topBoundary && !bottomBoundary && !leftBoundary && rightBoundary)
+						{
+							// BL
+							tile = _sceneBoundaryCorner.Instantiate<Node3D>();
+							tile.RotateY(Mathf.Tau * 0.25f);
+						}
+						else
+						{
+							//Debug.Fail("Unknown boundary tile");
+							continue;
+						}
                         break;
 
                     default:

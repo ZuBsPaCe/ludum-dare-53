@@ -8,7 +8,7 @@ public class WrapMap<TYPE, ITEM> : Map<TYPE, ITEM> where TYPE : Enum where ITEM 
     {
     }
 
-    public override bool IsValid(Vector2I coord)
+    public override bool IsValid(int x, int y)
     {
         return true;
     }

@@ -14,8 +14,6 @@ public partial class Level : Node3D
     private StateMachine _levelStateMachine;
 
 
-    private HashSet<TileType> _streetTileTypes = new();
-
     private List<Quest> _quests = new();
 
 
@@ -26,10 +24,6 @@ public partial class Level : Node3D
 
         _drivingOverlay.Setup(_cityMap.GetTexture());
 
-        _streetTileTypes.Add(TileType.StreetHor);
-        _streetTileTypes.Add(TileType.StreetVer);
-        _streetTileTypes.Add(TileType.StreetCrossing);
-        
         EventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
         EventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
 
@@ -105,7 +99,7 @@ public partial class Level : Node3D
 
     public void CreateQuest()
     {
-        if (_city.TryGetRandomCoord(_streetTileTypes, out Vector2I coord))
+        if (_city.TryGetRandomCoord(TileType.Street, out Vector2I coord))
         {
             Quest quest = new(coord);
             _quests.Add(quest);

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi7sbsxb854yg"]
+
+[ext_resource type="PackedScene" uid="uid://dskvihk73dv3a" path="res://Game/Street/StreetDeadEnd.blend" id="1_3up5u"]
+
+[node name="StreetDeadEnd" instance=ExtResource("1_3up5u")]

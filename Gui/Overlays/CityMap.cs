@@ -42,9 +42,7 @@ public partial class CityMap : SubViewport
                         sprite = _sceneBuilding.Instantiate<Sprite2D>();
                         break;
 
-                    case TileType.StreetVer:
-                    case TileType.StreetHor:
-                    case TileType.StreetCrossing:
+                    case TileType.Street:
                         sprite = _sceneStreet.Instantiate<Sprite2D>();
                         break;
 

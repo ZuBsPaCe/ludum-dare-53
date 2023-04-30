@@ -56,13 +56,13 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
         return IsInside(final);
     }
 
-    // Will be overriden by WrapMap
-    public virtual bool IsValid(Vector2I coord)
+    public bool IsValid(Vector2I coord)
     {
         return IsValid(coord.X, coord.Y);
     }
 
-    public bool IsValid(int x, int y)
+    // Will be overriden by WrapMap
+    public virtual bool IsValid(int x, int y)
     {
         return x >= 0 && y >= 0 && x < Width && y < Height;
     }
@@ -239,6 +239,11 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
     public bool IsTypeOf(Vector2I coord, ICollection<TYPE> tileTypes)
     {
         return tileTypes.Contains(GetType(coord));
+    }
+
+    public bool IsTypeAtDir4(int x, int y, Direction4 dir, TYPE tileType)
+    {
+        return IsTypeAtDir4(new Vector2I(x, y), dir, tileType);
     }
 
     // Will check, if the coord is valid

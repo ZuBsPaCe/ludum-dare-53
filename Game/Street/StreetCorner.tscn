@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://6duidnh82gqq"]
+
+[ext_resource type="PackedScene" uid="uid://51i7w6dxu270" path="res://Game/Street/StreetCorner.blend" id="1_vmawk"]
+[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Street/StreetMaterial.tres" id="2_fhs6y"]
+
+[node name="StreetCorner" instance=ExtResource("1_vmawk")]
+
+[node name="StreetStraight" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_fhs6y")

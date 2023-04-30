@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://wqrf6fd2kq4w"]
+
+[ext_resource type="PackedScene" uid="uid://06dcivh5eqo4" path="res://Game/Boundary/BoundaryCorner.blend" id="1_p7qnh"]
+[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Street/StreetMaterial.tres" id="2_ji4f0"]
+
+[node name="BoundaryCorner" instance=ExtResource("1_p7qnh")]
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_ji4f0")

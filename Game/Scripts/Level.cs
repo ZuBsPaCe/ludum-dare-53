@@ -248,8 +248,6 @@ public partial class Level : Node3D
 
     private void EventHub_QuestMarkerEntered(QuestMarker questMarker, bool isStart)
     {
-        Debug.Assert(_quests.Contains(questMarker.Quest));
-
         if (isStart)
         {
             _canEnterQuest = questMarker.Quest;

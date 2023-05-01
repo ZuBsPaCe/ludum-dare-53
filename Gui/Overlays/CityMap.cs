@@ -92,6 +92,20 @@ public partial class CityMap : SubViewport
 
         questSprite.Position = GetScalePos(quest.QuestMarker.GlobalPosition);
 
+        switch (quest.QuestLevel)
+        {
+            case QuestLevel.Medium:
+                questSprite.Modulate = Colors.Orange;
+                break;
+            case QuestLevel.Hard:
+                questSprite.Modulate = Colors.Red;
+                break;
+            default:
+                questSprite.Modulate = Colors.Green;
+                Debug.Assert(quest.QuestLevel == QuestLevel.Easy);
+                break;
+        }
+
         quest.QuestSprite = questSprite;
     }
 

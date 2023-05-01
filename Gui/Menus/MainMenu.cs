@@ -3,6 +3,7 @@ using Godot;
 public partial class MainMenu : MenuBase
 {
     [Export] private PackedScene _sceneSettingsControl;
+    [Export] private PackedScene _titleControl;
 
     public override void _Ready()
     {
@@ -17,12 +18,17 @@ public partial class MainMenu : MenuBase
         InitButton(startButton, MainMenuState.Start);
         InitButton(settingsButton, MainMenuState.Settings);
         InitButton(exitButton, MainMenuState.Exit);
+
+        SetCurrentButton(startButton);
     }
 
     protected override Control InstantiateMenuButtonControl(int state)
     {
         switch ((MainMenuState) state)
         {
+            case MainMenuState.Start:
+                return _titleControl.Instantiate<Control>();
+
             case MainMenuState.Settings:
                 return _sceneSettingsControl.Instantiate<Control>();
         }

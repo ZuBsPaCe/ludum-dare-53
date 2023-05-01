@@ -1,16 +1,17 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Level : Node3D
 {
     [Export] private PackedScene _sceneStateMachine;
     [Export] private PackedScene _sceneCity;
+    [Export] private PackedScene _sceneFuelStationMenu;
 
 
     private City _city;
     private CityMap _cityMap;
     private DrivingOverlay _drivingOverlay;
+    private Notification _notification;
 
     private StateMachine _levelStateMachine;
 
@@ -27,12 +28,19 @@ public partial class Level : Node3D
     private AudioStreamPlayer _currentMusic;
 
 
+    private Quest _canEnterQuest;
+    private bool _canEnterShop;
+    private bool _enterNotificationShown;
+
+
     public override void _Ready()
     {
         _cityMap = GetNode<CityMap>("CityMap");
         _drivingOverlay = GetNode<DrivingOverlay>("DrivingOverlay");
 
         _drivingOverlay.Setup(_cityMap.GetTexture());
+
+        _notification = GetNode<Notification>("Notification");
 
         
         _slowMusic = GetNode<AudioStreamPlayer>("%SlowBeat");
@@ -52,7 +60,11 @@ public partial class Level : Node3D
 
         GameEventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
         GameEventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
+        GameEventHub.Instance.QuestMarkerExited += EventHub_QuestMarkerExited;
         GameEventHub.Instance.QuestAccepted += EventHub_QuestAccepted;
+
+        GameEventHub.Instance.FuelMarkerEntered += EventHub_FuelMarkerEntered;
+        GameEventHub.Instance.FuelMarkerExited += EventHub_FuelMarkerExited;
 
 
         // Initialize LevelState StateMachine
@@ -74,6 +86,55 @@ public partial class Level : Node3D
         {
             State.CountdownSecs -= (float) delta;
         }
+
+        if (!_enterNotificationShown)
+        {
+            if (!State.OverlayActive)
+            {
+                if (_city.PlayerSpeed < 1)
+                {
+                    if (_canEnterQuest != null || _canEnterShop)
+                    {
+                        _notification.ShowNotification(NotificationType.Info, "Press E", true);
+                        _enterNotificationShown = true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (_city.PlayerSpeed >= 1)
+            {
+                _notification.Unhold();
+                _enterNotificationShown = false;
+            }
+            else
+            {
+                if (!State.OverlayActive)
+                {
+                    if (Input.IsActionJustPressed("Use"))
+                    {
+                        if (_canEnterQuest != null)
+                        {
+                            _notification.Unhold();
+                            _enterNotificationShown = false;
+
+                            State.OverlayActive = true;
+                            _drivingOverlay.ShowQuestMenu(_canEnterQuest);
+                        }
+                        else if (_canEnterShop)
+                        {
+                            _notification.Unhold();
+                            _enterNotificationShown = false;
+
+                            State.OverlayActive = true;
+                            FuelStationMenu fuelStationMenu = _sceneFuelStationMenu.Instantiate<FuelStationMenu>();
+                            AddChild(fuelStationMenu);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void EventHub_SwitchLevelState(LevelState levelState)
@@ -87,7 +148,7 @@ public partial class Level : Node3D
 
         if (isStart)
         {
-            _drivingOverlay.ShowQuestMenu(questMarker.Quest);
+            _canEnterQuest = questMarker.Quest;
         }
         else
         {
@@ -97,11 +158,13 @@ public partial class Level : Node3D
 
             if (State.CountdownSecs > 0)
             {
+                _notification.ShowNotification(NotificationType.Won, $"Good Job! +{_currentQuest.Money} bucks.");
                 Sounds.PlaySound(SoundType.Won);
                 State.Money += _currentQuest.Money;
             }
             else
             {
+                _notification.ShowNotification(NotificationType.Lost, $"Too late...");
                 Sounds.PlaySound(SoundType.Lost);
             }
 
@@ -112,9 +175,26 @@ public partial class Level : Node3D
         }
     }
 
+    private void EventHub_QuestMarkerExited()
+    {
+        _canEnterQuest = null;
+    }
+
+    private void EventHub_FuelMarkerEntered()
+    {
+        _canEnterShop = true;
+    }
+
+    private void EventHub_FuelMarkerExited()
+    {
+        _canEnterShop = false;
+    }
+
     private void EventHub_QuestAccepted(QuestMarker questMarker)
     {
         Debug.Assert(_currentQuest == null);
+
+        _canEnterQuest = null;
 
         Quest quest = questMarker.Quest;
         quest.QuestMarker.QueueFree();

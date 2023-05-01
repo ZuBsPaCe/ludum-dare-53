@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbrchu1nuv0px"]
+
+[ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="1_nhxgl"]
+[ext_resource type="Script" path="res://Gui/Notification/Notification.cs" id="2_aipqi"]
+[ext_resource type="Texture2D" uid="uid://c8c8ek4xwma21" path="res://Gui/Notification/NotificationInfo.png" id="2_ve0ob"]
+[ext_resource type="Texture2D" uid="uid://chjowry4020tx" path="res://icon.svg" id="3_2yofa"]
+[ext_resource type="Texture2D" uid="uid://dj1ih8sajjl5g" path="res://Gui/Notification/NotificationWon.png" id="3_vntl2"]
+[ext_resource type="Texture2D" uid="uid://ca8uy7im3g4v1" path="res://Gui/Notification/NotificationLost.png" id="4_nm7k1"]
+
+[node name="Notification" type="CanvasLayer"]
+script = ExtResource("2_aipqi")
+_infoTexture = ExtResource("2_ve0ob")
+_wonTexture = ExtResource("3_vntl2")
+_lostTexture = ExtResource("4_nm7k1")
+
+[node name="Root" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_nhxgl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Root"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Icon" type="TextureRect" parent="Root/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_2yofa")
+
+[node name="Control" type="Control" parent="Root/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Root/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Message"

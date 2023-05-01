@@ -8,6 +8,7 @@ public partial class CityMap : SubViewport
     [Export] private PackedScene _scenePark;
     [Export] private PackedScene _scenePlayer;
     [Export] private PackedScene _sceneQuest;
+    [Export] private PackedScene _sceneFuel;
 
     private int _tileSize;
 
@@ -52,6 +53,10 @@ public partial class CityMap : SubViewport
 
                     case TileType.Park:
                         sprite = _scenePark.Instantiate<Sprite2D>();
+                        break;
+
+                    case TileType.Fuel:
+                        sprite = _sceneFuel.Instantiate<Sprite2D>();
                         break;
 
                     default:

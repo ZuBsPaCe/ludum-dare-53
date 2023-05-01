@@ -182,13 +182,20 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
 
     public bool TryGetTypeWithOffset(Vector2I coord, Vector2I offset, out TYPE tileType)
     {
-        Vector2I final = coord + offset;
-        if (!IsValid(final))
+        return TryGetTypeWithOffset(coord.X, coord.Y, offset.X, offset.Y, out tileType);
+    }
+
+    public bool TryGetTypeWithOffset(int x, int y, int xOffset, int yOffset, out TYPE tileType)
+    {
+        int xFinal = x + xOffset;
+        int yFinal = y + yOffset;
+
+        if (!IsValid(xFinal, yFinal))
         {
             tileType = default;
             return false;
         }
-        tileType = GetType(final);
+        tileType = GetType(xFinal, yFinal);
         return true;
     }
 
@@ -252,6 +259,11 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
         return TryGetTypeWithOffset(coord, dir.ToVector(), out TYPE foundTileType) && foundTileType.Equals(tileType);
     }
 
+    public bool IsTypeAtDir8(int x, int y, Direction8 dir, TYPE tileType)
+    {
+        return IsTypeAtDir8(new Vector2I(x, y), dir, tileType);
+    }
+
     // Will check, if the coord is valid
     public bool IsTypeAtDir8(Vector2I coord, Direction8 dir, TYPE tileType)
     {
@@ -260,10 +272,15 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
 
     public int GetNeighbour4Count(Vector2I coord, TYPE tileType)
     {
+        return GetNeighbour4Count(coord.X, coord.Y, tileType);
+    }
+
+    public int GetNeighbour4Count(int x, int y, TYPE tileType)
+    {
         int count = 0;
 
         foreach (Direction4 dir in Enum.GetValues<Direction4>())
-            if (IsTypeAtDir4(coord, dir, tileType))
+            if (IsTypeAtDir4(x, y, dir, tileType))
                 count += 1;
 
         return count;
@@ -271,10 +288,47 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
 
     public int GetNeighbour8Count(Vector2I coord, TYPE tileType)
     {
+        return GetNeighbour8Count(coord.X, coord.Y, tileType);
+    }
+
+    public int GetNeighbour8Count(int x, int y, TYPE tileType)
+    {
         int count = 0;
 
         foreach (Direction8 dir in Enum.GetValues<Direction8>())
-            if (IsTypeAtDir8(coord, dir, tileType))
+            if (IsTypeAtDir8(x, y, dir, tileType))
+                count += 1;
+
+        return count;
+    }
+
+    public int GetInvalidNeighbour4Count(Vector2I coord)
+    {
+        return GetInvalidNeighbour4Count(coord.X, coord.Y);
+    }
+
+    public int GetInvalidNeighbour4Count(int x, int y)
+    {
+        int count = 0;
+
+        foreach (Direction4 dir in Enum.GetValues<Direction4>())
+            if (!IsValid(new Vector2I(x, y) + dir.ToVector()))
+                count += 1;
+
+        return count;
+    }
+
+    public int GetInvalidNeighbour8Count(Vector2I coord)
+    {
+        return GetInvalidNeighbour8Count(coord.X, coord.Y);
+    }
+
+    public int GetInvalidNeighbour8Count(int x, int y)
+    {
+        int count = 0;
+
+        foreach (Direction8 dir in Enum.GetValues<Direction8>())
+            if (!IsValid(new Vector2I(x, y) + dir.ToVector()))
                 count += 1;
 
         return count;

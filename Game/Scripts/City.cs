@@ -1,13 +1,14 @@
 using Godot;
 using Godot.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Collections.Specialized.BitVector32;
 
 [Tool]
 public partial class City : Node3D
 {
     [Export] private int _seed = 0;
+	[Export] private bool _debugGenerator;
 
 	[Export] private int _xSectionCount = 8;
 	[Export] private int _ySectionCount = 8;
@@ -20,6 +21,7 @@ public partial class City : Node3D
 	[Export] private float _downtownRadius = 25;
 
 	[Export] private Rect2I _parkCoords;
+	[Export] private Array<Vector2I> _fuelSections;
 
 	[Export] private NodePath _genPath;
 
@@ -36,12 +38,21 @@ public partial class City : Node3D
 	[Export] private PackedScene _sceneWater;
 	[Export] private PackedScene _scenePark;
 
+	[Export] private PackedScene _sceneFuelStation;
+
     [Export] private Array<PackedScene> _sceneBuildings;
     [Export] private Array<Material> _concreteMaterials;
 	[Export] private Material _baseMaterial;
 	[Export] private Material _windowMaterial;
+	[Export] private Material _redMaterial;
+	[Export] private Material _blackMaterial;
 
     [Export] private PackedScene _sceneQuestMarker;
+    [Export] private PackedScene _sceneFuelMarker;
+
+	[Export] private Material _questMarkerEasyMaterial;
+	[Export] private Material _questMarkerMediumMaterial;
+	[Export] private Material _questMarkerHardMaterial;
 
 
 	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
@@ -101,9 +112,14 @@ public partial class City : Node3D
 			_map.SetTypeIndex(index, (TileType)tileTypeArray[index]);
 		}
 
-		//_map = RunGenerate(false);
+#if DEBUG
+		if (_debugGenerator)
+            _map = RunGenerate(false);
+#endif
 
-        GenerateTiles(root, _map);
+		GD.Randomize();
+
+		GenerateTiles(root, _map);
     }
 
     public override void _Process(double delta)
@@ -119,6 +135,11 @@ public partial class City : Node3D
 	public Vector3 PlayerPos
 	{
 		get { return _playerTruck.GlobalPosition; }
+	}
+
+	public float PlayerSpeed
+	{
+		get { return _playerTruck.LinearVelocity.Length(); }
 	}
 
 	public int TileSize
@@ -144,19 +165,58 @@ public partial class City : Node3D
 
     public void AddQuestMarker(Quest quest, Vector2I coord, bool isStart)
     {
+		Material material;
+
+        switch (quest.QuestLevel)
+        {
+            case QuestLevel.Medium:
+				material = _questMarkerMediumMaterial;
+                break;
+            case QuestLevel.Hard:
+				material = _questMarkerHardMaterial;
+                break;
+            default:
+				material = _questMarkerEasyMaterial;
+				Debug.Assert(quest.QuestLevel == QuestLevel.Easy);
+                break;
+        }
+
         QuestMarker questMarker = _sceneQuestMarker.Instantiate<QuestMarker>();
 		AddChild(questMarker);
-		questMarker.Setup(quest, isStart);
+		questMarker.Setup(quest, isStart, material);
 		questMarker.GlobalPosition = GetRandomPosInCoord(coord);
 
-		quest.QuestMarker = questMarker;
+
+        quest.QuestMarker = questMarker;
 
 		_cityMap.AddQuest(quest);
     }
 
+    public void AddFuelMarker(Vector2I coord)
+	{
+        FuelMarker fuelMarker = _sceneFuelMarker.Instantiate<FuelMarker>();
+		AddChild(fuelMarker);
+        fuelMarker.GlobalPosition = GetCenterPosInCoord(coord);
+	}
+
 	private Vector3 GetRandomPosInCoord(Vector2I coord)
     {
-        return new Vector3(coord.X * _tileSize + GD.RandPosInt() % _tileSize, 0, coord.Y * _tileSize + GD.RandPosInt() % _tileSize);
+		return GetCenterPosInCoord(coord) + new Vector3(1, 0, 0).Normalized().Rotated(Vector3I.Up, GD.Randf() * Mathf.Tau) * (float) GD.RandRange(_tileSize * 0.1f, _tileSize * 0.3f);
+    }
+
+	private Vector3 GetCenterPosInCoord(Vector2I coord)
+	{
+		return
+			new Vector3(
+				coord.X * _tileSize,
+				0,
+				coord.Y * _tileSize);
+
+		// Braucht es nicht.. Verstehe nicht wieso.
+			//+ new Vector3(
+			//	0.5f * _tileSize,
+			//	0,
+			//	0.5f * _tileSize);
     }
 
     private Map<TileType, Tile> RunGenerate(bool debug)
@@ -180,8 +240,15 @@ public partial class City : Node3D
 				GenerateSection(map, xSection, ySection);
 			}
 
+        foreach (Vector2I fuelSection in _fuelSections)
+        {
+			Debug.Assert(fuelSection.X >= 0 && fuelSection.X < _xSectionCount);
+			Debug.Assert(fuelSection.Y >= 0 && fuelSection.Y < _ySectionCount);
 
-		{
+			GenerateFuelStationInSection(map, fuelSection.X, fuelSection.Y);
+        }
+
+        {
 			// Streets on the bottom and right boundary
 			width += 1;
 			height += 1;
@@ -276,7 +343,32 @@ public partial class City : Node3D
 		}
     }
 
-	private void GenerateTiles(Node3D root, Map<TileType, Tile> map)
+	private void GenerateFuelStationInSection(Map<TileType, Tile> map, int xSection, int ySection)
+	{
+		List<Vector2I> validFuelCoords = new();
+
+		for (int yIndex = 0; yIndex < _sectionTileSize; ++yIndex)
+		{
+			int yTile = (ySection * _sectionTileSize + yIndex);
+
+			for (int xIndex = 0; xIndex < _sectionTileSize; ++xIndex)
+			{
+				int xTile = xSection * _sectionTileSize + xIndex;
+
+				if (map.IsType(xTile, yTile, TileType.Building))
+				{
+					if (map.GetNeighbour4Count(xTile, yTile, TileType.Street) > 0 || map.GetInvalidNeighbour4Count(xTile, yTile) > 0)
+					{
+						validFuelCoords.Add(new Vector2I(xTile, yTile));
+					}
+				}
+			}
+		}
+
+		map.SetType(validFuelCoords.GetRandomItem(), TileType.Fuel);
+	}
+
+    private void GenerateTiles(Node3D root, Map<TileType, Tile> map)
 	{
 		List<PackedScene> orderedBuildings = _sceneBuildings.OrderBy(building => (int) building._Get("Height")).ToList();
 
@@ -304,34 +396,17 @@ public partial class City : Node3D
 						continue;
 
                     case TileType.Building:
-						float distance = (_downtownCoord - new Vector2I(xTile, yTile)).Length();
+                        float distance = (_downtownCoord - new Vector2I(xTile, yTile)).Length();
 
-						float factor = Mathf.Clamp(distance / _downtownRadius, 0.0f, 1.0f);
+                        float factor = Mathf.Clamp(distance / _downtownRadius, 0.0f, 1.0f);
 
-						int minIndex = Mathf.Max((int)(factor * orderedBuildings.Count - 3), 0);
-						int maxIndex = minIndex + 2;
+                        int minIndex = Mathf.Max((int)(factor * orderedBuildings.Count - 3), 0);
+                        int maxIndex = minIndex + 2;
 
                         tile = orderedBuildings[GD.RandRange(minIndex, maxIndex)].Instantiate<Node3D>();
 
-						foreach (var child in tile.GetChildren())
-						{
-							if (child is MeshInstance3D meshInstance)
-							{
-								if (child.Name.ToString().Contains("Window"))
-								{
-									meshInstance.MaterialOverride = _windowMaterial;
-								}
-								else if (child.Name.ToString().Contains("Base"))
-								{
-									meshInstance.MaterialOverride = _baseMaterial;
-								}
-								else
-								{
-									meshInstance.MaterialOverride = _concreteMaterials.PickRandom();
-								}
-							}
-						}
-						break;
+                        CustomizeMaterials(tile);
+                        break;
 
                     case TileType.Street:
 						bool topStreet = map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street);
@@ -458,6 +533,27 @@ public partial class City : Node3D
 						}
                         break;
 
+					case TileType.Fuel:
+                        tile = _sceneFuelStation.Instantiate<Node3D>();
+
+                        if (map.IsTypeAtDir4(xTile, yTile, Direction4.W, TileType.Street))
+						{
+							tile.RotateY(Mathf.Tau * 0.5f);
+						}
+						else if (map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street))
+						{
+							tile.RotateY(Mathf.Tau * 0.25f);
+						}
+						else if (map.IsTypeAtDir4(xTile, yTile, Direction4.S, TileType.Street))
+						{
+							tile.RotateY(Mathf.Tau * 0.75f);
+						}
+
+						AddFuelMarker(new Vector2I(xTile, yTile));
+
+                        CustomizeMaterials(tile);
+						break;
+
                     default:
                         Debug.Fail($"Unknown TileType [{tileType}]");
 						continue;
@@ -493,4 +589,35 @@ public partial class City : Node3D
                 waterSection.Position = new Vector3((xSection + 0.5f) * _sectionTileSize, 0, (ySection + 0.5f) * _sectionTileSize) * _tileSize;
             }
     }
+
+    private void CustomizeMaterials(Node3D tile)
+    {
+        foreach (var child in tile.GetChildren())
+        {
+            if (child is MeshInstance3D meshInstance)
+            {
+                if (child.Name.ToString().Contains("Window"))
+                {
+                    meshInstance.MaterialOverride = _windowMaterial;
+                }
+                else if (child.Name.ToString().Contains("Base"))
+                {
+                    meshInstance.MaterialOverride = _baseMaterial;
+                }
+                else if (child.Name.ToString().Contains("Red"))
+				{
+                    meshInstance.MaterialOverride = _redMaterial;
+				}
+                else if (child.Name.ToString().Contains("Black"))
+				{
+                    meshInstance.MaterialOverride = _blackMaterial;
+				}
+                else
+                {
+                    meshInstance.MaterialOverride = _concreteMaterials.PickRandom();
+                }
+            }
+        }
+    }
+
 }

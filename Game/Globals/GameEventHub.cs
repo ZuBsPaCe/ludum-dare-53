@@ -8,7 +8,11 @@ public partial class GameEventHub : Node
     [Signal] public delegate void SwitchLevelStateEventHandler(LevelState levelState);
 
     [Signal] public delegate void QuestMarkerEnteredEventHandler(QuestMarker questMarker, bool isStart);
+    [Signal] public delegate void QuestMarkerExitedEventHandler();
     [Signal] public delegate void QuestAcceptedEventHandler(QuestMarker questMarker);
+
+    [Signal] public delegate void FuelMarkerEnteredEventHandler();
+    [Signal] public delegate void FuelMarkerExitedEventHandler();
 
     [Signal] public delegate void FuelChangedEventHandler(int amount);
     [Signal] public delegate void MoneyChangedEventHandler(int amount);
@@ -25,9 +29,24 @@ public partial class GameEventHub : Node
         Instance.EmitSignal(SignalName.QuestMarkerEntered, questMarker, isStart);
     }
 
+    internal static void EmitQuestMarkerExited()
+    {
+        Instance.EmitSignal(SignalName.QuestMarkerExited);
+    }
+
     internal static void EmitQuestAccepted(QuestMarker questMarker)
     {
         Instance.EmitSignal(SignalName.QuestAccepted, questMarker);
+    }
+
+    internal static void EmitFuelMarkerEntered()
+    {
+        Instance.EmitSignal(SignalName.FuelMarkerEntered);
+    }
+
+    internal static void EmitFuelMarkerExited()
+    {
+        Instance.EmitSignal(SignalName.FuelMarkerExited);
     }
 
     internal static void EmitFuelChanged(int amount)

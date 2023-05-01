@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4pg2yd6b5kal"]
+[gd_scene load_steps=8 format=3 uid="uid://c4pg2yd6b5kal"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/CityMap.cs" id="1_vy3nv"]
 [ext_resource type="PackedScene" uid="uid://c2wt7hwlikjxc" path="res://Gui/Overlays/CityMapSprites/StreetMapSprite.tscn" id="2_f6nhf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://celmmw250jlul" path="res://Gui/Overlays/CityMapSprites/PlayerMapSprite.tscn" id="4_5ppva"]
 [ext_resource type="PackedScene" uid="uid://cw87rtnvoh0t4" path="res://Gui/Overlays/CityMapSprites/ParkMapSprite.tscn" id="4_7bohc"]
 [ext_resource type="PackedScene" uid="uid://bdmuauyaiunw6" path="res://Gui/Overlays/CityMapSprites/QuestMapSprite.tscn" id="5_gx43s"]
+[ext_resource type="PackedScene" uid="uid://dwjinyfkl4lsr" path="res://Gui/Overlays/CityMapSprites/FuelMapSprite.tscn" id="7_2sehq"]
 
 [node name="CityMap" type="SubViewport"]
 disable_3d = true
@@ -18,6 +19,7 @@ _sceneBuilding = ExtResource("3_ypktd")
 _scenePark = ExtResource("4_7bohc")
 _scenePlayer = ExtResource("4_5ppva")
 _sceneQuest = ExtResource("5_gx43s")
+_sceneFuel = ExtResource("7_2sehq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(256, 256)

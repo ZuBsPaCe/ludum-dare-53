@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dg4qv1ynj1ts7"]
+[gd_scene load_steps=12 format=3 uid="uid://dg4qv1ynj1ts7"]
 
 [ext_resource type="Script" path="res://Game/Scripts/Level.cs" id="1_y7fik"]
 [ext_resource type="PackedScene" uid="uid://cg0dmlipc3emq" path="res://Scenes/City.tscn" id="2_bcatt"]
 [ext_resource type="PackedScene" uid="uid://thy7el8r112x" path="res://Base/Framework/StateMachine.tscn" id="2_lxsuu"]
+[ext_resource type="PackedScene" uid="uid://cjmrb8yrxse55" path="res://Gui/Overlays/FuelStationMenu.tscn" id="4_utusa"]
 [ext_resource type="PackedScene" uid="uid://c4pg2yd6b5kal" path="res://Gui/Overlays/CityMap.tscn" id="4_v1eu2"]
 [ext_resource type="PackedScene" uid="uid://b8tuljyi1sqsm" path="res://Gui/Overlays/DrivingOverlay.tscn" id="5_wcoc3"]
 [ext_resource type="AudioStream" uid="uid://c381w6p010bn5" path="res://Music/SlowBeat.mp3" id="6_6sl7k"]
 [ext_resource type="AudioStream" uid="uid://di1vty4s27cl8" path="res://Music/MediumBeat.mp3" id="7_h16hl"]
+[ext_resource type="PackedScene" uid="uid://dbrchu1nuv0px" path="res://Gui/Notification/Notification.tscn" id="7_jvsky"]
 [ext_resource type="AudioStream" uid="uid://jfsyjvklo75u" path="res://Music/FastBeat.mp3" id="8_p7d83"]
 [ext_resource type="AudioStream" uid="uid://cyy32b2r7dhur" path="res://Music/Star.mp3" id="9_noekx"]
 
@@ -15,10 +17,13 @@ process_mode = 1
 script = ExtResource("1_y7fik")
 _sceneStateMachine = ExtResource("2_lxsuu")
 _sceneCity = ExtResource("2_bcatt")
+_sceneFuelStationMenu = ExtResource("4_utusa")
 
 [node name="CityMap" parent="." instance=ExtResource("4_v1eu2")]
 
 [node name="DrivingOverlay" parent="." instance=ExtResource("5_wcoc3")]
+
+[node name="Notification" parent="." instance=ExtResource("7_jvsky")]
 
 [node name="SlowBeat" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

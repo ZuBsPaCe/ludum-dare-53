@@ -28,7 +28,7 @@ public partial class PlayerTruck : VehicleBody3D
 	{
 		float engineForce = 0;
 
-		if (!State.QuestOverlayActive)
+		if (!State.OverlayActive)
 		{
 			if (Input.IsActionPressed("Forward"))
 			{

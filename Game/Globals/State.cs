@@ -80,5 +80,5 @@
     }
 
 
-    public static bool QuestOverlayActive { get; set; }
+    public static bool OverlayActive { get; set; }
 }

@@ -3,5 +3,6 @@
     Building,
     Street,
     Boundary,
-    Park
+    Park,
+    Fuel
 }

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwjinyfkl4lsr"]
+
+[ext_resource type="Texture2D" uid="uid://bg1nctg53s3hc" path="res://Gui/Overlays/CityMapSprites/FuelMapTex.png" id="1_71u3x"]
+
+[node name="FuelMapSprite" type="Sprite2D"]
+z_index = 1
+texture = ExtResource("1_71u3x")

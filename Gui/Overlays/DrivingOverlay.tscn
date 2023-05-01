@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8tuljyi1sqsm"]
+[gd_scene load_steps=8 format=3 uid="uid://b8tuljyi1sqsm"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/DrivingOverlay.cs" id="1_mqwa3"]
 [ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="2_8w3be"]
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="2_otjna"]
 [ext_resource type="PackedScene" uid="uid://c1boai0amhgij" path="res://Gui/Menus/QuestControl.tscn" id="3_hw5a3"]
-[ext_resource type="PackedScene" uid="uid://bre61oi5svlc0" path="res://Gui/Menus/BuyFuelControl.tscn" id="4_mt7q1"]
 [ext_resource type="Texture2D" uid="uid://rf506pc7k3ef" path="res://Gui/Icons/Fuel.png" id="5_k3xrc"]
 [ext_resource type="Texture2D" uid="uid://c3hsfuhvk8njl" path="res://Gui/Icons/Clock.png" id="5_rmbpw"]
 [ext_resource type="Texture2D" uid="uid://guwdb5kjwevp" path="res://Gui/Icons/Money.png" id="6_1m3ap"]
@@ -13,7 +12,6 @@
 script = ExtResource("1_mqwa3")
 _sceneSettingsControl = ExtResource("2_8w3be")
 _sceneQuestControl = ExtResource("3_hw5a3")
-_buyFuelControl = ExtResource("4_mt7q1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -153,16 +151,6 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Skip Quest"
-
-[node name="Spacer4" type="Control" parent="ButtonBar/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="BuyFuel" type="Button" parent="ButtonBar/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
-text = "Buy Fuel"
 
 [node name="Spacer2" type="Control" parent="ButtonBar/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)

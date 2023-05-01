@@ -138,7 +138,7 @@ public partial class Main : Node
 
     public override void _UnhandledKeyInput(InputEvent ev)
     {
-        if (_gameStateMachine.IsState(GameState.Game) && ev.IsPressed() && !ev.IsEcho() && ev.IsAction("Pause"))
+        if (_gameStateMachine.IsState(GameState.Game) && !State.OverlayActive && ev.IsPressed() && !ev.IsEcho() && ev.IsAction("Pause"))
         {
             EventHub.EmitSwitchGameState(GameState.PauseMenu);
         }

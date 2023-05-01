@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://din20c1xmjn3p"]
+
+[ext_resource type="Shader" path="res://Game/QuestMarker/QuestMarkerMaterialShader.gdshader" id="1_171cg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t8f5g"]
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7jrog"]
+seamless = true
+noise = SubResource("FastNoiseLite_t8f5g")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_171cg")
+shader_parameter/albedo = Color(1, 0.706667, 0.12, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_7jrog")

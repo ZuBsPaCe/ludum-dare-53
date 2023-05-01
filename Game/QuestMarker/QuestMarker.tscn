@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b83xl5jdd7ce6"]
+[gd_scene load_steps=5 format=3 uid="uid://5ty0tavjbfjh"]
 
 [ext_resource type="PackedScene" uid="uid://4ybr4pi21owk" path="res://Game/QuestMarker/QuestMarker.blend" id="1_xnrgh"]
 [ext_resource type="Script" path="res://Game/QuestMarker/QuestMarker.cs" id="2_5rp60"]
-[ext_resource type="Material" uid="uid://b74a7ybxx24hu" path="res://Game/QuestMarker/QuestMarkerMaterial.tres" id="2_dejhu"]
+[ext_resource type="Material" uid="uid://b74a7ybxx24hu" path="res://Game/QuestMarker/QuestMarkerEasyMaterial.tres" id="3_8fkfq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_iwp4a"]
 height = 20.0
@@ -12,7 +12,7 @@ radius = 6.636
 script = ExtResource("2_5rp60")
 
 [node name="Cylinder" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_dejhu")
+surface_material_override/0 = ExtResource("3_8fkfq")
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
 

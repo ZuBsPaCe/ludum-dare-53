@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bre61oi5svlc0"]
+[gd_scene load_steps=3 format=3 uid="uid://ch5mlxf00y1w6"]
 
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="1_ul0da"]
-[ext_resource type="Script" path="res://Gui/Menus/BuyFuelControl.cs" id="2_gefbh"]
+[ext_resource type="Script" path="res://Gui/Menus/ShopControl.cs" id="2_vbxtb"]
 
-[node name="BuyFuelControl" type="MarginContainer"]
+[node name="ShopControl" type="MarginContainer"]
 offset_right = 1344.0
 offset_bottom = 1080.0
 theme = ExtResource("1_ul0da")
-script = ExtResource("2_gefbh")
+script = ExtResource("2_vbxtb")
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -16,10 +16,10 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="FuelLabel" type="Label" parent="PanelContainer/MarginContainer"]
+[node name="ShopLabel" type="Label" parent="PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
-text = "Please deliver this. Thx!"
+text = "Nice shop"
 autowrap_mode = 2
 text_overrun_behavior = 4

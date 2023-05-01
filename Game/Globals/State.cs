@@ -85,4 +85,6 @@ public class State
     public static Stopwatch LevelTime { get; set; } = new();
 
     public static bool OverlayActive { get; set; }
+
+    public static int QuestsDone { get; set; } = 0;
 }

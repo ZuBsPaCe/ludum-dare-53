@@ -43,6 +43,7 @@ public partial class Level : Node3D
     {
         State.ShopWinBought = false;
         State.LevelTime.Restart();
+        State.QuestsDone = 0;
 
 
         _cityMap = GetNode<CityMap>("CityMap");
@@ -264,6 +265,7 @@ public partial class Level : Node3D
                 _notification.ShowNotification(NotificationType.Won, $"Good Job! +{_currentQuest.Money} bucks.");
                 Sounds.PlaySound(SoundType.Won);
                 State.Money += _currentQuest.Money;
+                State.QuestsDone += 1;
             }
             else
             {

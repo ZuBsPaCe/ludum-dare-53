@@ -54,9 +54,11 @@ public class Quest
         largeLabels.Add("Secret, shall I tell you? Grand Master of Jedi Order am I. Important this job is.");
         largeLabels.Add("Please give this birthay present to my friend, will you?. Haven't seen him in while. Lives on the other end of the city. Ok?");
 
+        float support = 1f - Mathf.Clamp(State.QuestsDone / 8f, 0, 1);
+
         if (distance < 12)
         {
-            secs = 20;
+            secs = 20 + (int)(20 * support);
             money = shortMoney.GetRandomItem();
             level = QuestLevel.Easy;
             return shortLabels.GetRandomItem();
@@ -64,13 +66,13 @@ public class Quest
         
         if (distance < 25)
         {
-            secs = 30;
+            secs = 30 + (int)(20 * support);
             level = QuestLevel.Medium;
             money = mediumMoney.GetRandomItem();
             return mediumLabels.GetRandomItem();
         }
 
-        secs = 40;
+        secs = 40 + (int)(20 * support);
         level = QuestLevel.Hard;
         money = largeMoney.GetRandomItem();
         return largeLabels.GetRandomItem();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cg0dmlipc3emq"]
+[gd_scene load_steps=63 format=3 uid="uid://cg0dmlipc3emq"]
 
 [ext_resource type="Script" path="res://Game/Scripts/City.cs" id="1_8udbb"]
 [ext_resource type="PackedScene" path="res://Game/Street/StreetCrossing.tscn" id="1_58f1t"]
@@ -40,6 +40,7 @@
 [ext_resource type="Material" uid="uid://b74a7ybxx24hu" path="res://Game/QuestMarker/QuestMarkerEasyMaterial.tres" id="35_ghhox"]
 [ext_resource type="Material" uid="uid://din20c1xmjn3p" path="res://Game/QuestMarker/QuestMarkerMediumMaterial.tres" id="36_xofpa"]
 [ext_resource type="Material" uid="uid://cueuf0h0hxukn" path="res://Game/QuestMarker/QuestMarkerHardMaterial.tres" id="37_tjl0d"]
+[ext_resource type="PackedScene" uid="uid://djg3bngonl7m3" path="res://Game/Cars/Car01.tscn" id="38_oi2oe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuxrv"]
 resource_name = "Floor"
@@ -307,6 +308,7 @@ _sceneFuelMarker = ExtResource("34_gomte")
 _questMarkerEasyMaterial = ExtResource("35_ghhox")
 _questMarkerMediumMaterial = ExtResource("36_xofpa")
 _questMarkerHardMaterial = ExtResource("37_tjl0d")
+_cars = Array[PackedScene]([ExtResource("38_oi2oe")])
 _levelData = {
 "MapHeight": 27,
 "MapWidth": 39,

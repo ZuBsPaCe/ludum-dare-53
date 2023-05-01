@@ -10,8 +10,6 @@ public partial class FuelStationMenu : MenuBase
 
     private TextureRect _mapTextureRect;
 
-    private Quest _quest;
-
     private Label _fuelLabel;
     private Label _moneyLabel;
 

@@ -54,6 +54,8 @@ public partial class City : Node3D
 	[Export] private Material _questMarkerMediumMaterial;
 	[Export] private Material _questMarkerHardMaterial;
 
+	[Export] private Array<PackedScene> _cars;
+
 
 	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
 
@@ -125,6 +127,10 @@ public partial class City : Node3D
 		GD.Randomize();
 
 		GenerateTiles(root, _map);
+		GenerateCars(root, _map);
+
+		State.Map = _map;
+		State.TileSize = _tileSize;
     }
 
     public override void _Process(double delta)
@@ -607,6 +613,29 @@ public partial class City : Node3D
                 waterSection.Position = new Vector3((xSection + 0.5f) * _sectionTileSize, 0, (ySection + 0.5f) * _sectionTileSize) * _tileSize;
             }
     }
+
+	private void GenerateCars(Node3D root, Map<TileType, Tile> map)
+	{
+		for (int yTile = 0; yTile < map.Height; ++yTile)
+		{
+			int y = yTile * _tileSize;
+
+			for (int xTile = 0; xTile < map.Width; ++xTile)
+			{
+				int x = xTile * _tileSize;
+
+				TileType tileType = map.GetType(xTile, yTile);
+
+				if (tileType == TileType.Street)
+				{
+					Car car = _cars.PickRandom().Instantiate<Car>();
+					root.AddChild(car);
+
+					car.GlobalPosition = GetCenterPosInCoord(new Vector2I(xTile, yTile)) + Vector3.Up * 5;
+				}
+			}
+		}
+	}
 
     private void CustomizeMaterials(Node3D tile)
     {

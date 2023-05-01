@@ -11,10 +11,7 @@ public partial class Main : Node
     private StateMachine _gameStateMachine;
 
     private AudioStreamPlayer _mainMenuMusic;
-    private AudioStreamPlayer _slowMusic;
-    private AudioStreamPlayer _mediumMusic;
-    private AudioStreamPlayer _fastMusic;
-    private AudioStreamPlayer _starMusic;
+
     private AudioStreamPlayer _wonMusic;
     private AudioStreamPlayer _lostMusic;
 
@@ -23,17 +20,16 @@ public partial class Main : Node
     public override void _Ready()
     {
         _mainMenuMusic = GetNode<AudioStreamPlayer>("%MainMenuMusic");
-        _slowMusic = GetNode<AudioStreamPlayer>("%SlowBeat");
-        _mediumMusic = GetNode<AudioStreamPlayer>("%MediumBeat");
-        _fastMusic = GetNode<AudioStreamPlayer>("%FastBeat");
-        _starMusic = GetNode<AudioStreamPlayer>("%StarMusic");
+
         _wonMusic = GetNode<AudioStreamPlayer>("%Won");
         _lostMusic = GetNode<AudioStreamPlayer>("%Lost");
-
 
         // Initialize Sound Singleton
         Sounds.Instance = new Sounds();
         AddChild(Sounds.Instance, false, InternalMode.Front);
+
+        Sounds.RegisterSound(SoundType.Won, _wonMusic);
+        Sounds.RegisterSound(SoundType.Lost, _lostMusic);
 
 
         // Initialize EventHub Singleton

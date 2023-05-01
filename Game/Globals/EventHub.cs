@@ -14,6 +14,10 @@ public partial class EventHub : Node
     [Signal] public delegate void QuestMarkerEnteredEventHandler(QuestMarker questMarker, bool isStart);
     [Signal] public delegate void QuestAcceptedEventHandler(QuestMarker questMarker);
 
+    [Signal] public delegate void FuelChangedEventHandler(int amount);
+    [Signal] public delegate void MoneyChangedEventHandler(int amount);
+    [Signal] public delegate void CountdownChangedEventHandler(bool active, float countdownSecs);
+
     public static void EmitSwitchGameState(GameState gameState)
     {
         Instance.EmitSignal(SignalName.SwitchGameState, (int) gameState);
@@ -47,5 +51,20 @@ public partial class EventHub : Node
     internal static void EmitQuestAccepted(QuestMarker questMarker)
     {
         Instance.EmitSignal(SignalName.QuestAccepted, questMarker);
+    }
+
+    internal static void EmitFuelChanged(int amount)
+    {
+        Instance.EmitSignal(SignalName.FuelChanged, amount);
+    }
+
+    internal static void EmitMoneyChanged(int amount)
+    {
+        Instance.EmitSignal(SignalName.MoneyChanged, amount);
+    }
+
+    internal static void EmitCountdownChanged(bool active, float countdownSecs)
+    {
+        Instance.EmitSignal(SignalName.CountdownChanged, active, countdownSecs);
     }
 }

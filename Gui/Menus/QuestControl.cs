@@ -11,7 +11,7 @@ public partial class QuestControl : MarginContainer
 		Debug.Assert(_quest != null);
 
 		_questLabel = GetNode<Label>("%QuestLabel");
-		_questLabel.Text = _quest.Label;
+		_questLabel.Text = _quest.Label + "\r\r" + $"Reward: $ {_quest.Money}";
 	}
 
 	public void Setup(Quest quest)

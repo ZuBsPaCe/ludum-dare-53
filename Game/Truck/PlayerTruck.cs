@@ -14,6 +14,8 @@ public partial class PlayerTruck : VehicleBody3D
 
 	private AudioStreamPlayer3D _motorSound;
 
+	private float _fuelTime;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,14 +28,21 @@ public partial class PlayerTruck : VehicleBody3D
 	{
 		float engineForce = 0;
 
-		if (Input.IsActionPressed("Forward"))
+		if (!State.QuestOverlayActive)
 		{
-			engineForce += _maxForwardForce;
-		}
-		
-		if (Input.IsActionPressed("Backward"))
-		{
-			engineForce -= _maxBackwardForce;
+			if (Input.IsActionPressed("Forward"))
+			{
+				engineForce += _maxForwardForce;
+
+				_fuelTime += (float)delta;
+			}
+
+			if (Input.IsActionPressed("Backward"))
+			{
+				engineForce -= _maxBackwardForce;
+
+				_fuelTime += (float)delta;
+			}
 		}
 
 		float velocity = LinearVelocity.Length();
@@ -58,5 +67,13 @@ public partial class PlayerTruck : VehicleBody3D
 
 
 		_motorSound.PitchScale = Mathf.Lerp(1f, 3f, Mathf.Clamp(velocity / 30f, 0f, 1f));
+
+
+		if (_fuelTime > 3)
+		{
+			_fuelTime -= 3;
+
+			State.Fuel -= 1;
+		}
 	}
 }

@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8tuljyi1sqsm"]
+[gd_scene load_steps=8 format=3 uid="uid://b8tuljyi1sqsm"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/DrivingOverlay.cs" id="1_mqwa3"]
 [ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="2_8w3be"]
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="2_otjna"]
 [ext_resource type="PackedScene" uid="uid://c1boai0amhgij" path="res://Gui/Menus/QuestControl.tscn" id="3_hw5a3"]
+[ext_resource type="Texture2D" uid="uid://rf506pc7k3ef" path="res://Gui/Icons/Fuel.png" id="5_k3xrc"]
+[ext_resource type="Texture2D" uid="uid://c3hsfuhvk8njl" path="res://Gui/Icons/Clock.png" id="5_rmbpw"]
+[ext_resource type="Texture2D" uid="uid://guwdb5kjwevp" path="res://Gui/Icons/Money.png" id="6_1m3ap"]
 
 [node name="DrivingOverlay" type="CanvasLayer"]
 script = ExtResource("1_mqwa3")
@@ -39,6 +42,81 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CountdownIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_rmbpw")
+expand_mode = 2
+
+[node name="Spacer5" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="CountdownLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Counter"
+
+[node name="Spacer6" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_k3xrc")
+expand_mode = 2
+
+[node name="Spacer3" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="FuelLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Fuel"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_1m3ap")
+expand_mode = 2
+
+[node name="Spacer4" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Money"
 
 [node name="ButtonBar" type="MarginContainer" parent="."]
 unique_name_in_owner = true

@@ -19,12 +19,27 @@ public partial class Level : Node3D
     private Quest _currentQuest;
 
 
+    private AudioStreamPlayer _slowMusic;
+    private AudioStreamPlayer _mediumMusic;
+    private AudioStreamPlayer _fastMusic;
+    private AudioStreamPlayer _starMusic;
+
+    private AudioStreamPlayer _currentMusic;
+
+
     public override void _Ready()
     {
         _cityMap = GetNode<CityMap>("CityMap");
         _drivingOverlay = GetNode<DrivingOverlay>("DrivingOverlay");
 
         _drivingOverlay.Setup(_cityMap.GetTexture());
+
+        
+        _slowMusic = GetNode<AudioStreamPlayer>("%SlowBeat");
+        _mediumMusic = GetNode<AudioStreamPlayer>("%MediumBeat");
+        _fastMusic = GetNode<AudioStreamPlayer>("%FastBeat");
+        _starMusic = GetNode<AudioStreamPlayer>("%StarMusic");
+
 
         EventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
         EventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
@@ -36,6 +51,17 @@ public partial class Level : Node3D
         AddChild(_levelStateMachine, false, InternalMode.Front);
         _levelStateMachine.Setup(LevelState.Init, SwitchLevelState);
 
+
+        State.Fuel = 65;
+        State.Money = 100;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (State.CountdownActive)
+        {
+            State.CountdownSecs -= (float) delta;
+        }
     }
 
     private void EventHub_SwitchLevelState(LevelState levelState)
@@ -53,6 +79,20 @@ public partial class Level : Node3D
         }
         else
         {
+            _currentMusic?.Stop();
+
+            State.CountdownActive = false;
+
+            if (State.CountdownSecs > 0)
+            {
+                Sounds.PlaySound(SoundType.Won);
+                State.Money += _currentQuest.Money;
+            }
+            else
+            {
+                Sounds.PlaySound(SoundType.Lost);
+            }
+
             _currentQuest.Teardown();
             _currentQuest = null;
 
@@ -79,6 +119,27 @@ public partial class Level : Node3D
         _city.AddQuestMarker(quest, quest.TargetCoord, false);
 
         _currentQuest = quest;
+
+        State.CountdownSecs = quest.Seconds;
+        State.CountdownActive = true;
+
+        switch (quest.QuestLevel)
+        {
+            case QuestLevel.Easy:
+                _currentMusic = _slowMusic;
+                break;
+            case QuestLevel.Medium:
+                _currentMusic = _mediumMusic;
+                break;
+            case QuestLevel.Hard:
+                _currentMusic = _fastMusic;
+                break;
+            default:
+                _currentMusic = null;
+                break;
+        }
+
+        _currentMusic?.Play();
     }
 
     private void SwitchLevelState(StateMachine stateMachine)

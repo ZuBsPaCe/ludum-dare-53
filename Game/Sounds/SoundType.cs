@@ -4,5 +4,8 @@ using System;
 public enum SoundType
 {
     MainMenuHover,
-    MainMenuSelect
+    MainMenuSelect,
+
+    Won,
+    Lost
 }

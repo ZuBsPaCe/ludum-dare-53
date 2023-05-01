@@ -71,6 +71,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2501, 3.6)
 
 [node name="MotorSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_hmdn4")
-volume_db = -10.0
 autoplay = true
 bus = &"Motor"

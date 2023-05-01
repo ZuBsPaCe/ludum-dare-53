@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class DrivingOverlay : MenuBase
 {
@@ -11,9 +12,19 @@ public partial class DrivingOverlay : MenuBase
 
     private Quest _quest;
 
+    private Label _fuelLabel;
+    private Label _moneyLabel;
+
+    private TextureRect _countDownIcon;
+    private Label _countDownLabel;
+
+
     public override void _Ready()
     {
+        State.QuestOverlayActive = false;
+
         _mapTextureRect = GetNode<TextureRect>("%MapTextureRect");
+
 
 
         Control buttonBar = GetNode<MarginContainer>("%ButtonBar");
@@ -30,6 +41,19 @@ public partial class DrivingOverlay : MenuBase
         InitButton(denyButton, IngameMenuState.Deny);
         InitButton(settingsButton, IngameMenuState.Settings);
         InitButton(mainMenuButton, IngameMenuState.MainMenu);
+
+        _moneyLabel = GetNode<Label>("%MoneyLabel");
+        _fuelLabel = GetNode<Label>("%FuelLabel");
+
+        _countDownIcon = GetNode<TextureRect>("%CountdownIcon");
+        _countDownLabel = GetNode<Label>("%CountdownLabel");
+
+        _countDownIcon.Visible = false;
+        _countDownLabel.Visible = false;
+
+        EventHub.Instance.FuelChanged += (amount) => EventHub_FuelChanged(amount);
+        EventHub.Instance.MoneyChanged += (amount) => EventHub_MoneyChanged(amount);
+        EventHub.Instance.CountdownChanged += (active, secs) => EventHub_CountdownChanged(active, secs);
     }
 
     public void Setup(ViewportTexture _cityMapTex)
@@ -44,9 +68,29 @@ public partial class DrivingOverlay : MenuBase
             return;
         }
 
+        State.QuestOverlayActive = true;
+
         _quest = quest;
         ShowButtonBar();
         SetCurrentButton(_questInfoButton);
+    }
+
+    private void EventHub_MoneyChanged(int amount)
+    {
+        _moneyLabel.Text = amount.ToString();
+    }
+
+    private void EventHub_FuelChanged(int amount)
+    {
+        _fuelLabel.Text = amount.ToString();
+    }
+
+    private void EventHub_CountdownChanged(bool active, float secs)
+    {
+        _countDownIcon.Visible = active;
+        _countDownLabel.Visible = active;
+
+        _countDownLabel.Text = Mathf.CeilToInt(secs).ToString() + "s";
     }
 
     protected override Control InstantiateMenuButtonControl(int state)
@@ -71,6 +115,7 @@ public partial class DrivingOverlay : MenuBase
         {
             case IngameMenuState.Accept:
                 {
+                    State.QuestOverlayActive = false;
                     CloseMenu(false);
                     EventHub.EmitQuestAccepted(_quest.QuestMarker);
                     _quest = null;
@@ -79,6 +124,7 @@ public partial class DrivingOverlay : MenuBase
 
             case IngameMenuState.Deny:
                 {
+                    State.QuestOverlayActive = false;
                     CloseMenu(false);
                     _quest = null;
                 }
@@ -86,6 +132,7 @@ public partial class DrivingOverlay : MenuBase
 
             case IngameMenuState.MainMenu:
                 {
+                    State.QuestOverlayActive = false;
                     CloseMenu();
                     EventHub.EmitSwitchGameState(GameState.MainMenu);
                 }

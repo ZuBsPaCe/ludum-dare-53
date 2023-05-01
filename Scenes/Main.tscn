@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddlnsubdrqjgc"]
+[gd_scene load_steps=10 format=3 uid="uid://ddlnsubdrqjgc"]
 
 [ext_resource type="Script" path="res://Game/Scripts/Main.cs" id="1_kyl25"]
 [ext_resource type="PackedScene" uid="uid://thy7el8r112x" path="res://Base/Framework/StateMachine.tscn" id="2_3g0d3"]
@@ -7,10 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b3pp16r1lhk4a" path="res://Game/Sounds/SoundStore.tscn" id="4_veahi"]
 [ext_resource type="PackedScene" uid="uid://b3vy06p0ir4u3" path="res://Gui/Menus/PauseMenu.tscn" id="5_wvk86"]
 [ext_resource type="AudioStream" uid="uid://dtbtfb5ghyf0v" path="res://Music/MainMenuMusic.mp3" id="7_4w5my"]
-[ext_resource type="AudioStream" uid="uid://c381w6p010bn5" path="res://Music/SlowBeat.mp3" id="8_evko6"]
-[ext_resource type="AudioStream" uid="uid://di1vty4s27cl8" path="res://Music/MediumBeat.mp3" id="9_k1tra"]
-[ext_resource type="AudioStream" uid="uid://jfsyjvklo75u" path="res://Music/FastBeat.mp3" id="10_h7wam"]
-[ext_resource type="AudioStream" uid="uid://cyy32b2r7dhur" path="res://Music/Star.mp3" id="11_hnmln"]
 [ext_resource type="AudioStream" uid="uid://cj4cuwbm1tyje" path="res://Music/Won.mp3" id="12_uwc8y"]
 [ext_resource type="AudioStream" uid="uid://ckpkkq1xxohe7" path="res://Music/Lost.mp3" id="13_nyud5"]
 
@@ -27,30 +23,6 @@ _scenePauseMenu = ExtResource("5_wvk86")
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_4w5my")
-bus = &"Music"
-
-[node name="SlowBeat" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-process_mode = 1
-stream = ExtResource("8_evko6")
-bus = &"Music"
-
-[node name="MediumBeat" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-process_mode = 1
-stream = ExtResource("9_k1tra")
-bus = &"Music"
-
-[node name="FastBeat" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-process_mode = 1
-stream = ExtResource("10_h7wam")
-bus = &"Music"
-
-[node name="StarMusic" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-process_mode = 1
-stream = ExtResource("11_hnmln")
 bus = &"Music"
 
 [node name="Won" type="AudioStreamPlayer" parent="."]

@@ -8,7 +8,10 @@ public class Quest
         StartCoord = startCoord;
         TargetCoord = targetCoord;
 
-        Label = GetLabel((targetCoord - startCoord).Length());
+        Label = GetLabel((targetCoord - startCoord).Length(), out int secs, out int money, out QuestLevel level);
+        Seconds = secs;
+        Money = money;
+        QuestLevel = level;
     }
 
     public void Teardown()
@@ -24,13 +27,20 @@ public class Quest
     public Sprite2D QuestSprite { get; set; }
 
     public string Label { get; }
+    public int Seconds { get; }
+    public int Money { get; }
+    public QuestLevel QuestLevel { get; }
 
-
-    private string GetLabel(float distance)
+    private string GetLabel(float distance, out int secs, out int money, out QuestLevel level)
     {
         List<string> shortLabels = new();
+        List<int> shortMoney = new() { 10, 20, 30 };
+
         List<string> mediumLabels = new();
+        List<int> mediumMoney = new() { 40, 60, 80 };
+
         List<string> largeLabels = new();
+        List<int> largeMoney = new() { 100, 150, 200 };
 
         shortLabels.Add("Please deliver this letter to Grandma. She lives nearby.");
         shortLabels.Add("My dog needs to poo-poo. Could you go for a short walk?");
@@ -46,14 +56,23 @@ public class Quest
 
         if (distance < 12)
         {
+            secs = 20;
+            money = shortMoney.GetRandomItem();
+            level = QuestLevel.Easy;
             return shortLabels.GetRandomItem();
         }
         
         if (distance < 25)
         {
+            secs = 30;
+            level = QuestLevel.Medium;
+            money = mediumMoney.GetRandomItem();
             return mediumLabels.GetRandomItem();
         }
 
+        secs = 40;
+        level = QuestLevel.Hard;
+        money = largeMoney.GetRandomItem();
         return largeLabels.GetRandomItem();
     }
 }

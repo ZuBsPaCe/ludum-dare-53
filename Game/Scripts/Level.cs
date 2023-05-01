@@ -35,6 +35,10 @@ public partial class Level : Node3D
 
     public override void _Ready()
     {
+        State.ShopWinBought = false;
+        State.LevelTime.Restart();
+
+
         _cityMap = GetNode<CityMap>("CityMap");
         _drivingOverlay = GetNode<DrivingOverlay>("DrivingOverlay");
 
@@ -65,6 +69,9 @@ public partial class Level : Node3D
 
         GameEventHub.Instance.FuelMarkerEntered += EventHub_FuelMarkerEntered;
         GameEventHub.Instance.FuelMarkerExited += EventHub_FuelMarkerExited;
+        GameEventHub.Instance.FuelChanged += EventHub_FuelChanged;
+
+        GameEventHub.Instance.ShopBoughtWin += EventHub_ShopBoughtWin;
 
 
         // Initialize LevelState StateMachine
@@ -190,6 +197,12 @@ public partial class Level : Node3D
         _canEnterShop = false;
     }
 
+    private void EventHub_FuelChanged(int amount)
+    {
+        if (amount == 0)
+            _notification.ShowNotification(NotificationType.Lost, "Ran out of fuel... Try again...");
+    }
+
     private void EventHub_QuestAccepted(QuestMarker questMarker)
     {
         Debug.Assert(_currentQuest == null);
@@ -232,6 +245,11 @@ public partial class Level : Node3D
         }
 
         _currentMusic?.Play();
+    }
+
+    private void EventHub_ShopBoughtWin()
+    {
+        // Not used
     }
 
     private void SwitchLevelState(StateMachine stateMachine)

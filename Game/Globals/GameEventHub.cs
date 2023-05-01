@@ -18,6 +18,8 @@ public partial class GameEventHub : Node
     [Signal] public delegate void MoneyChangedEventHandler(int amount);
     [Signal] public delegate void CountdownChangedEventHandler(bool active, float countdownSecs);
 
+    [Signal] public delegate void ShopBoughtWinEventHandler();
+
 
     public static void EmitSwitchLevelState(LevelState levelState)
     {
@@ -62,5 +64,10 @@ public partial class GameEventHub : Node
     internal static void EmitCountdownChanged(bool active, float countdownSecs)
     {
         Instance.EmitSignal(SignalName.CountdownChanged, active, countdownSecs);
+    }
+
+    internal static void EmitShopBoughtWin()
+    {
+        Instance.EmitSignal(SignalName.ShopBoughtWin);
     }
 }

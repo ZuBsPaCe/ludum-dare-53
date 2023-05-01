@@ -1,4 +1,6 @@
-﻿public class State
+﻿using System.Diagnostics;
+
+public class State
 {
     private static int _fuel;
     private static int _money;
@@ -79,6 +81,8 @@
         }
     }
 
+    public static bool ShopWinBought { get; set; }
+    public static Stopwatch LevelTime { get; set; } = new();
 
     public static bool OverlayActive { get; set; }
 }

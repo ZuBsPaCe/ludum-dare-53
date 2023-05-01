@@ -114,6 +114,7 @@ public partial class Main : Node
                     _mainMenuMusic.Stop();
 
                     GetTree().Paused = false;
+                    State.LevelTime.Start();
                 }
                 break;
 
@@ -121,6 +122,7 @@ public partial class Main : Node
                 if (stateMachine.Action == StateMachineAction.Start)
                 {
                     GetTree().Paused = true;
+                    State.LevelTime.Stop();
 
                     PauseMenu pauseMenu = _scenePauseMenu.Instantiate<PauseMenu>();
                     AddChild(pauseMenu);

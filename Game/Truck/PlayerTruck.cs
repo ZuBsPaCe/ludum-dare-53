@@ -4,7 +4,7 @@ using System;
 public partial class PlayerTruck : VehicleBody3D
 {
 	[Export] private float _maxForwardForce = 100;
-	[Export] private float _maxBackwardForce = 50;
+	[Export] private float _maxBackwardForce = 75;
 
 	[Export] private float _slowSteeringDeg = 45;
 	[Export] private float _fastSteeringDeg = 25;
@@ -23,26 +23,33 @@ public partial class PlayerTruck : VehicleBody3D
 		_motorSound = GetNode<AudioStreamPlayer3D>("MotorSound");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _PhysicsProcess(double delta)
 	{
 		float engineForce = 0;
 
 		if (!State.OverlayActive)
 		{
-			if (Input.IsActionPressed("Forward"))
+			if (State.Fuel > 0)
 			{
-				engineForce += _maxForwardForce;
+				if (Input.IsActionPressed("Forward"))
+				{
+					engineForce += _maxForwardForce;
 
-				_fuelTime += (float)delta;
+					_fuelTime += (float)delta;
+				}
+
+				if (Input.IsActionPressed("Backward"))
+				{
+					engineForce -= _maxBackwardForce;
+
+					_fuelTime += (float)delta;
+				}
 			}
-
-			if (Input.IsActionPressed("Backward"))
-			{
-				engineForce -= _maxBackwardForce;
-
-				_fuelTime += (float)delta;
-			}
+		}
+		else
+		{
+			LinearVelocity = LinearVelocity.MoveToward(Vector3.Zero, (float) delta);
 		}
 
 		float velocity = LinearVelocity.Length();

@@ -52,7 +52,7 @@ public partial class CityMap : SubViewport
 
                     case TileType.Park:
                         sprite = _scenePark.Instantiate<Sprite2D>();
-                        continue;
+                        break;
 
                     default:
                         Debug.Fail($"Unknown enum [{tileType}]");

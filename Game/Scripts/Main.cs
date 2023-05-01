@@ -49,7 +49,7 @@ public partial class Main : Node
 
         // Initialize UserSettings Singleton
         UserSettings.Instance = new UserSettings();
-        AddChild(Sounds.Instance, false, InternalMode.Front);
+        AddChild(UserSettings.Instance, false, InternalMode.Front);
 
         UserSettings.Load();
     }

@@ -35,6 +35,9 @@ public partial class Level : Node3D
     private float _flipTime;
     private bool _flipped;
 
+    private bool _ranOutOfFuel;
+    private float _ranOutOfFuelTimer;
+
 
     public override void _Ready()
     {
@@ -153,6 +156,34 @@ public partial class Level : Node3D
             return;
         }
 
+        if (State.Fuel == 0 && !State.OverlayActive)
+        {
+            if (_city.PlayerSpeed < 1)
+            {
+                _ranOutOfFuelTimer += (float)delta;
+            }
+            else
+            {
+                _ranOutOfFuelTimer = 0;
+            }
+
+            if (!_ranOutOfFuel && _ranOutOfFuelTimer > 3)
+            {
+                _ranOutOfFuel = true;
+                _notification.ShowNotification(NotificationType.Lost, "Ran out of fuel... Press Esc and try again...", true);
+            }
+        }
+        else
+        {
+            _ranOutOfFuelTimer = 0;
+
+            if (_ranOutOfFuel && State.Fuel > 0)
+            {
+                _ranOutOfFuel = false;
+                _notification.Unhold();
+            }
+        }
+
 
         if (State.CountdownActive)
         {
@@ -264,8 +295,7 @@ public partial class Level : Node3D
 
     private void EventHub_FuelChanged(int amount)
     {
-        if (amount == 0)
-            _notification.ShowNotification(NotificationType.Lost, "Ran out of fuel... Try again...");
+        // unused
     }
 
     private void EventHub_QuestAccepted(QuestMarker questMarker)

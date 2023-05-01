@@ -19,6 +19,8 @@ public partial class DrivingOverlay : MenuBase
     private TextureRect _countDownIcon;
     private Label _countDownLabel;
 
+    private bool _closed;
+
 
     public override void _Ready()
     {
@@ -54,9 +56,15 @@ public partial class DrivingOverlay : MenuBase
         _countDownIcon.Visible = false;
         _countDownLabel.Visible = false;
 
-        EventHub.Instance.FuelChanged += (amount) => EventHub_FuelChanged(amount);
-        EventHub.Instance.MoneyChanged += (amount) => EventHub_MoneyChanged(amount);
-        EventHub.Instance.CountdownChanged += (active, secs) => EventHub_CountdownChanged(active, secs);
+        // TODO: Should be initialized in Level
+        // Initialize GameEventHub Singleton
+        GameEventHub.Instance = new GameEventHub();
+        AddChild(GameEventHub.Instance, false, InternalMode.Front);
+
+
+        GameEventHub.Instance.FuelChanged += (amount) => EventHub_FuelChanged(amount);
+        GameEventHub.Instance.MoneyChanged += (amount) => EventHub_MoneyChanged(amount);
+        GameEventHub.Instance.CountdownChanged += (active, secs) => EventHub_CountdownChanged(active, secs);
     }
 
     public void Setup(ViewportTexture _cityMapTex)
@@ -124,7 +132,7 @@ public partial class DrivingOverlay : MenuBase
                 {
                     State.QuestOverlayActive = false;
                     CloseMenu(false);
-                    EventHub.EmitQuestAccepted(_quest.QuestMarker);
+                    GameEventHub.EmitQuestAccepted(_quest.QuestMarker);
                     _quest = null;
                 }
                 break;

@@ -28,7 +28,7 @@ public partial class QuestMarker : Node3D
     {
 		if (body.IsInGroup(Group.Player))
 		{
-			EventHub.EmitQuestMarkerEntered(this, IsStart);
+            GameEventHub.EmitQuestMarkerEntered(this, IsStart);
 		}
     }
 }

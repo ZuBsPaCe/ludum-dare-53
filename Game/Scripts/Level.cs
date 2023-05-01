@@ -41,9 +41,18 @@ public partial class Level : Node3D
         _starMusic = GetNode<AudioStreamPlayer>("%StarMusic");
 
 
-        EventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
-        EventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
-        EventHub.Instance.QuestAccepted += EventHub_QuestAccepted;
+        // TODO: Must be initialized in DrivingOverlay, because ready ist called first there
+        // BUT: GameEventHub must be free along with Level, otherwise it won't disconnect
+        // event handlers...
+        //
+        //// Initialize GameEventHub Singleton
+        //GameEventHub.Instance = new GameEventHub();
+        //AddChild(GameEventHub.Instance, false, InternalMode.Front);
+
+
+        GameEventHub.Instance.SwitchLevelState += EventHub_SwitchLevelState;
+        GameEventHub.Instance.QuestMarkerEntered += EventHub_QuestMarkerEntered;
+        GameEventHub.Instance.QuestAccepted += EventHub_QuestAccepted;
 
 
         // Initialize LevelState StateMachine
@@ -162,8 +171,7 @@ public partial class Level : Node3D
 
                         _city.Setup(_cityMap);
 
-
-                        EventHub.EmitSwitchLevelState(LevelState.Running);
+                        GameEventHub.EmitSwitchLevelState(LevelState.Running);
                     }
                 }
                 break;

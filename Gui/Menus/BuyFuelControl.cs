@@ -11,7 +11,7 @@ public partial class BuyFuelControl : MarginContainer
         _buyFuelLabel = GetNode<Label>("%FuelLabel");
         UpdateMessage();
 
-        EventHub.Instance.FuelChanged += (amount) => EventHub_FuelChanged(amount);
+        GameEventHub.Instance.FuelChanged += (amount) => EventHub_FuelChanged(amount);
     }
 
     private void EventHub_FuelChanged(int amount)

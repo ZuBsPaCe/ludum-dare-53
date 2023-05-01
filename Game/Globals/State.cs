@@ -19,7 +19,7 @@
             if (newValue != _fuel)
             {
                 _fuel = newValue;
-                EventHub.EmitFuelChanged(_fuel);
+                GameEventHub.EmitFuelChanged(_fuel);
             }
         }
     }
@@ -38,7 +38,7 @@
             if (newValue != _money)
             {
                 _money = newValue;
-                EventHub.EmitMoneyChanged(_money);
+                GameEventHub.EmitMoneyChanged(_money);
             }
         }
     }
@@ -53,7 +53,7 @@
         {
 
             _countdownActive = value;
-            EventHub.EmitCountdownChanged(_countdownActive, _countdownSecs);
+            GameEventHub.EmitCountdownChanged(_countdownActive, _countdownSecs);
         }
     }
 
@@ -74,7 +74,7 @@
             if (newValue != _countdownSecs)
             {
                 _countdownSecs = newValue;
-                EventHub.EmitCountdownChanged(_countdownActive, _countdownSecs);
+                GameEventHub.EmitCountdownChanged(_countdownActive, _countdownSecs);
             }
         }
     }

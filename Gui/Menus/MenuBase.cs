@@ -158,6 +158,7 @@ public abstract partial class MenuBase : CanvasLayer
         _currentControl = null;
 
         Tween tween = control.CreateTween();
+        tween.SetPauseMode(Tween.TweenPauseMode.Process);
         tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         tween.TweenProperty(control, "position", new Vector2(0, 1080), TRANSITION_DURATION);
         tween.Parallel().TweenProperty(control, "modulate", new Color(1, 1, 1, 0), TRANSITION_DURATION);

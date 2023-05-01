@@ -62,6 +62,7 @@ public partial class UserSettings : Node
 
         try
         {
+            GD.Print($"Loading settings: {File.Exists("UserSettings.json")}");
             if (File.Exists("UserSettings.json"))
             {
                 string content = File.ReadAllText("UserSettings.json");
@@ -123,7 +124,7 @@ public partial class UserSettings : Node
     {
         bool finalValue = defaultValue;
 
-        if (_settings != null && _settings.TryGetValue(name, out var data))
+        if (userSettings != null && userSettings.TryGetValue(name, out var data))
         {
             try
             {

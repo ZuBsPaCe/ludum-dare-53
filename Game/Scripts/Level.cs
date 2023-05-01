@@ -51,6 +51,9 @@ public partial class Level : Node3D
         AddChild(_levelStateMachine, false, InternalMode.Front);
         _levelStateMachine.Setup(LevelState.Init, SwitchLevelState);
 
+        // Force refresh...
+        State.Fuel = 1;
+        State.Money = 1;
 
         State.Fuel = 65;
         State.Money = 100;

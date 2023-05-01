@@ -32,6 +32,9 @@ public partial class Level : Node3D
     private bool _canEnterShop;
     private bool _enterNotificationShown;
 
+    private float _flipTime;
+    private bool _flipped;
+
 
     public override void _Ready()
     {
@@ -89,9 +92,45 @@ public partial class Level : Node3D
 
     public override void _Process(double delta)
     {
+        bool resetTruck = false;
         if (_city.PlayerPos.Y < -20)
         {
+            resetTruck = true;
+        }
+        else
+        {
+            if (Mathf.Abs(_city.TruckFlipRotationDegrees) > 10 && _city.PlayerSpeed < 5)
+            {
+                _flipTime += (float) delta;
+
+                if (!_flipped && _flipTime >= 5) 
+                {
+                    _flipped = true;
+                    _notification.ShowNotification(NotificationType.Info, "Press E to reset your truck", true);
+                }
+
+                if (_flipped && Input.IsActionJustPressed("Use"))
+                {
+                    resetTruck = true;
+                }
+            }
+            else
+            {
+                if (_flipped)
+                {
+                    _flipped = false;
+                    _notification.Unhold();
+                }
+
+                _flipTime = 0;
+            }
+        }
+
+        if (resetTruck)
+        {
             _city.ResetPlayerTruck();
+            _flipTime = 0;
+            _flipped = false;
 
             int repairCost;
             if (State.Money <= 100)
@@ -107,9 +146,13 @@ public partial class Level : Node3D
                 repairCost = 100;
             }
 
+            _notification.Unhold();
             _notification.ShowNotification(NotificationType.Lost, $"Repairs: -{repairCost} bucks");
             State.Money -= repairCost;
+
+            return;
         }
+
 
         if (State.CountdownActive)
         {

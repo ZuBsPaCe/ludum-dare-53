@@ -116,6 +116,16 @@ public partial class City : Node3D
         _cityMap.UpdatePlayerPos(_playerTruck.GlobalPosition, -_playerTruck.GlobalRotation.Y);
     }
 
+	public Vector3 PlayerPos
+	{
+		get { return _playerTruck.GlobalPosition; }
+	}
+
+	public int TileSize
+	{
+		get { return _tileSize; }
+	}
+
     public void Setup(CityMap cityMap)
 	{
 		_cityMap = cityMap;

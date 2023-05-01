@@ -206,15 +206,43 @@ public partial class Level : Node3D
             TileType.Park
         };
 
-        for (int i = 0; i < 50; ++i)
+        int failures = 0;
+        int count = GD.RandRange(4, 10);
+
+        while (_quests.Count < count && failures < count * 10)
         {
-            if (_city.TryGetRandomCoord(validTypes, out Vector2I coord) &&
+            if (_city.TryGetRandomCoord(validTypes, out Vector2I startCoord) &&
                 _city.TryGetRandomCoord(validTypes, out Vector2I targetCoord))
             {
-                Quest quest = new(coord, targetCoord);
-                _quests.Add(quest);
+                float minDistance;
 
-                _city.AddQuestMarker(quest, quest.StartCoord, true);
+                Vector3 playerPos = _city.PlayerPos;
+                Vector2 playerPos2 = new Vector2(playerPos.X, playerPos.Z);
+                float playerDistance = (playerPos2 - startCoord * _city.TileSize).Length();
+                minDistance = playerDistance;
+
+
+                foreach (Quest otherQuest in _quests)
+                {
+                    float currentDistance = (otherQuest.StartCoord - startCoord).Length() * _city.TileSize;
+                    if (currentDistance < minDistance)
+                    {
+                        minDistance = currentDistance;
+                    }
+                }
+
+
+                if (minDistance >= 100)
+                {
+                    Quest quest = new(startCoord, targetCoord);
+                    _quests.Add(quest);
+
+                    _city.AddQuestMarker(quest, quest.StartCoord, true);
+                }
+                else
+                {
+                    failures += 1;
+                }
             }
         }
     }

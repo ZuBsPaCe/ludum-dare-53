@@ -69,11 +69,11 @@ public partial class PlayerTruck : VehicleBody3D
 		_motorSound.PitchScale = Mathf.Lerp(1f, 3f, Mathf.Clamp(velocity / 30f, 0f, 1f));
 
 
-		if (_fuelTime > 3)
+		if (_fuelTime > 2.07f)
 		{
-			_fuelTime -= 3;
+			_fuelTime -= 2.07f;
 
-			State.Fuel -= 1;
+            State.Fuel -= 1;
 		}
 	}
 }

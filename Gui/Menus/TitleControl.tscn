@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx3j0ojyc6skp"]
+[gd_scene load_steps=5 format=3 uid="uid://cx3j0ojyc6skp"]
 
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="1_dihy6"]
 [ext_resource type="Texture2D" uid="uid://hfrocm4yj8t3" path="res://Gui/Title/Title.png" id="2_nf1lg"]
+[ext_resource type="Script" path="res://Gui/Menus/TitleControl.cs" id="2_ofjgu"]
+[ext_resource type="Texture2D" uid="uid://um2wm1qm7whd" path="res://Gui/Title/TitleOutline.png" id="3_tq2fl"]
 
 [node name="TitleControl" type="MarginContainer"]
+process_mode = 3
 offset_right = 1344.0
 offset_bottom = 1080.0
 theme = ExtResource("1_dihy6")
+script = ExtResource("2_ofjgu")
+_cloneTex = ExtResource("2_nf1lg")
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -15,17 +20,10 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(800, 800)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("2_nf1lg")
-expand_mode = 5
+[node name="Title1" type="Sprite2D" parent="PanelContainer/MarginContainer/Panel"]
+unique_name_in_owner = true
+position = Vector2(580, 454)
+texture = ExtResource("3_tq2fl")

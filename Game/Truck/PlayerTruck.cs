@@ -47,10 +47,6 @@ public partial class PlayerTruck : VehicleBody3D
 				}
 			}
 		}
-		else
-		{
-			LinearVelocity = LinearVelocity.MoveToward(Vector3.Zero, (float) delta);
-		}
 
 		float velocity = LinearVelocity.Length();
 

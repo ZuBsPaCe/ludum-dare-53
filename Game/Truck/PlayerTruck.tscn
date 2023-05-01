@@ -22,6 +22,7 @@ point_count = 3
 
 [node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
+can_sleep = false
 script = ExtResource("1_ojfq6")
 
 [node name="WheelFrontLeft" type="VehicleWheel3D" parent="."]

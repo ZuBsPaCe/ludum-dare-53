@@ -89,6 +89,28 @@ public partial class Level : Node3D
 
     public override void _Process(double delta)
     {
+        if (_city.PlayerPos.Y < -20)
+        {
+            _city.ResetPlayerTruck();
+
+            int repairCost;
+            if (State.Money <= 100)
+            {
+                repairCost = 20;
+            }
+            else if (State.Money <= 300)
+            {
+                repairCost = 60;
+            }
+            else
+            {
+                repairCost = 100;
+            }
+
+            _notification.ShowNotification(NotificationType.Lost, $"Repairs: -{repairCost} bucks");
+            State.Money -= repairCost;
+        }
+
         if (State.CountdownActive)
         {
             State.CountdownSecs -= (float) delta;

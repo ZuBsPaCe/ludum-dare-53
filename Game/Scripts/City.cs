@@ -85,6 +85,9 @@ public partial class City : Node3D
 	private CityMap _cityMap;
 	private PlayerTruck _playerTruck;
 
+	private Vector3 _playerTruckResetPos;
+	private Vector3 _playerTruckResetRot;
+
 
     public override void _Ready()
     {
@@ -94,6 +97,8 @@ public partial class City : Node3D
 		}
 
 		_playerTruck = GetNode<PlayerTruck>("%PlayerTruck");
+		_playerTruckResetPos = _playerTruck.GlobalPosition;
+		_playerTruckResetRot = _playerTruck.GlobalRotation;
 
         var root = GetNode<Node3D>(_genPath);
         foreach (var child in root.GetChildren())
@@ -197,6 +202,14 @@ public partial class City : Node3D
         FuelMarker fuelMarker = _sceneFuelMarker.Instantiate<FuelMarker>();
 		AddChild(fuelMarker);
         fuelMarker.GlobalPosition = GetCenterPosInCoord(coord);
+	}
+
+	public void ResetPlayerTruck()
+	{
+		_playerTruck.GlobalPosition = _playerTruckResetPos;
+		_playerTruck.GlobalRotation = _playerTruckResetRot;
+		_playerTruck.LinearVelocity = Vector3.Zero;
+		_playerTruck.AngularVelocity = Vector3.Zero;
 	}
 
 	private Vector3 GetRandomPosInCoord(Vector2I coord)

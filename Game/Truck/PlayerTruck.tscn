@@ -85,7 +85,8 @@ stream = ExtResource("4_hmdn4")
 autoplay = true
 bus = &"Motor"
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="ExhaustParticles" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.648333, 0.761357, 0, -0.761357, -0.648333, 1.01039, -7.34156, 0.52597)
 transparency = 0.38
 amount = 32

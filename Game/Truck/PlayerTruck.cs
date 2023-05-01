@@ -16,12 +16,16 @@ public partial class PlayerTruck : VehicleBody3D
 
 	private float _fuelTime;
 
+	private CpuParticles3D _exhaustParticles;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_motorSound = GetNode<AudioStreamPlayer3D>("MotorSound");
-	}
+		_exhaustParticles = GetNode<CpuParticles3D>("%ExhaustParticles");
+
+    }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
@@ -77,6 +81,15 @@ public partial class PlayerTruck : VehicleBody3D
 			_fuelTime -= 2.07f;
 
             State.Fuel -= 1;
+		}
+
+		if (State.Fuel == 0 && _exhaustParticles.Emitting)
+		{
+			_exhaustParticles.Emitting = false;
+		}
+		else if (State.Fuel > 0 && !_exhaustParticles.Emitting)
+		{
+			_exhaustParticles.Emitting = true;
 		}
 	}
 }

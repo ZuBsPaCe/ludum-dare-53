@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ptsmjv3mjisf"]
+[gd_scene load_steps=10 format=3 uid="uid://ptsmjv3mjisf"]
 
 [ext_resource type="PackedScene" uid="uid://56jlt84osiqe" path="res://Game/Truck/Truck.tscn" id="1_botde"]
 [ext_resource type="Script" path="res://Game/Truck/PlayerTruck.cs" id="1_ojfq6"]
@@ -9,6 +9,16 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jqvt7"]
 size = Vector3(3.5, 2, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0e6fp"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vpfhy"]
+material = SubResource("StandardMaterial3D_0e6fp")
+
+[sub_resource type="Curve" id="Curve_hw8mb"]
+_data = [Vector2(0, 0.336364), 0.0, 0.0, 0, 0, Vector2(0.612591, 0.418182), 0.682644, 0.682644, 0, 0, Vector2(0.997579, 0), -1.39057, 0.0, 0, 0]
+point_count = 3
 
 [node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
@@ -73,3 +83,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2501, 3.6)
 stream = ExtResource("4_hmdn4")
 autoplay = true
 bus = &"Motor"
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.648333, 0.761357, 0, -0.761357, -0.648333, 1.01039, -7.34156, 0.52597)
+transparency = 0.38
+amount = 32
+lifetime = 0.63
+lifetime_randomness = 0.55
+mesh = SubResource("SphereMesh_vpfhy")
+direction = Vector3(0, 0, 1)
+spread = 22.29
+gravity = Vector3(0, 0.1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_hw8mb")

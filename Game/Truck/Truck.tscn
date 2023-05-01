@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://56jlt84osiqe"]
+[gd_scene load_steps=6 format=3 uid="uid://56jlt84osiqe"]
 
 [ext_resource type="PackedScene" uid="uid://c57tdt5l3w8hb" path="res://Game/Truck/Truck.blend" id="1_ameyc"]
 [ext_resource type="Material" uid="uid://c48elewhxf1k4" path="res://Game/Truck/TruckChassisMaterial.tres" id="2_noy4l"]
 [ext_resource type="Material" uid="uid://bq5dc62oe4wg3" path="res://Game/Truck/TruckCargoMaterial.tres" id="3_5wkxp"]
+[ext_resource type="Material" uid="uid://de41mmb1jkcj5" path="res://Game/Materials/WindowMaterial.tres" id="4_so474"]
+[ext_resource type="Material" uid="uid://4uyf7hoydv0n" path="res://Game/Materials/BlackMaterial.tres" id="5_wlxpa"]
 
 [node name="Truck" instance=ExtResource("1_ameyc")]
 
@@ -11,3 +13,9 @@ surface_material_override/0 = ExtResource("2_noy4l")
 
 [node name="TruckCargo" parent="." index="1"]
 surface_material_override/0 = ExtResource("3_5wkxp")
+
+[node name="Window" parent="." index="2"]
+surface_material_override/0 = ExtResource("4_so474")
+
+[node name="ExhaustLeft" parent="." index="3"]
+surface_material_override/0 = ExtResource("5_wlxpa")

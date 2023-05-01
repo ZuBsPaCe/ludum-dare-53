@@ -5,6 +5,7 @@ public partial class DrivingOverlay : MenuBase
 {
     [Export] private PackedScene _sceneSettingsControl;
     [Export] private PackedScene _sceneQuestControl;
+    [Export] private PackedScene _buyFuelControl;
 
     private TextureRect _mapTextureRect;
 
@@ -33,12 +34,14 @@ public partial class DrivingOverlay : MenuBase
         _questInfoButton = GetNode<Button>("%QuestInfoButton");
         Button acceptButton = GetNode<Button>("%AcceptButton");
         Button denyButton = GetNode<Button>("%DenyButton");
+        Button buyFuelButton = GetNode<Button>("%BuyFuel");
         Button settingsButton = GetNode<Button>("%SettingsButton");
         Button mainMenuButton = GetNode<Button>("%MainMenuButton");
 
         InitButton(_questInfoButton, IngameMenuState.QuestInfo);
         InitButton(acceptButton, IngameMenuState.Accept);
         InitButton(denyButton, IngameMenuState.Deny);
+        InitButton(buyFuelButton, IngameMenuState.BuyFuel);
         InitButton(settingsButton, IngameMenuState.Settings);
         InitButton(mainMenuButton, IngameMenuState.MainMenu);
 
@@ -102,6 +105,10 @@ public partial class DrivingOverlay : MenuBase
                 questControl.Setup(_quest);
                 return questControl;
 
+            case IngameMenuState.BuyFuel:
+                var buyFuelControl = _buyFuelControl.Instantiate<BuyFuelControl>();
+                return buyFuelControl;
+
             case IngameMenuState.Settings:
                 return _sceneSettingsControl.Instantiate<Control>();
         }
@@ -127,6 +134,27 @@ public partial class DrivingOverlay : MenuBase
                     State.QuestOverlayActive = false;
                     CloseMenu(false);
                     _quest = null;
+                }
+                break;
+
+            case IngameMenuState.BuyFuel:
+                {
+                    int buyFuel = Mathf.Min(State.Money, 10);
+
+                    if (State.Fuel + buyFuel > 65)
+                    {
+                        buyFuel = 65 - State.Fuel;
+                    }
+
+                    if (buyFuel > 0)
+                    {
+                        State.Money -= buyFuel;
+                        State.Fuel += buyFuel;
+                    }
+                    else
+                    {
+
+                    }
                 }
                 break;
 

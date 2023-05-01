@@ -5,5 +5,6 @@
     Accept,
     Deny,
     Settings,
-    MainMenu
+    MainMenu,
+    BuyFuel
 }

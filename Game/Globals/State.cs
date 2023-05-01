@@ -18,7 +18,7 @@
 
             if (newValue != _fuel)
             {
-                _fuel = value;
+                _fuel = newValue;
                 EventHub.EmitFuelChanged(_fuel);
             }
         }
@@ -51,6 +51,7 @@
         }
         set
         {
+
             _countdownActive = value;
             EventHub.EmitCountdownChanged(_countdownActive, _countdownSecs);
         }
@@ -72,7 +73,7 @@
 
             if (newValue != _countdownSecs)
             {
-                _countdownSecs = value;
+                _countdownSecs = newValue;
                 EventHub.EmitCountdownChanged(_countdownActive, _countdownSecs);
             }
         }

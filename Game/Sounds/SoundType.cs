@@ -7,5 +7,8 @@ public enum SoundType
     MainMenuSelect,
 
     Won,
-    Lost
+    Lost,
+
+    Money,
+    Crash
 }

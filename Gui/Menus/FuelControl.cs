@@ -70,6 +70,8 @@ public partial class FuelControl : MarginContainer
             State.Fuel += buyFuel;
 
             _boughtSome = true;
+
+            Sounds.PlaySound(SoundType.Money);
         }
 
         UpdateMessage();

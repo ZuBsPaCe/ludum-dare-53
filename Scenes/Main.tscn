@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddlnsubdrqjgc"]
+[gd_scene load_steps=12 format=3 uid="uid://ddlnsubdrqjgc"]
 
 [ext_resource type="Script" path="res://Game/Scripts/Main.cs" id="1_kyl25"]
 [ext_resource type="PackedScene" uid="uid://thy7el8r112x" path="res://Base/Framework/StateMachine.tscn" id="2_3g0d3"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b3pp16r1lhk4a" path="res://Game/Sounds/SoundStore.tscn" id="4_veahi"]
 [ext_resource type="PackedScene" uid="uid://b3vy06p0ir4u3" path="res://Gui/Menus/PauseMenu.tscn" id="5_wvk86"]
 [ext_resource type="AudioStream" uid="uid://dtbtfb5ghyf0v" path="res://Music/MainMenuMusic.mp3" id="7_4w5my"]
+[ext_resource type="AudioStream" uid="uid://b2sjc3l2pjcl8" path="res://Sounds/Money.wav" id="10_0ht82"]
+[ext_resource type="AudioStream" uid="uid://cyk54a3j5sy1r" path="res://Sounds/Crash.wav" id="11_wtpk2"]
 [ext_resource type="AudioStream" uid="uid://cj4cuwbm1tyje" path="res://Music/Won.mp3" id="12_uwc8y"]
 [ext_resource type="AudioStream" uid="uid://ckpkkq1xxohe7" path="res://Music/Lost.mp3" id="13_nyud5"]
 
@@ -34,3 +36,9 @@ bus = &"Music"
 unique_name_in_owner = true
 stream = ExtResource("13_nyud5")
 bus = &"Music"
+
+[node name="MoneySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_0ht82")
+
+[node name="CrashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_wtpk2")

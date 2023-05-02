@@ -15,6 +15,9 @@ public partial class Main : Node
     private AudioStreamPlayer _wonMusic;
     private AudioStreamPlayer _lostMusic;
 
+    private AudioStreamPlayer _moneySound;
+    private AudioStreamPlayer _crashSound;
+
     private Level _game;
 
     public override void _Ready()
@@ -30,6 +33,8 @@ public partial class Main : Node
 
         Sounds.RegisterSound(SoundType.Won, _wonMusic);
         Sounds.RegisterSound(SoundType.Lost, _lostMusic);
+        Sounds.RegisterSound(SoundType.Money, _moneySound);
+        Sounds.RegisterSound(SoundType.Crash, _crashSound);
 
 
         // Initialize EventHub Singleton

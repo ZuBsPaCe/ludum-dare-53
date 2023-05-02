@@ -261,9 +261,6 @@ public partial class PlayerTruck : VehicleBody3D
 		Steering = steering;
 
 
-		_motorSound.PitchScale = Mathf.Lerp(1f, 3f, Mathf.Clamp(velocity / 30f, 0f, 1f));
-
-
 		if (_fuelTime > 2.07f)
 		{
 			_fuelTime -= 2.07f;
@@ -274,28 +271,33 @@ public partial class PlayerTruck : VehicleBody3D
 		if (State.Fuel == 0 && _exhaustParticles.Emitting)
 		{
 			_exhaustParticles.Emitting = false;
+			_motorSound.Stop();
 		}
 		else if (State.Fuel > 0 && !_exhaustParticles.Emitting)
 		{
 			_exhaustParticles.Emitting = true;
+			_motorSound.Play();
 		}
 
-		//var rot = Transform;
-		//rot = rot.RotatedLocal(Vector3.Right, (float)GetPhysicsProcessDeltaTime() * Mathf.Tau * 0.25f);
-		//rot = rot.RotatedLocal(Vector3.Forward, (float)GetPhysicsProcessDeltaTime() * Mathf.Tau * 0.2f);
-		//rot = rot.RotatedLocal(Vector3.Up, (float)GetPhysicsProcessDeltaTime() * Mathf.Tau * 0.15f);
-		//      Transform = rot;
 
-		//GravityScale = 0;
-		//GlobalPosition = new Vector3(GlobalPosition.X, 12, GlobalPosition.Z);
+        _motorSound.PitchScale = Mathf.Lerp(1f, 3f, Mathf.Clamp(velocity / 30f, 0f, 1f));
 
-		//if (State.StarTime > 0)
-		//{
-		
+        //var rot = Transform;
+        //rot = rot.RotatedLocal(Vector3.Right, (float)GetPhysicsProcessDeltaTime() * Mathf.Tau * 0.25f);
+        //rot = rot.RotatedLocal(Vector3.Forward, (float)GetPhysicsProcessDeltaTime() * Mathf.Tau * 0.2f);
+        //rot = rot.RotatedLocal(Vector3.Up, (float)GetPhysicsProcessDeltaTime() * Mathf.Tau * 0.15f);
+        //      Transform = rot;
 
-		//	State.StarTime = 0;
-		//}
-	}
+        //GravityScale = 0;
+        //GlobalPosition = new Vector3(GlobalPosition.X, 12, GlobalPosition.Z);
+
+        //if (State.StarTime > 0)
+        //{
+
+
+        //	State.StarTime = 0;
+        //}
+    }
 
   //  public override void _IntegrateForces(PhysicsDirectBodyState3D state)
   //  {

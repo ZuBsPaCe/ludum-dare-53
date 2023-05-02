@@ -29,6 +29,11 @@ public abstract partial class MenuBase : CanvasLayer
         // https://stackoverflow.com/a/60022245/998987
         int intState = Unsafe.As<T, int>(ref newState);
 
+        if (_allButtons.Count == 0)
+        {
+            button.GrabFocus();
+        }
+
         _allButtons.Add(button);
         _buttonToState[button] = intState;
 
@@ -136,6 +141,10 @@ public abstract partial class MenuBase : CanvasLayer
                 _currentControl = nextControl;
                 AddChild(_currentControl);
 
+                Control leftControl = nextControl.FindNextValidFocus();
+                NodePath leftControlPath = leftControl?.GetPath();
+                button.FocusNeighborLeft = leftControlPath;
+
                 _currentControl.Position = new Vector2(0, -1080);
                 _currentControl.Modulate = new Color(1, 1, 1, 0);
 
@@ -145,6 +154,10 @@ public abstract partial class MenuBase : CanvasLayer
                 show_tween.Parallel().TweenProperty(nextControl, "modulate", new Color(1, 1, 1, 1), TRANSITION_DURATION);
 
                 Sounds.PlaySound(SoundType.MainMenuSelect);
+            }
+            else
+            {
+                button.FocusNeighborLeft = null;
             }
         }
     }

@@ -31,7 +31,6 @@ layout_mode = 2
 [node name="ContinueButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Continue"
 
 [node name="FuelButton" type="Button" parent="ButtonBar/VBoxContainer"]
@@ -43,7 +42,6 @@ text = "Fuel"
 [node name="ShopButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Shop"
 
 [node name="Spacer2" type="Control" parent="ButtonBar/VBoxContainer"]
@@ -53,7 +51,6 @@ layout_mode = 2
 [node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../MainMenuButton")
 text = "Settings"
 
 [node name="Spacer" type="Control" parent="ButtonBar/VBoxContainer"]
@@ -63,5 +60,4 @@ layout_mode = 2
 [node name="MainMenuButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../SettingsButton")
 text = "Exit to MainMenu"

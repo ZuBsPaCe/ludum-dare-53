@@ -110,53 +110,57 @@ public partial class PlayerTruck : VehicleBody3D
 		{
 			if (State.Fuel > 0)
 			{
-				if (Input.IsActionPressed("Forward"))
+				float engineForceForward = 0;
+				if (Input.IsActionPressed("Forward")) 
 				{
 					if (!_starred)
 					{
-						engineForce += _maxForwardForce;
+                        engineForceForward += _maxForwardForce;
 
 						if (State.SpeedUpgrade1)
 						{
-							engineForce += _speedUpgradeForce;
+                            engineForceForward += _speedUpgradeForce;
 						}
 
 						if (State.SpeedUpgrade2)
 						{
-							engineForce += _speedUpgradeForce;
+                            engineForceForward += _speedUpgradeForce;
 						}
 					}
 					else
 					{
-						engineForce += _starForce;
+                        engineForceForward += _starForce;
 					}
 
 					_fuelTime += (float)delta;
 				}
 
+				float engineForceBackward = 0;
 				if (Input.IsActionPressed("Backward"))
-				{
+                {
 					if (!_starred)
 					{
-						engineForce -= _maxBackwardForce;
+                        engineForceBackward -= _maxBackwardForce;
 
 						if (State.SpeedUpgrade1)
 						{
-							engineForce -= _speedUpgradeForce;
+                            engineForceBackward -= _speedUpgradeForce;
 						}
 
 						if (State.SpeedUpgrade2)
 						{
-							engineForce -= _speedUpgradeForce;
+                            engineForceBackward -= _speedUpgradeForce;
 						}
 					}
 					else
 					{
-						engineForce -= _starBackwardForce;
+                        engineForceBackward -= _starBackwardForce;
 					}
 
-					_fuelTime += (float)delta;
+                    _fuelTime += (float)delta;
 				}
+
+				engineForce = engineForceForward + engineForceBackward;
 			}
 		}
 
@@ -247,12 +251,12 @@ public partial class PlayerTruck : VehicleBody3D
 
 		if (Input.IsActionPressed("Left"))
 		{
-			steering += Mathf.DegToRad(steeringDeg);
+			steering += Mathf.DegToRad(steeringDeg) * Input.GetActionStrength("Left");
 		}
 		
 		if (Input.IsActionPressed("Right"))
 		{
-			steering -= Mathf.DegToRad(steeringDeg);
+			steering -= Mathf.DegToRad(steeringDeg) * Input.GetActionStrength("Right");
 		}
 
 		steering = Mathf.MoveToward(Steering, steering, (float) (_steerSmoothing * delta));

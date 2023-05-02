@@ -25,13 +25,11 @@ alignment = 1
 [node name="StartButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../ExitButton")
 text = "Start Game"
 
 [node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../ExitButton")
 text = "Settings"
 
 [node name="Spacer" type="Control" parent="ButtonBar/VBoxContainer"]
@@ -41,6 +39,4 @@ layout_mode = 2
 [node name="ExitButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../SettingsButton")
-focus_neighbor_bottom = NodePath("../StartButton")
 text = "Exit"

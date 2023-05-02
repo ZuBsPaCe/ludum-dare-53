@@ -121,7 +121,9 @@ public partial class Level : Node3D
                 if (!_flipped && _flipTime >= 5) 
                 {
                     _flipped = true;
-                    _notification.ShowNotification(NotificationType.Info, "Press E to reset your truck", true);
+
+                    string key = State.UsingJoypad ? "X" : "E";
+                    _notification.ShowNotification(NotificationType.Info, $"Press {key} to reset your truck", true);
                 }
 
                 if (_flipped && Input.IsActionJustPressed("Use"))
@@ -182,7 +184,9 @@ public partial class Level : Node3D
             if (!_ranOutOfFuel && _ranOutOfFuelTimer > 1.5f)
             {
                 _ranOutOfFuel = true;
-                _notification.ShowNotification(NotificationType.Lost, "Ran out of fuel... Press Esc and try again...", true);
+
+                string key = State.UsingJoypad ? "Start" : "Esc";
+                _notification.ShowNotification(NotificationType.Lost, $"Ran out of fuel... Press {key} and try again...", true);
             }
         }
         else
@@ -210,7 +214,8 @@ public partial class Level : Node3D
                 {
                     if (_canEnterQuest != null || _canEnterShop)
                     {
-                        _notification.ShowNotification(NotificationType.Info, "Press E", true);
+                        string key = State.UsingJoypad ? "X" : "E";
+                        _notification.ShowNotification(NotificationType.Info, "Press X", true);
                         _enterNotificationShown = true;
                     }
                 }

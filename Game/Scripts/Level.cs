@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections;
 using System.Collections.Generic;
 
 public partial class Level : Node3D
@@ -84,6 +85,7 @@ public partial class Level : Node3D
         GameEventHub.Instance.ShopBoughtWin += EventHub_ShopBoughtWin;
 
 		GameEventHub.Instance.StarPickedUp += GameEventHub_StarPickedUp;
+		GameEventHub.Instance.StarDone += GameEventHub_StarDone;
 
 
         // Initialize LevelState StateMachine
@@ -328,7 +330,17 @@ public partial class Level : Node3D
         State.CountdownSecs = quest.Seconds;
         State.CountdownActive = true;
 
-        switch (quest.QuestLevel)
+        PlayQuestMusic();
+    }
+
+    private void PlayQuestMusic()
+    {
+        if (_currentQuest == null)
+        {
+            return;
+        }
+
+        switch (_currentQuest.QuestLevel)
         {
             case QuestLevel.Easy:
                 _currentMusic = _slowMusic;
@@ -344,7 +356,10 @@ public partial class Level : Node3D
                 break;
         }
 
-        _currentMusic?.Play();
+        if (!_starMusic.Playing)
+        {
+            _currentMusic?.Play();
+        }
     }
 
     private void EventHub_ShopBoughtWin()
@@ -355,12 +370,20 @@ public partial class Level : Node3D
     private void GameEventHub_StarPickedUp()
 	{
         _currentMusic?.Stop();
-        _currentMusic = _starMusic;
-        _currentMusic.Play();
+        _currentMusic = null;
+
+        _starMusic.Stop();
+        _starMusic.Play();
 
         State.StarTime = 20;
 
         _city.CreateStar();
+    }
+
+    private void GameEventHub_StarDone()
+    {
+        _starMusic.Stop();
+        PlayQuestMusic();
     }
 
     private void SwitchLevelState(StateMachine stateMachine)

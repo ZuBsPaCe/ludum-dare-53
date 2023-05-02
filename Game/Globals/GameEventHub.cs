@@ -21,7 +21,7 @@ public partial class GameEventHub : Node
     [Signal] public delegate void ShopBoughtWinEventHandler();
 
     [Signal] public delegate void StarPickedUpEventHandler();
-
+    [Signal] public delegate void StarDoneEventHandler();
 
     public static void EmitSwitchLevelState(LevelState levelState)
     {
@@ -76,5 +76,10 @@ public partial class GameEventHub : Node
     internal static void EmitStarPickedUp() 
     {
         Instance.EmitSignal(SignalName.StarPickedUp);
+    }
+
+    internal static void EmitStarDone()
+    {
+        Instance.EmitSignal(SignalName.StarDone);
     }
 }

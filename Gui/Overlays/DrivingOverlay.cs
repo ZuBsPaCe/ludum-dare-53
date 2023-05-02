@@ -120,8 +120,11 @@ public partial class DrivingOverlay : MenuBase
 
         if (secs == 0)
         {
-            _countDownBlinkTween.Kill();
-            _countDownLabel.Modulate = Colors.Red;
+            if (active)
+            {
+                _countDownBlinkTween.Kill();
+                _countDownLabel.Modulate = Colors.Red;
+            }
         }
         else if (secs <= 10 && _countDownBlinkTween == null)
         {

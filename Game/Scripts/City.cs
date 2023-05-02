@@ -57,6 +57,7 @@ public partial class City : Node3D
 	[Export] private Array<PackedScene> _sceneCars;
 	[Export] private Array<Material> _carsMaterials;
 
+	[Export] private PackedScene _sceneStar;
 
 	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
 
@@ -131,6 +132,8 @@ public partial class City : Node3D
 
 		GenerateTiles(_genRoot, _map);
 		GenerateCars(_genRoot, _map);
+
+		CreateStar(_genRoot, _map);
 
 		State.Map = _map;
 		State.TileSize = _tileSize;
@@ -667,7 +670,6 @@ public partial class City : Node3D
 
 				if (tileType == TileType.Street)
                 {
-
                     CreateCar(root, map, xTile, yTile);
                 }
             }
@@ -719,6 +721,31 @@ public partial class City : Node3D
             case Direction4.W:
                 car.Rotate(Vector3.Up, Mathf.Tau * 0.75f);
                 break;
+        }
+    }
+
+	public void CreateStar()
+	{
+		CreateStar(_genRoot, _map);
+	}
+
+	private void CreateStar(Node3D root, Map<TileType, Tile> map)
+	{
+		Vector3 playerGlobalPosition = PlayerPos;
+
+        for (int j = 0; j < 50; ++j)
+        {
+            if (map.TryGetRandomCoord(TileType.Street, out Vector2I coord) &&
+                (playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > 400)
+            {
+                Vector3 position = GetCenterPosInCoord(new Vector2I(coord.X, coord.Y)) + Vector3.Up * 2;
+
+                Star star = _sceneStar.Instantiate<Star>();
+                root.AddChild(star);
+				star.GlobalPosition = position;
+
+                break;
+            }
         }
     }
 

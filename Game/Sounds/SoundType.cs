@@ -10,5 +10,5 @@ public enum SoundType
     Lost,
 
     Money,
-    Crash
+    Crash,
 }

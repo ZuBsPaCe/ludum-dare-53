@@ -21,6 +21,7 @@ _data = [Vector2(0, 0.336364), 0.0, 0.0, 0, 0, Vector2(0.612591, 0.418182), 0.68
 point_count = 3
 
 [node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
 max_contacts_reported = 1
 contact_monitor = true

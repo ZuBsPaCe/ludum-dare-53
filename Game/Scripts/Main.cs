@@ -18,6 +18,7 @@ public partial class Main : Node
     private AudioStreamPlayer _moneySound;
     private AudioStreamPlayer _crashSound;
 
+
     private Level _game;
 
     public override void _Ready()

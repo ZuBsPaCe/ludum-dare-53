@@ -90,4 +90,6 @@ public class State
 
     public static Map<TileType, Tile> Map { get; set; }
     public static int TileSize { get; set; }
+
+    public static float StarTime { get; set; }
 }

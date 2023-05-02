@@ -44,6 +44,9 @@ public partial class Level : Node3D
         State.ShopWinBought = false;
         State.LevelTime.Restart();
         State.QuestsDone = 0;
+        State.CountdownActive = false;
+        State.CountdownSecs = 0;
+        State.StarTime = 0;
 
 
         _cityMap = GetNode<CityMap>("CityMap");
@@ -79,6 +82,8 @@ public partial class Level : Node3D
         GameEventHub.Instance.FuelChanged += EventHub_FuelChanged;
 
         GameEventHub.Instance.ShopBoughtWin += EventHub_ShopBoughtWin;
+
+		GameEventHub.Instance.StarPickedUp += GameEventHub_StarPickedUp;
 
 
         // Initialize LevelState StateMachine
@@ -345,6 +350,17 @@ public partial class Level : Node3D
     private void EventHub_ShopBoughtWin()
     {
         // Not used
+    }
+
+    private void GameEventHub_StarPickedUp()
+	{
+        _currentMusic?.Stop();
+        _currentMusic = _starMusic;
+        _currentMusic.Play();
+
+        State.StarTime = 10;
+
+        _city.CreateStar();
     }
 
     private void SwitchLevelState(StateMachine stateMachine)

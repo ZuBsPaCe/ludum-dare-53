@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://cg0dmlipc3emq"]
+[gd_scene load_steps=70 format=3 uid="uid://cg0dmlipc3emq"]
 
 [ext_resource type="Script" path="res://Game/Scripts/City.cs" id="1_8udbb"]
 [ext_resource type="PackedScene" path="res://Game/Street/StreetCrossing.tscn" id="1_58f1t"]
@@ -47,6 +47,7 @@
 [ext_resource type="Material" uid="uid://b2bo74bybo0nk" path="res://Game/Cars/CarMaterial04.tres" id="42_a78px"]
 [ext_resource type="Material" uid="uid://ccwyuxgmsub7k" path="res://Game/Cars/CarMaterial05.tres" id="43_op6nx"]
 [ext_resource type="Material" uid="uid://urfbv1xydq1v" path="res://Game/Cars/CarMaterial06.tres" id="44_suc7n"]
+[ext_resource type="PackedScene" uid="uid://c2u4l0lpowrsc" path="res://Game/Star/Star.tscn" id="45_at6mc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuxrv"]
 resource_name = "Floor"
@@ -316,6 +317,7 @@ _questMarkerMediumMaterial = ExtResource("36_xofpa")
 _questMarkerHardMaterial = ExtResource("37_tjl0d")
 _sceneCars = Array[PackedScene]([ExtResource("38_oi2oe")])
 _carsMaterials = Array[Material]([ExtResource("39_m8mqf"), ExtResource("40_5qlgy"), ExtResource("41_77otr"), ExtResource("42_a78px"), ExtResource("43_op6nx"), ExtResource("44_suc7n")])
+_sceneStar = ExtResource("45_at6mc")
 _levelData = {
 "MapHeight": 27,
 "MapWidth": 39,

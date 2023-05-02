@@ -7,8 +7,8 @@ public partial class PlayerTruck : VehicleBody3D
 	[Export] private float _maxBackwardForce = 75;
 
 	[Export] private float _slowSteeringDeg = 45;
-	[Export] private float _fastSteeringDeg = 25;
-	[Export] private float _fastSteeringVelocity = 15;
+	[Export] private float _fastSteeringDeg = 15;
+	[Export] private float _fastSteeringVelocity = 30;
 
 	[Export] private float _steerSmoothing = 5f;
 
@@ -30,7 +30,7 @@ public partial class PlayerTruck : VehicleBody3D
 
     private void AnotherBodyEntered(Node body)
     {
-		Sounds.PlaySound(SoundType.Crash);
+        Sounds.PlaySound(SoundType.Crash);
     }
 
 
@@ -57,6 +57,12 @@ public partial class PlayerTruck : VehicleBody3D
 					_fuelTime += (float)delta;
 				}
 			}
+		}
+
+		if (State.StarTime > 0)
+		{
+			State.StarTime = Mathf.Max(State.StarTime - (float)delta, 0);
+			engineForce *= 3;
 		}
 
 		float velocity = LinearVelocity.Length();

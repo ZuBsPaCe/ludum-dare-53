@@ -34,13 +34,13 @@ public class Quest
     private string GetLabel(float distance, out int secs, out int money, out QuestLevel level)
     {
         List<string> shortLabels = new();
-        List<int> shortMoney = new() { 10, 20, 30 };
+        List<int> shortMoney = new() { 30, 40, 50 };
 
         List<string> mediumLabels = new();
-        List<int> mediumMoney = new() { 40, 60, 80 };
+        List<int> mediumMoney = new() { 60, 80, 100 };
 
         List<string> largeLabels = new();
-        List<int> largeMoney = new() { 100, 150, 200 };
+        List<int> largeMoney = new() { 150, 200, 250 };
 
         shortLabels.Add("Please deliver this letter to Grandma. She lives nearby.");
         shortLabels.Add("My dog needs to poo-poo. Could you go for a short walk?");
@@ -58,7 +58,7 @@ public class Quest
 
         if (distance < 12)
         {
-            secs = 20 + (int)(20 * support);
+            secs = 30 + (int)(20 * support);
             money = shortMoney.GetRandomItem();
             level = QuestLevel.Easy;
             return shortLabels.GetRandomItem();
@@ -66,13 +66,13 @@ public class Quest
         
         if (distance < 25)
         {
-            secs = 30 + (int)(20 * support);
+            secs = 40 + (int)(20 * support);
             level = QuestLevel.Medium;
             money = mediumMoney.GetRandomItem();
             return mediumLabels.GetRandomItem();
         }
 
-        secs = 40 + (int)(20 * support);
+        secs = 50 + (int)(20 * support);
         level = QuestLevel.Hard;
         money = largeMoney.GetRandomItem();
         return largeLabels.GetRandomItem();

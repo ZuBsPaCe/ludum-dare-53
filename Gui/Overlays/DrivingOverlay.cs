@@ -13,10 +13,13 @@ public partial class DrivingOverlay : MenuBase
     private Quest _quest;
 
     private Label _fuelLabel;
+    private Tween _fuelBlinkTween;
+
     private Label _moneyLabel;
 
     private TextureRect _countDownIcon;
     private Label _countDownLabel;
+    private Tween _countDownBlinkTween;
 
     private bool _closed;
 
@@ -89,6 +92,23 @@ public partial class DrivingOverlay : MenuBase
     private void EventHub_FuelChanged(int amount)
     {
         _fuelLabel.Text = amount.ToString();
+
+        if (amount <= 10 && _fuelBlinkTween == null)
+        {
+            _fuelBlinkTween = _fuelLabel.CreateTween();
+            _fuelBlinkTween.SetLoops();
+            _fuelBlinkTween.TweenProperty(_fuelLabel, "modulate", Colors.Red, 0.1f);
+            _fuelBlinkTween.TweenInterval(0.4f);
+            _fuelBlinkTween.TweenProperty(_fuelLabel, "modulate", Colors.White, 0.1f);
+            _fuelBlinkTween.TweenInterval(0.4f);
+        }
+        else if (amount > 10 && _fuelBlinkTween != null)
+        {
+            _fuelBlinkTween.Kill();
+            _fuelBlinkTween = null;
+
+            _fuelLabel.Modulate = Colors.White;
+        }
     }
 
     private void EventHub_CountdownChanged(bool active, float secs)
@@ -96,7 +116,29 @@ public partial class DrivingOverlay : MenuBase
         _countDownIcon.Visible = active;
         _countDownLabel.Visible = active;
 
-        _countDownLabel.Text = Mathf.CeilToInt(secs).ToString() + "s";
+        _countDownLabel.Text = Mathf.CeilToInt(secs).ToString();
+
+        if (secs == 0)
+        {
+            _countDownBlinkTween.Kill();
+            _countDownLabel.Modulate = Colors.Red;
+        }
+        else if (secs <= 10 && _countDownBlinkTween == null)
+        {
+            _countDownBlinkTween = _countDownLabel.CreateTween();
+            _countDownBlinkTween.SetLoops();
+            _countDownBlinkTween.TweenProperty(_countDownLabel, "modulate", Colors.Red, 0.1f);
+            _countDownBlinkTween.TweenInterval(0.4f);
+            _countDownBlinkTween.TweenProperty(_countDownLabel, "modulate", Colors.White, 0.1f);
+            _countDownBlinkTween.TweenInterval(0.4f);
+        }
+        else if (secs > 10 && _countDownBlinkTween != null)
+        {
+            _countDownBlinkTween.Kill();
+            _countDownBlinkTween = null;
+
+            _countDownLabel.Modulate = Colors.White;
+        }
     }
 
     protected override Control InstantiateMenuButtonControl(int state)

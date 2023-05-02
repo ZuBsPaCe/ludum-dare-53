@@ -110,6 +110,10 @@ public partial class City : Node3D
 		_playerTruckResetPos = _playerTruck.GlobalPosition;
 		_playerTruckResetRot = _playerTruck.GlobalRotation;
 
+        var playerRot = _playerTruckResetRot;
+        playerRot.Y += GD.Randf() * Mathf.Tau;
+		_playerTruck.GlobalRotation = playerRot;
+
         _genRoot = GetNode<Node3D>(_genPath);
         foreach (var child in _genRoot.GetChildren())
             child.QueueFree();
@@ -178,6 +182,19 @@ public partial class City : Node3D
 				}
 			}
 		}
+
+
+        {
+            int xTile = Mathf.RoundToInt(PlayerPos.X / State.TileSize);
+            int yTile = Mathf.RoundToInt(PlayerPos.Z / State.TileSize);
+
+            if (State.Map.IsType(xTile, yTile, TileType.Street))
+            {
+				var newResetPos = GetCenterPosInCoord(new Vector2I(xTile, yTile));
+				newResetPos.Y = _playerTruckResetPos.Y;
+				_playerTruckResetPos = newResetPos;
+            }
+        }
     }
 
 	public Vector3 PlayerPos
@@ -257,9 +274,12 @@ public partial class City : Node3D
 
 	public void ResetPlayerTruck()
 	{
-		_playerTruck.GlobalPosition = _playerTruckResetPos;
-		_playerTruck.GlobalRotation = _playerTruckResetRot;
-		_playerTruck.LinearVelocity = Vector3.Zero;
+		var resetRot = _playerTruckResetRot;
+		resetRot.Y += GD.Randf() * Mathf.Tau;
+
+        _playerTruck.GlobalPosition = _playerTruckResetPos;
+		_playerTruck.GlobalRotation = resetRot;
+        _playerTruck.LinearVelocity = Vector3.Zero;
 		_playerTruck.AngularVelocity = Vector3.Zero;
 	}
 

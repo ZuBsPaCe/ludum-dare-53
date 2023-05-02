@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://dukrcqa657jnc"]
 
-[ext_resource type="FontFile" uid="uid://cidhvsq56ctj0" path="res://Gui/Font/Lobster 1.4.otf" id="2_qxk2d"]
+[ext_resource type="FontFile" uid="uid://bm7ww6253tvnu" path="res://Gui/Font/ZeroCool.ttf" id="1_8xmxb"]
 
 [resource]
-default_font = ExtResource("2_qxk2d")
+default_font = ExtResource("1_8xmxb")
 default_font_size = 64
 Button/colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 Button/colors/font_hover_color = Color(0.74902, 0.74902, 0.74902, 1)

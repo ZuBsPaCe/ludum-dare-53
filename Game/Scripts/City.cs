@@ -185,9 +185,12 @@ public partial class City : Node3D
 		get { return _playerTruck.LinearVelocity.Length(); }
 	}
 	
-	public float TruckFlipRotationDegrees
+	public bool TruckIsFlipped
 	{
-		get { return _playerTruck.RotationDegrees.Z; }
+		get
+		{
+			return Mathf.Abs(_playerTruck.RotationDegrees.Z) > 10.0 || Mathf.Abs(_playerTruck.RotationDegrees.X) > 10.0;
+		}
 	}
 
 	public int TileSize

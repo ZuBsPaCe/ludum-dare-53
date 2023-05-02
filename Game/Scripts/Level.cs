@@ -108,7 +108,7 @@ public partial class Level : Node3D
         }
         else
         {
-            if (Mathf.Abs(_city.TruckFlipRotationDegrees) > 10 && _city.PlayerSpeed < 5)
+            if (_city.TruckIsFlipped && _city.PlayerSpeed < 5)
             {
                 _flipTime += (float) delta;
 

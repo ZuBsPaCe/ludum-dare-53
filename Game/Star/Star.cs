@@ -32,9 +32,13 @@ public partial class Star : Node3D
         tween.TweenProperty(_mesh, "scale", _mesh.Scale + new Vector3(7, 0, 7), 0.5f);
 
         var material = (StandardMaterial3D)_mesh.GetSurfaceOverrideMaterial(0);
+        material = (StandardMaterial3D) material.Duplicate();
+
+        _mesh.SetSurfaceOverrideMaterial(0, material);
+
         var albedo = material.AlbedoColor;
         albedo.A = 0;
-        tween.Parallel().TweenProperty(_mesh.GetSurfaceOverrideMaterial(0), "albedo_color", albedo, 0.5f);
+        tween.Parallel().TweenProperty(material, "albedo_color", albedo, 0.5f);
 
         _tween.TweenCallback(Callable.From(() => { QueueFree(); }));
     }

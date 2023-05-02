@@ -22,7 +22,7 @@ uniform vec3 uv2_offset;
 uniform sampler2D texture_noise : source_color,filter_linear_mipmap,repeat_enable;
 
 float height(vec2 pos) {
-	return texture(texture_noise, pos + vec2(TIME * 0.02)).r * 6.0;
+	return texture(texture_noise, pos + vec2(TIME * 0.02)).r * 5.0;
 }
 
 void vertex() {

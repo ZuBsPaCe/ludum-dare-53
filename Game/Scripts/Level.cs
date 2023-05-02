@@ -358,7 +358,7 @@ public partial class Level : Node3D
         _currentMusic = _starMusic;
         _currentMusic.Play();
 
-        State.StarTime = 10;
+        State.StarTime = 20;
 
         _city.CreateStar();
     }

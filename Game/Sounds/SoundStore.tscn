@@ -11,7 +11,9 @@ _mainMenuSelect = NodePath("AudioStreamPlayer2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6d7hf")
-volume_db = -6.741
+volume_db = -2.599
+bus = &"Sound"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_doi82")
+bus = &"Sound"

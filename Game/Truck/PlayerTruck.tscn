@@ -8,7 +8,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_km1iv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jqvt7"]
-size = Vector3(3.5, 2, 6)
+size = Vector3(3.5, 2.98931, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0e6fp"]
 albedo_color = Color(0, 0, 0, 1)
@@ -76,7 +76,7 @@ damping_relaxation = 0.95
 [node name="TruckWheel" parent="WheelBackRight" instance=ExtResource("2_re51u")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.2501, 3.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.54537, 3.6)
 shape = SubResource("BoxShape3D_jqvt7")
 
 [node name="Truck" parent="." instance=ExtResource("1_botde")]

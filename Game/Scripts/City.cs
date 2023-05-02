@@ -158,8 +158,8 @@ public partial class City : Node3D
         for (int i = _cars.Count - 1; i >= 0; i--)
 		{
             Car car = _cars[i];
-            if (car.NotMovedTime > 120 && (playerGlobalPosition - car.GlobalPosition).Length() > 400)
-			{
+            if (car.NotMovedTime > 120 && (playerGlobalPosition - car.GlobalPosition).Length() > 400 || car.GlobalPosition.Y < -20)
+            {
 				_cars.RemoveAt(i);
 				car.QueueFree();
 				removedCount += 1;

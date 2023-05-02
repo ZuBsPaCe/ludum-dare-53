@@ -166,6 +166,7 @@ public partial class City : Node3D
 					(playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > 400)
 				{
 					CreateCar(_genRoot, State.Map, coord.X, coord.Y);
+					break;
 				}
 			}
 		}

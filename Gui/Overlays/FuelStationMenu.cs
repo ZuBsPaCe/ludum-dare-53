@@ -5,7 +5,6 @@ public partial class FuelStationMenu : MenuBase
 {
     [Export] private PackedScene _sceneSettingsControl;
     [Export] private PackedScene _fuelControl;
-    [Export] private PackedScene _repairControl;
     [Export] private PackedScene _shopControl;
 
     private TextureRect _mapTextureRect;
@@ -28,14 +27,12 @@ public partial class FuelStationMenu : MenuBase
 
         Button continueButton = GetNode<Button>("%ContinueButton");
         Button fuelButton = GetNode<Button>("%FuelButton");
-        Button repairButton = GetNode<Button>("%RepairButton");
         Button shopButton = GetNode<Button>("%ShopButton");
         Button settingsButton = GetNode<Button>("%SettingsButton");
         Button mainMenuButton = GetNode<Button>("%MainMenuButton");
 
         InitButton(continueButton, FuelStationMenuState.Continue);
         InitButton(fuelButton, FuelStationMenuState.Fuel);
-        InitButton(repairButton, FuelStationMenuState.Repair);
         InitButton(shopButton, FuelStationMenuState.Shop);
         InitButton(settingsButton, FuelStationMenuState.Settings);
         InitButton(mainMenuButton, FuelStationMenuState.MainMenu);
@@ -49,9 +46,6 @@ public partial class FuelStationMenu : MenuBase
         {
             case FuelStationMenuState.Fuel:
                 return _fuelControl.Instantiate<FuelControl>();
-
-            case FuelStationMenuState.Repair:
-                return _repairControl.Instantiate<RepairControl>();
 
             case FuelStationMenuState.Shop:
                 return _shopControl.Instantiate<ShopControl>();

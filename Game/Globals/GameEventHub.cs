@@ -23,6 +23,8 @@ public partial class GameEventHub : Node
     [Signal] public delegate void StarPickedUpEventHandler();
     [Signal] public delegate void StarDoneEventHandler();
 
+    [Signal] public delegate void GripBoughtEventHandler();
+
     public static void EmitSwitchLevelState(LevelState levelState)
     {
         Instance.EmitSignal(SignalName.SwitchLevelState, (int)levelState);
@@ -81,5 +83,10 @@ public partial class GameEventHub : Node
     internal static void EmitStarDone()
     {
         Instance.EmitSignal(SignalName.StarDone);
+    }
+
+    internal static void EmitGripBought()
+    {
+        Instance.EmitSignal(SignalName.GripBought);
     }
 }

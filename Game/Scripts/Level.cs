@@ -48,6 +48,10 @@ public partial class Level : Node3D
         State.CountdownActive = false;
         State.CountdownSecs = 0;
         State.StarTime = 0;
+        State.GripUpgrade1 = false;
+        State.GripUpgrade2 = false;
+        State.SpeedUpgrade1 = false;
+        State.SpeedUpgrade2 = false;
 
 
         _cityMap = GetNode<CityMap>("CityMap");

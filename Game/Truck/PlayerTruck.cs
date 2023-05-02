@@ -7,6 +7,14 @@ public partial class PlayerTruck : VehicleBody3D
 {
 	[Export] private float _maxForwardForce = 100;
 	[Export] private float _maxBackwardForce = 75;
+	[Export] private float _friction = 4;
+
+	[Export] private float _starForce = 300;
+	[Export] private float _starBackwardForce = 225;
+	[Export] private float _starFriction = 16;
+
+	[Export] private float _speedUpgradeForce = 25;
+	[Export] private float _frictionUpgrade = 4;
 
 	[Export] private float _slowSteeringDeg = 45;
 	[Export] private float _fastSteeringDeg = 15;
@@ -25,6 +33,8 @@ public partial class PlayerTruck : VehicleBody3D
 
     private List<VehicleWheel3D> _wheels;
 
+	private bool _updateFriction;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -38,6 +48,8 @@ public partial class PlayerTruck : VehicleBody3D
         _starArea.BodyEntered += StarArea_BodyEntered;
 
 		_wheels = GetChildren().Where(child => child is VehicleWheel3D).Cast<VehicleWheel3D>().ToList();
+
+		GameEventHub.Instance.GripBought += GameEventHub_GripBought;
     }
 
     private void VehicleBody_BodyEntered(Node body)
@@ -84,6 +96,11 @@ public partial class PlayerTruck : VehicleBody3D
 		return false;
     }
 
+    private void GameEventHub_GripBought()
+    {
+		_updateFriction = true;
+    }
+
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
 	{
@@ -95,14 +112,48 @@ public partial class PlayerTruck : VehicleBody3D
 			{
 				if (Input.IsActionPressed("Forward"))
 				{
-					engineForce += _maxForwardForce;
+					if (!_starred)
+					{
+						engineForce += _maxForwardForce;
+
+						if (State.SpeedUpgrade1)
+						{
+							engineForce += _speedUpgradeForce;
+						}
+
+						if (State.SpeedUpgrade2)
+						{
+							engineForce += _speedUpgradeForce;
+						}
+					}
+					else
+					{
+						engineForce += _starForce;
+					}
 
 					_fuelTime += (float)delta;
 				}
 
 				if (Input.IsActionPressed("Backward"))
 				{
-					engineForce -= _maxBackwardForce;
+					if (!_starred)
+					{
+						engineForce -= _maxBackwardForce;
+
+						if (State.SpeedUpgrade1)
+						{
+							engineForce -= _speedUpgradeForce;
+						}
+
+						if (State.SpeedUpgrade2)
+						{
+							engineForce -= _speedUpgradeForce;
+						}
+					}
+					else
+					{
+						engineForce -= _starBackwardForce;
+					}
 
 					_fuelTime += (float)delta;
 				}
@@ -146,11 +197,10 @@ public partial class PlayerTruck : VehicleBody3D
 				AxisLockAngularX = true;
 				AxisLockAngularZ = true;
 
-				_wheels.ForEach(wheel => wheel.WheelFrictionSlip = 16);
+				_wheels.ForEach(wheel => wheel.WheelFrictionSlip = _starFriction);
 			}
 
 			State.StarTime = Mathf.Max(State.StarTime - (float)delta, 0);
-            engineForce *= 3;
 		}
 		else
 		{
@@ -161,12 +211,32 @@ public partial class PlayerTruck : VehicleBody3D
 				SetCollisionLayerValue(2, true);
 				SetCollisionMaskValue(3, true);
 
-                _starArea.SetCollisionMaskValue(3, false);
+				_starArea.SetCollisionMaskValue(3, false);
 
-				_wheels.ForEach(wheel => wheel.WheelFrictionSlip = 4);
+                _updateFriction = true;
 
-				AxisLockAngularX = false;
-				AxisLockAngularZ = false;
+                AxisLockAngularX = false;
+                AxisLockAngularZ = false;
+            }
+
+			if (_updateFriction) 
+			{
+				_updateFriction = false;
+
+				float friction = _friction;
+
+                if (State.GripUpgrade1)
+                {
+                    friction += _frictionUpgrade;
+                }
+
+                if (State.GripUpgrade2)
+                {
+                    friction += _frictionUpgrade;
+                }
+
+                _wheels.ForEach(wheel => wheel.WheelFrictionSlip = friction);
+
 			}
 		}
 

@@ -92,4 +92,10 @@ public class State
     public static int TileSize { get; set; }
 
     public static float StarTime { get; set; }
+
+    public static bool GripUpgrade1 { get; set; }
+    public static bool GripUpgrade2 { get; set; }
+
+    public static bool SpeedUpgrade1 { get; set; }
+    public static bool SpeedUpgrade2 { get; set; }
 }

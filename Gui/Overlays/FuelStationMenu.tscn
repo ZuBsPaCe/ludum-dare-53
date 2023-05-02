@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjmrb8yrxse55"]
+[gd_scene load_steps=6 format=3 uid="uid://cjmrb8yrxse55"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/FuelStationMenu.cs" id="1_lc2qm"]
 [ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="2_cadly"]
 [ext_resource type="PackedScene" uid="uid://1r5bnbqv65v" path="res://Gui/Menus/FuelControl.tscn" id="3_121jl"]
-[ext_resource type="PackedScene" uid="uid://3w2tu0bkchr8" path="res://Gui/Menus/RepairControl.tscn" id="4_x2kal"]
 [ext_resource type="PackedScene" uid="uid://ch5mlxf00y1w6" path="res://Gui/Menus/ShopControl.tscn" id="5_8csbj"]
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="5_m1iba"]
 
@@ -11,7 +10,6 @@
 script = ExtResource("1_lc2qm")
 _sceneSettingsControl = ExtResource("2_cadly")
 _fuelControl = ExtResource("3_121jl")
-_repairControl = ExtResource("4_x2kal")
 _shopControl = ExtResource("5_8csbj")
 
 [node name="ButtonBar" type="MarginContainer" parent="."]
@@ -42,12 +40,6 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Fuel"
 
-[node name="RepairButton" type="Button" parent="ButtonBar/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
-text = "Repair"
-
 [node name="ShopButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -72,5 +64,4 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../SettingsButton")
-focus_neighbor_bottom = NodePath("../RepairButton")
 text = "Exit to MainMenu"

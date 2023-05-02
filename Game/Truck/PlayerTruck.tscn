@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ptsmjv3mjisf"]
+[gd_scene load_steps=11 format=3 uid="uid://ptsmjv3mjisf"]
 
 [ext_resource type="PackedScene" uid="uid://56jlt84osiqe" path="res://Game/Truck/Truck.tscn" id="1_botde"]
 [ext_resource type="Script" path="res://Game/Truck/PlayerTruck.cs" id="1_ojfq6"]
@@ -20,10 +20,14 @@ material = SubResource("StandardMaterial3D_0e6fp")
 _data = [Vector2(0, 0.336364), 0.0, 0.0, 0, 0, Vector2(0.612591, 0.418182), 0.682644, 0.682644, 0, 0, Vector2(0.997579, 0), -1.39057, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ctmr"]
+size = Vector3(4, 3.5, 8)
+
 [node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
-collision_mask = 3
+collision_layer = 10
+collision_mask = 15
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
-max_contacts_reported = 1
+max_contacts_reported = 10
 contact_monitor = true
 can_sleep = false
 script = ExtResource("1_ojfq6")
@@ -103,3 +107,11 @@ initial_velocity_min = 1.0
 initial_velocity_max = 4.0
 angle_max = 720.0
 scale_amount_curve = SubResource("Curve_hw8mb")
+
+[node name="StarArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.55344, 3.59741)
+shape = SubResource("BoxShape3D_8ctmr")

@@ -21,8 +21,9 @@ public partial class PlayerTruck : VehicleBody3D
 	private CpuParticles3D _exhaustParticles;
 
 	private bool _starred = false;
+	private Area3D _starArea;
 
-	private List<VehicleWheel3D> _wheels;
+    private List<VehicleWheel3D> _wheels;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -31,31 +32,57 @@ public partial class PlayerTruck : VehicleBody3D
 		_motorSound = GetNode<AudioStreamPlayer3D>("MotorSound");
 		_exhaustParticles = GetNode<CpuParticles3D>("%ExhaustParticles");
 
-		BodyEntered += (body) => AnotherBodyEntered(body);
+		BodyEntered += (body) => VehicleBody_BodyEntered(body);
+
+        _starArea = GetNode<Area3D>("StarArea");
+        _starArea.BodyEntered += StarArea_BodyEntered;
 
 		_wheels = GetChildren().Where(child => child is VehicleWheel3D).Cast<VehicleWheel3D>().ToList();
     }
 
-    private void AnotherBodyEntered(Node body)
+    private void VehicleBody_BodyEntered(Node body)
     {
-        Sounds.PlaySound(SoundType.Crash);
-
-		if (_starred)
+		if (body.IsInGroup("Car"))
 		{
-			if (body.IsInGroup("Car"))
-			{
-				Car car = (Car)body;
+            Sounds.PlaySound(SoundType.Crash);
 
-				var dir = car.GlobalPosition - GlobalPosition;
-				dir.Y = 0;
-				dir = dir.Normalized();
-				dir.Y += 0.4f + GD.Randf() * 0.2f;
-
-				car.ApplyImpulse(dir.Normalized() * (1000f + GD.Randf() * 200f));
-			}
+			ApplyStarToCar(body);
+		}
+		else
+		{
+			Sounds.PlaySound(SoundType.ObjectHit);
 		}
     }
 
+	private void StarArea_BodyEntered(Node body)
+	{
+		if (body.IsInGroup("Car"))
+		{
+			Sounds.PlaySound(SoundType.Crash);
+			ApplyStarToCar(body);
+		}
+    }
+
+	private bool ApplyStarToCar(Node body)
+	{
+        if (_starred)
+        {
+            if (body.IsInGroup("Car"))
+            {
+                Car car = (Car)body;
+
+                var dir = car.GlobalPosition - GlobalPosition;
+                dir.Y = 0;
+                dir = dir.Normalized();
+                dir.Y += 0.4f + GD.Randf() * 0.2f;
+
+                car.ApplyImpulse(dir.Normalized() * (1000f + GD.Randf() * 200f));
+				return true;
+            }
+        }
+
+		return false;
+    }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
@@ -88,11 +115,18 @@ public partial class PlayerTruck : VehicleBody3D
 			{
 				_starred = true;
 
+				// Disabling collision with cars (we're on layer 2, cars on layer 3). We detect them with an area instead.
+				// This way, we don't lose momentum, when we run into them.
 
-				// Point up vector straight up. Align forward and side vector.
-				// And then axis lock them.
+				SetCollisionLayerValue(2, false);
+				SetCollisionMaskValue(3, false);
 
-				var transform = Transform;
+                _starArea.SetCollisionMaskValue(3, true);
+
+                // Point up vector straight up. Align forward and side vector.
+                // And then axis lock them.
+
+                var transform = Transform;
 				var basis = transform.Basis;
 
 				var up = Vector3.Up;
@@ -123,6 +157,11 @@ public partial class PlayerTruck : VehicleBody3D
 			if (_starred)
 			{
 				_starred = false;
+
+				SetCollisionLayerValue(2, true);
+				SetCollisionMaskValue(3, true);
+
+                _starArea.SetCollisionMaskValue(3, false);
 
 				_wheels.ForEach(wheel => wheel.WheelFrictionSlip = 4);
 

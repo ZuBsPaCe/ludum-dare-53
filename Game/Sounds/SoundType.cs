@@ -11,4 +11,5 @@ public enum SoundType
 
     Money,
     Crash,
+    ObjectHit,
 }

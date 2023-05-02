@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dtbtfb5ghyf0v" path="res://Music/MainMenuMusic.mp3" id="7_4w5my"]
 [ext_resource type="AudioStream" uid="uid://b2sjc3l2pjcl8" path="res://Sounds/Money.wav" id="10_0ht82"]
 [ext_resource type="AudioStream" uid="uid://cyk54a3j5sy1r" path="res://Sounds/Crash.wav" id="11_wtpk2"]
-[ext_resource type="AudioStream" uid="uid://cyy32b2r7dhur" path="res://Music/Star.mp3" id="12_t0mhc"]
+[ext_resource type="AudioStream" uid="uid://dhry38irplhyv" path="res://Sounds/ObjectHit.wav" id="12_ois31"]
 [ext_resource type="AudioStream" uid="uid://cj4cuwbm1tyje" path="res://Music/Won.mp3" id="12_uwc8y"]
 [ext_resource type="AudioStream" uid="uid://ckpkkq1xxohe7" path="res://Music/Lost.mp3" id="13_nyud5"]
 
@@ -49,5 +49,8 @@ stream = ExtResource("11_wtpk2")
 volume_db = -9.664
 bus = &"Sound"
 
-[node name="Star" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_t0mhc")
+[node name="ObjectHit" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_ois31")
+volume_db = -2.761
+bus = &"Sound"

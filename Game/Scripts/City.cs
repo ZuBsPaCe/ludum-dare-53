@@ -133,7 +133,8 @@ public partial class City : Node3D
 		GenerateTiles(_genRoot, _map);
 		GenerateCars(_genRoot, _map);
 
-		CreateStar(_genRoot, _map);
+		for (int i = 0; i < 2; ++i)
+            CreateStar(_genRoot, _map);
 
 		State.Map = _map;
 		State.TileSize = _tileSize;

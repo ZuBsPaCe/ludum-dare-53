@@ -17,6 +17,7 @@ public partial class Main : Node
 
     private AudioStreamPlayer _moneySound;
     private AudioStreamPlayer _crashSound;
+    private AudioStreamPlayer _objectHit;
 
 
     private Level _game;
@@ -29,6 +30,7 @@ public partial class Main : Node
         _lostMusic = GetNode<AudioStreamPlayer>("%Lost");
         _moneySound = GetNode<AudioStreamPlayer>("%Money");
         _crashSound = GetNode<AudioStreamPlayer>("%Crash");
+        _objectHit = GetNode<AudioStreamPlayer>("%ObjectHit");
 
         // Initialize Sound Singleton
         Sounds.Instance = new Sounds();
@@ -38,6 +40,7 @@ public partial class Main : Node
         Sounds.RegisterSound(SoundType.Lost, _lostMusic);
         Sounds.RegisterSound(SoundType.Money, _moneySound);
         Sounds.RegisterSound(SoundType.Crash, _crashSound);
+        Sounds.RegisterSound(SoundType.ObjectHit, _objectHit);
 
 
         // Initialize EventHub Singleton

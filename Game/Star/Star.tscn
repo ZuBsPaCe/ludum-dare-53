@@ -19,6 +19,7 @@ surface_material_override/0 = ExtResource("2_y86f3")
 [node name="Area3D" type="Area3D" parent="." index="1"]
 unique_name_in_owner = true
 collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_506k8")

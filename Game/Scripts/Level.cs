@@ -168,7 +168,7 @@ public partial class Level : Node3D
                 _ranOutOfFuelTimer = 0;
             }
 
-            if (!_ranOutOfFuel && _ranOutOfFuelTimer > 3)
+            if (!_ranOutOfFuel && _ranOutOfFuelTimer > 1.5f)
             {
                 _ranOutOfFuel = true;
                 _notification.ShowNotification(NotificationType.Lost, "Ran out of fuel... Press Esc and try again...", true);

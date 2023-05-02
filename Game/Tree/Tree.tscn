@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7lkj1gh3f5wm"]
+
+[ext_resource type="PackedScene" uid="uid://c4yfs85m8j2ih" path="res://Game/Tree/Tree.blend" id="1_eponu"]
+[ext_resource type="Material" uid="uid://cgfram7hv6vmq" path="res://Game/Tree/TreeTrunkMaterial.tres" id="2_15fmi"]
+[ext_resource type="Material" uid="uid://domebogvbjf2c" path="res://Game/Tree/TreeGreenMaterial.tres" id="3_r2u56"]
+
+[node name="Tree" instance=ExtResource("1_eponu")]
+
+[node name="TreeTrunk" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_15fmi")
+
+[node name="TreeGreen" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_r2u56")

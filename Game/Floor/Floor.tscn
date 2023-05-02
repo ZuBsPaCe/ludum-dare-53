@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c58xusxin1dh5"]
+
+[ext_resource type="PackedScene" uid="uid://bsfttsy0qrusb" path="res://Game/Floor/Floor.blend" id="1_2ipqw"]
+[ext_resource type="Material" uid="uid://04xlj7egeyam" path="res://Game/Materials/FloorMaterial.tres" id="2_43ycq"]
+
+[node name="Floor" instance=ExtResource("1_2ipqw")]
+
+[node name="Base" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_43ycq")

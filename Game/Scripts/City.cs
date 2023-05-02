@@ -32,6 +32,8 @@ public partial class City : Node3D
 	[Export] private PackedScene _sceneStreetDeadEnd;
 	[Export] private PackedScene _sceneStreetCorner;
 
+	[Export] private PackedScene _sceneFloor;
+
     [Export] private PackedScene _sceneBoundaryStraight;
     [Export] private PackedScene _sceneBoundaryCorner;
 
@@ -58,6 +60,8 @@ public partial class City : Node3D
 	[Export] private Array<Material> _carsMaterials;
 
 	[Export] private PackedScene _sceneStar;
+
+	[Export] private PackedScene _sceneTree;
 
 	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
 
@@ -433,6 +437,7 @@ public partial class City : Node3D
 		List<PackedScene> orderedBuildings = _sceneBuildings.OrderBy(building => (int) building._Get("Height")).ToList();
 
 		Vector2I? parkPos = null;
+		List<Vector2I> parkCoords = new();
 
 		for (int yTile = 0; yTile < map.Height; ++yTile)
 		{
@@ -453,6 +458,7 @@ public partial class City : Node3D
 						{
 							parkPos = new Vector2I(x, y);
 						}
+                        parkCoords.Add(new Vector2I(xTile, yTile));
 						continue;
 
                     case TileType.Building:
@@ -463,9 +469,23 @@ public partial class City : Node3D
                         int minIndex = Mathf.Max((int)(factor * orderedBuildings.Count - 3), 0);
                         int maxIndex = minIndex + 2;
 
-                        tile = orderedBuildings[GD.RandRange(minIndex, maxIndex)].Instantiate<Node3D>();
+						if (minIndex <= 2 && GD.Randf() < 0.2)
+						{
+							tile = _sceneFloor.Instantiate<Node3D>();
 
-                        CustomizeMaterials(tile);
+							int trees = GD.RandRange(0, 4);
+                            for (int i = 0; i < trees; ++i)
+                            {
+                                Node3D tree = _sceneTree.Instantiate<Node3D>();
+                                root.AddChild(tree);
+                                tree.Position = GetRandomPosInCoord(new Vector2I(xTile, yTile));
+                            }
+                        }
+						else
+						{
+                            tile = orderedBuildings[GD.RandRange(minIndex, maxIndex)].Instantiate<Node3D>();
+                            CustomizeMaterials(tile);
+						}
                         break;
 
                     case TileType.Street:
@@ -632,6 +652,13 @@ public partial class City : Node3D
 			Node3D park = _scenePark.Instantiate<Node3D>();
 			root.AddChild(park);
 			park.Position = new Vector3(parkPos.Value.X, 0, parkPos.Value.Y) - new Vector3(10, 0, 10);
+
+			for (int i = 0; i < 50; ++i)
+			{
+				Node3D tree = _sceneTree.Instantiate<Node3D>();
+				root.AddChild(tree);
+				tree.Position = GetRandomPosInCoord(parkCoords.GetRandomItem());
+			}
 		}
 
 

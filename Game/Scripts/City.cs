@@ -55,6 +55,7 @@ public partial class City : Node3D
 	[Export] private Material _questMarkerHardMaterial;
 
 	[Export] private Array<PackedScene> _cars;
+	[Export] private Array<Material> _carsMaterials;
 
 
 	[Export] private Godot.Collections.Dictionary<string, Variant> _levelData;
@@ -640,6 +641,8 @@ public partial class City : Node3D
 				{
 					Car car = _cars.PickRandom().Instantiate<Car>();
 					root.AddChild(car);
+
+					car.GetNode<MeshInstance3D>("Car").MaterialOverride = _carsMaterials.PickRandom();
 
 					car.GlobalPosition = GetCenterPosInCoord(new Vector2I(xTile, yTile)) + Vector3.Up * 5;
 

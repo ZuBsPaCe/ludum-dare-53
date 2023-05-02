@@ -26,6 +26,8 @@ public partial class Main : Node
 
         _wonMusic = GetNode<AudioStreamPlayer>("%Won");
         _lostMusic = GetNode<AudioStreamPlayer>("%Lost");
+        _moneySound = GetNode<AudioStreamPlayer>("%Money");
+        _crashSound = GetNode<AudioStreamPlayer>("%Crash");
 
         // Initialize Sound Singleton
         Sounds.Instance = new Sounds();

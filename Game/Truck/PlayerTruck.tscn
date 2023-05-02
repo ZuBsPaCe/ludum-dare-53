@@ -22,6 +22,8 @@ point_count = 3
 
 [node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
+max_contacts_reported = 1
+contact_monitor = true
 can_sleep = false
 script = ExtResource("1_ojfq6")
 

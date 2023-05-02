@@ -25,7 +25,14 @@ public partial class PlayerTruck : VehicleBody3D
 		_motorSound = GetNode<AudioStreamPlayer3D>("MotorSound");
 		_exhaustParticles = GetNode<CpuParticles3D>("%ExhaustParticles");
 
+		BodyEntered += (body) => AnotherBodyEntered(body);
     }
+
+    private void AnotherBodyEntered(Node body)
+    {
+		Sounds.PlaySound(SoundType.Crash);
+    }
+
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)

@@ -80,7 +80,9 @@ size = Vector3(1.97552, 1, 2.16132)
 
 [sub_resource type="SphereMesh" id="SphereMesh_lbnie"]
 
-[node name="Car01" type="VehicleBody3D"]
+[node name="Car01" type="VehicleBody3D" groups=["Car"]]
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("2_hbfgn")
 
 [node name="Car" type="MeshInstance3D" parent="."]

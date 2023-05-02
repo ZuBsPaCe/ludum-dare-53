@@ -15,12 +15,23 @@ public partial class Car : VehicleBody3D
 	private MeshInstance3D _debugMesh;
 
 	private Vector2I _currentCoord = new Vector2I(-1, -1);
+
+	private Vector3 _lastCheckMovePosition;
+	private float _notMovedTime;
+
+
+	public float NotMovedTime
+	{
+		get { return _notMovedTime; }
+	}
 	
 	public override void _Ready()
 	{
 		_targetTime = GD.Randf() * _interval;
 		_debugMesh = GetNode<MeshInstance3D>("DebugMesh");
 		_debugMesh.Visible = false;
+
+		_lastCheckMovePosition = GlobalPosition;
     }
 
 	public void UpdateTarget()
@@ -60,6 +71,18 @@ public partial class Car : VehicleBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+		Vector3 globalPosition = GlobalPosition;
+		if ((globalPosition - _lastCheckMovePosition).Length() < 10.0)
+		{
+			_notMovedTime += (float) delta;
+		}
+		else
+		{
+			_notMovedTime = 0;
+			_lastCheckMovePosition = globalPosition;
+		}
+
+
 		if (State.Map == null)
 		{
 			return;

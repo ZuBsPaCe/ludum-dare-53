@@ -54,7 +54,7 @@ public partial class City : Node3D
 	[Export] private Material _questMarkerMediumMaterial;
 	[Export] private Material _questMarkerHardMaterial;
 
-	[Export] private Array<PackedScene> _cars;
+	[Export] private Array<PackedScene> _sceneCars;
 	[Export] private Array<Material> _carsMaterials;
 
 
@@ -87,10 +87,12 @@ public partial class City : Node3D
 	private Map<TileType, Tile> _map;
 	private CityMap _cityMap;
 	private PlayerTruck _playerTruck;
+	private List<Car> _cars = new();
 
 	private Vector3 _playerTruckResetPos;
 	private Vector3 _playerTruckResetRot;
 
+	private Node3D _genRoot;
 
     public override void _Ready()
     {
@@ -103,8 +105,8 @@ public partial class City : Node3D
 		_playerTruckResetPos = _playerTruck.GlobalPosition;
 		_playerTruckResetRot = _playerTruck.GlobalRotation;
 
-        var root = GetNode<Node3D>(_genPath);
-        foreach (var child in root.GetChildren())
+        _genRoot = GetNode<Node3D>(_genPath);
+        foreach (var child in _genRoot.GetChildren())
             child.QueueFree();
 
 
@@ -127,8 +129,8 @@ public partial class City : Node3D
 
 		GD.Randomize();
 
-		GenerateTiles(root, _map);
-		GenerateCars(root, _map);
+		GenerateTiles(_genRoot, _map);
+		GenerateCars(_genRoot, _map);
 
 		State.Map = _map;
 		State.TileSize = _tileSize;
@@ -142,6 +144,31 @@ public partial class City : Node3D
         }
 
         _cityMap.UpdatePlayerPos(_playerTruck.GlobalPosition, -_playerTruck.GlobalRotation.Y);
+
+		int removedCount = 0;
+		Vector3 playerGlobalPosition = _playerTruck.GlobalPosition;
+        for (int i = _cars.Count - 1; i >= 0; i--)
+		{
+            Car car = _cars[i];
+            if (car.NotMovedTime > 120 && (playerGlobalPosition - car.GlobalPosition).Length() > 400)
+			{
+				_cars.RemoveAt(i);
+				car.QueueFree();
+				removedCount += 1;
+			}
+		}
+
+		for (int i = 0; i < removedCount; ++i)
+		{
+			for (int j = 0; j < 10; ++j)
+			{
+				if (State.Map.TryGetRandomCoord(TileType.Street, out Vector2I coord) &&
+					(playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > 400)
+				{
+					CreateCar(_genRoot, State.Map, coord.X, coord.Y);
+				}
+			}
+		}
     }
 
 	public Vector3 PlayerPos
@@ -638,50 +665,59 @@ public partial class City : Node3D
 				TileType tileType = map.GetType(xTile, yTile);
 
 				if (tileType == TileType.Street)
-				{
-					Car car = _cars.PickRandom().Instantiate<Car>();
-					root.AddChild(car);
+                {
 
-					car.GetNode<MeshInstance3D>("Car").MaterialOverride = _carsMaterials.PickRandom();
-
-					car.GlobalPosition = GetCenterPosInCoord(new Vector2I(xTile, yTile)) + Vector3.Up * 5;
-
-					List<Direction4> possibleDirs = new();
-					if (map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street))
-					{
-						possibleDirs.Add(Direction4.N);
-					}
-					if (map.IsTypeAtDir4(xTile, yTile, Direction4.E, TileType.Street))
-					{
-						possibleDirs.Add(Direction4.E);
-					}
-					if (map.IsTypeAtDir4(xTile, yTile, Direction4.S, TileType.Street))
-					{
-						possibleDirs.Add(Direction4.S);
-					}
-					if (map.IsTypeAtDir4(xTile, yTile, Direction4.W, TileType.Street))
-					{
-						possibleDirs.Add(Direction4.W);
-					}
-
-					Direction4 dir = possibleDirs.GetRandomItem();
-                    switch (dir)
-                    {
-                        case Direction4.N:
-							car.Rotate(Vector3.Up, Mathf.Tau * 0.5f);
-                            break;
-                        case Direction4.E:
-							car.Rotate(Vector3.Up, Mathf.Tau * 0.25f);
-                            break;
-                        case Direction4.S:
-                            break;
-                        case Direction4.W:
-							car.Rotate(Vector3.Up, Mathf.Tau * 0.75f);
-                            break;
-                            break;
-                    }
+                    CreateCar(root, map, xTile, yTile);
                 }
             }
+        }
+    }
+
+    private void CreateCar(Node3D root, Map<TileType, Tile> map, int xTile, int yTile)
+    {
+        Vector3 position = GetCenterPosInCoord(new Vector2I(xTile, yTile)) + Vector3.Up * 5;
+
+        Car car = _sceneCars.PickRandom().Instantiate<Car>();
+        root.AddChild(car);
+
+        _cars.Add(car);
+
+        car.GetNode<MeshInstance3D>("Car").MaterialOverride = _carsMaterials.PickRandom();
+
+        car.GlobalPosition = position;
+
+        List<Direction4> possibleDirs = new();
+        if (map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street))
+        {
+            possibleDirs.Add(Direction4.N);
+        }
+        if (map.IsTypeAtDir4(xTile, yTile, Direction4.E, TileType.Street))
+        {
+            possibleDirs.Add(Direction4.E);
+        }
+        if (map.IsTypeAtDir4(xTile, yTile, Direction4.S, TileType.Street))
+        {
+            possibleDirs.Add(Direction4.S);
+        }
+        if (map.IsTypeAtDir4(xTile, yTile, Direction4.W, TileType.Street))
+        {
+            possibleDirs.Add(Direction4.W);
+        }
+
+        Direction4 dir = possibleDirs.GetRandomItem();
+        switch (dir)
+        {
+            case Direction4.N:
+                car.Rotate(Vector3.Up, Mathf.Tau * 0.5f);
+                break;
+            case Direction4.E:
+                car.Rotate(Vector3.Up, Mathf.Tau * 0.25f);
+                break;
+            case Direction4.S:
+                break;
+            case Direction4.W:
+                car.Rotate(Vector3.Up, Mathf.Tau * 0.75f);
+                break;
         }
     }
 

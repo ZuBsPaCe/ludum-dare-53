@@ -4,4 +4,5 @@
 
 [node name="PlayerMapSprite" type="Sprite2D"]
 modulate = Color(0.0509804, 0.270588, 0.411765, 1)
+z_index = 10
 texture = ExtResource("1_vjrm0")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://djg3bngonl7m3"]
+[gd_scene load_steps=13 format=3 uid="uid://djg3bngonl7m3"]
 
 [ext_resource type="Material" uid="uid://5ds1avpanewp" path="res://Game/Cars/CarMaterial01.tres" id="2_7tbch"]
 [ext_resource type="Script" path="res://Game/Cars/Car.cs" id="2_hbfgn"]
@@ -78,6 +78,8 @@ size = Vector3(2.12786, 0.347292, 5.15035)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xusfs"]
 size = Vector3(1.97552, 1, 2.16132)
 
+[sub_resource type="SphereMesh" id="SphereMesh_lbnie"]
+
 [node name="Car01" type="VehicleBody3D"]
 script = ExtResource("2_hbfgn")
 
@@ -146,3 +148,7 @@ shape = SubResource("BoxShape3D_t0i77")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885713, -0.50074)
 shape = SubResource("BoxShape3D_xusfs")
+
+[node name="DebugMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75335, 2.94848)
+mesh = SubResource("SphereMesh_lbnie")

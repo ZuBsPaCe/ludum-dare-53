@@ -210,7 +210,7 @@ public partial class City : Node3D
 
     public void AddFuelMarker(Vector2I coord)
 	{
-        FuelMarker fuelMarker = _sceneFuelMarker.Instantiate<FuelMarker>();
+        Node3D fuelMarker = _sceneFuelMarker.Instantiate<Node3D>();
 		AddChild(fuelMarker);
         fuelMarker.GlobalPosition = GetCenterPosInCoord(coord);
 	}
@@ -624,6 +624,16 @@ public partial class City : Node3D
 			{
 				int x = xTile * _tileSize;
 
+				if (xTile == 13 && yTile == 13)
+				{
+					continue;
+				}
+
+				if (GD.Randf() < 0.6)
+				{
+					continue;
+				}
+
 				TileType tileType = map.GetType(xTile, yTile);
 
 				if (tileType == TileType.Street)
@@ -632,10 +642,45 @@ public partial class City : Node3D
 					root.AddChild(car);
 
 					car.GlobalPosition = GetCenterPosInCoord(new Vector2I(xTile, yTile)) + Vector3.Up * 5;
-				}
-			}
-		}
-	}
+
+					List<Direction4> possibleDirs = new();
+					if (map.IsTypeAtDir4(xTile, yTile, Direction4.N, TileType.Street))
+					{
+						possibleDirs.Add(Direction4.N);
+					}
+					if (map.IsTypeAtDir4(xTile, yTile, Direction4.E, TileType.Street))
+					{
+						possibleDirs.Add(Direction4.E);
+					}
+					if (map.IsTypeAtDir4(xTile, yTile, Direction4.S, TileType.Street))
+					{
+						possibleDirs.Add(Direction4.S);
+					}
+					if (map.IsTypeAtDir4(xTile, yTile, Direction4.W, TileType.Street))
+					{
+						possibleDirs.Add(Direction4.W);
+					}
+
+					Direction4 dir = possibleDirs.GetRandomItem();
+                    switch (dir)
+                    {
+                        case Direction4.N:
+							car.Rotate(Vector3.Up, Mathf.Tau * 0.5f);
+                            break;
+                        case Direction4.E:
+							car.Rotate(Vector3.Up, Mathf.Tau * 0.25f);
+                            break;
+                        case Direction4.S:
+                            break;
+                        case Direction4.W:
+							car.Rotate(Vector3.Up, Mathf.Tau * 0.75f);
+                            break;
+                            break;
+                    }
+                }
+            }
+        }
+    }
 
     private void CustomizeMaterials(Node3D tile)
     {

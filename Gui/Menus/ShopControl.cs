@@ -150,13 +150,13 @@ public partial class ShopControl : MenuControlBase
 
     private void WinButtonPressed()
     {
-        if (State.Money < 999)
+        if (State.Money < int.Parse(_winCost.Text.Replace("$ ", "")))
         {
             _shopLabel.Text = "Are you dying to get away? The Florida Keys are waiting for you...";
             return;
         }
 
-        State.Money -= 999;
+        State.Money -= int.Parse(_winCost.Text.Replace("$ ", ""));
         State.ShopWinBought = true;
 
         Sounds.PlaySound(SoundType.Won);
@@ -170,13 +170,13 @@ public partial class ShopControl : MenuControlBase
 
     private void Grip1ButtonPressed()
     {
-        if (State.Money < 30)
+        if (State.Money < int.Parse(_grip1Cost.Text.Replace("$ ", "")))
         {
             _shopLabel.Text = "I'm not doing this for free...";
             return;
         }
 
-        State.Money -= 30;
+        State.Money -= int.Parse(_grip1Cost.Text.Replace("$ ", ""));
         State.GripUpgrade1 = true;
 
         GameEventHub.EmitGripBought();
@@ -197,13 +197,13 @@ public partial class ShopControl : MenuControlBase
 
     private void Grip2ButtonPressed()
     {
-        if (State.Money < 60)
+        if (State.Money < int.Parse(_grip2Cost.Text.Replace("$ ", "")))
         {
             _shopLabel.Text = "Great tires, ain't them?";
             return;
         }
 
-        State.Money -= 60;
+        State.Money -= int.Parse(_grip2Cost.Text.Replace("$ ", ""));
         State.GripUpgrade2 = true;
 
         GameEventHub.EmitGripBought();
@@ -226,13 +226,13 @@ public partial class ShopControl : MenuControlBase
 
     private void Speed1ButtonPressed()
     {
-        if (State.Money < 80)
+        if (State.Money < int.Parse(_speed1Cost.Text.Replace("$ ", "")))
         {
             _shopLabel.Text = "Yeah, your truck could need that...";
             return;
         }
 
-        State.Money -= 80;
+        State.Money -= int.Parse(_speed1Cost.Text.Replace("$ ", ""));
         State.SpeedUpgrade1 = true;
 
         Sounds.PlaySound(SoundType.Money);
@@ -253,13 +253,13 @@ public partial class ShopControl : MenuControlBase
 
     private void Speed2ButtonPressed()
     {
-        if (State.Money < 120)
+        if (State.Money < int.Parse(_speed2Cost.Text.Replace("$ ", "")))
         {
             _shopLabel.Text = "Don't know if that's a good idea for a truck...";
             return;
         }
 
-        State.Money -= 120;
+        State.Money -= int.Parse(_speed2Cost.Text.Replace("$ ", ""));
         State.SpeedUpgrade2 = true;
 
         Sounds.PlaySound(SoundType.Money);
@@ -280,13 +280,13 @@ public partial class ShopControl : MenuControlBase
 
     private void Tank1ButtonPressed()
     {
-        if (State.Money < 200)
+        if (State.Money < int.Parse(_tank1Cost.Text.Replace("$ ", "")))
         {
             _shopLabel.Text = "Driving a lot, ain't ya?";
             return;
         }
 
-        State.Money -= 200;
+        State.Money -= int.Parse(_tank1Cost.Text.Replace("$ ", ""));
         State.TankUpgrade1 = true;
         State.TankMaxSize = 85;
         State.Fuel = 85;

@@ -44,6 +44,16 @@ public partial class UserSettings : Node
         }
     }
 
+    public static bool EasyMode
+    {
+        get { return (bool)_settings["EasyMode"]; }
+        set
+        {
+            _settings["EasyMode"] = value;
+            Save();
+        }
+    }
+
 
 
     public static float SoundSettings { get; private set; }
@@ -74,9 +84,10 @@ public partial class UserSettings : Node
             GD.PrintErr(ex.Message);
         }
 
-        MusicVolume = ReadFloat("MusicVolume", 0.8f, userSettings);
-        SoundVolume = ReadFloat("SoundVolume", 0.8f, userSettings);
+        MusicVolume = ReadFloat("MusicVolume", 0.4f, userSettings);
+        SoundVolume = ReadFloat("SoundVolume", 0.4f, userSettings);
         Fullscreen = ReadBool("Fullscreen", true, userSettings);
+        EasyMode = ReadBool("EasyMode", false, userSettings);
 
         _initialized = true;
 

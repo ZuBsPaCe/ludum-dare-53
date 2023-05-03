@@ -173,7 +173,7 @@ public partial class PlayerTruck : VehicleBody3D
 					{
 						_backPressTime += (float)delta;
 
-						if (_backPressTime > 0.5f)
+						if (_backPressTime > 0.25f)
 						{
 							_drivingBack = true;
 						}

@@ -3,5 +3,6 @@
     Init,
     Start,
     Settings,
-    Exit
+    Exit,
+    Help
 }

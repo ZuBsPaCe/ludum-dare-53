@@ -45,7 +45,9 @@ public partial class Level : Node3D
     {
         State.ShopWinBought = false;
         State.LevelTime.Restart();
-        State.QuestsDone = 0;
+        State.EasyQuestsDone = 0;
+        State.MediumQuestsDone = 0;
+        State.HardQuestsDone = 0;
         State.CountdownActive = false;
         State.CountdownSecs = 0;
         State.StarTime = 0;
@@ -105,7 +107,7 @@ public partial class Level : Node3D
         State.Money = 1;
 
         State.Fuel = State.TankMaxSize;
-        State.Money = 100;
+        State.Money = 50;
     }
 
     public override void _Process(double delta)
@@ -159,15 +161,32 @@ public partial class Level : Node3D
             }
             else if (State.Money <= 300)
             {
-                repairCost = 60;
+                repairCost = 40;
             }
             else
             {
-                repairCost = 100;
+                repairCost = 60;
+            }
+
+            string message = $"Repairs: -{repairCost} bucks";
+
+            if (State.Money == 0)
+            {
+                List<string> msg = new()
+                {
+                    "Again?!",
+                    "You should look for another job...",
+                    "You ever heard of brakes?",
+                    "Not again...",
+                    "Don't drink while driving...",
+                    "Don't text while driving..."
+                };
+
+                message = msg.GetRandomItem();
             }
 
             _notification.Unhold();
-            _notification.ShowNotification(NotificationType.Lost, $"Repairs: -{repairCost} bucks");
+            _notification.ShowNotification(NotificationType.Lost, message);
             State.Money -= repairCost;
 
             return;
@@ -175,7 +194,7 @@ public partial class Level : Node3D
 
         if (State.Fuel == 0 && !State.OverlayActive)
         {
-            if (_city.PlayerSpeed < 1)
+            if (_city.PlayerSpeed < 5)
             {
                 _ranOutOfFuelTimer += (float)delta;
             }
@@ -282,7 +301,23 @@ public partial class Level : Node3D
                 _notification.ShowNotification(NotificationType.Won, $"Good Job! +{_currentQuest.Money} bucks.");
                 Sounds.PlaySound(SoundType.Won);
                 State.Money += _currentQuest.Money;
-                State.QuestsDone += 1;
+
+                switch (_currentQuest.QuestLevel)
+                {
+                    case QuestLevel.Easy:
+                        State.EasyQuestsDone += 1;
+                        break;
+                    case QuestLevel.Medium:
+                        State.MediumQuestsDone += 1;
+                        break;
+                    case QuestLevel.Hard:
+                        State.HardQuestsDone += 1;
+                        break;
+                    default:
+                        Debug.Fail();
+                        break;
+                }
+
             }
             else
             {

@@ -16,14 +16,17 @@ public partial class SettingsControl : MenuControlBase
         _musicSlider = GetNode<HSlider>("%MusicSlider");
         _soundSlider = GetNode<HSlider>("%SoundSlider");
         var fullscreenCheckBox = GetNode<CheckBox>("%FullscreenCheckBox");
+        var easyModeCheckBox = GetNode<CheckBox>("%EasyModeCheckBox");
 
         _musicSlider.Value = UserSettings.MusicVolume;
         _soundSlider.Value = UserSettings.SoundVolume;
         fullscreenCheckBox.ButtonPressed = UserSettings.Fullscreen;
+        easyModeCheckBox.ButtonPressed = UserSettings.EasyMode;
 
         _musicSlider.ValueChanged += (value) => Music_ValueChanged(value);
         _soundSlider.ValueChanged += (value) => Sound_ValueChanged(value);
         fullscreenCheckBox.Toggled += (value) => Fullscreen_Toggled(value);
+        easyModeCheckBox.Toggled += (value) => EasyMode_Toggled(value);
 
         musicMinusButton.Pressed += MusicMinusButton_Pressed;
         musicPlusButton.Pressed += MusicPlusButton_Pressed;
@@ -58,6 +61,11 @@ public partial class SettingsControl : MenuControlBase
     private void Fullscreen_Toggled(bool value)
     {
         UserSettings.Fullscreen = value;
+    }
+
+    private void EasyMode_Toggled(bool value)
+    {
+        UserSettings.EasyMode = value;
     }
 
     private void Sound_ValueChanged(double value)

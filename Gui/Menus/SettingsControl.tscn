@@ -118,4 +118,18 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../HBoxContainer2/SoundMinusButton")
+focus_neighbor_bottom = NodePath("../EasyModeCheckBox")
+
+[node name="EasyModeLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Easy mode"
+
+[node name="EasyModeCheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../FullscreenCheckBox")
 focus_neighbor_bottom = NodePath(".")

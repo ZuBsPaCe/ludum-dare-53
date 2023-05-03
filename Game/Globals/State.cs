@@ -86,7 +86,9 @@ public class State
 
     public static bool OverlayActive { get; set; }
 
-    public static int QuestsDone { get; set; } = 0;
+    public static int EasyQuestsDone { get; set; } = 0;
+    public static int MediumQuestsDone { get; set; } = 0;
+    public static int HardQuestsDone { get; set; } = 0;
 
     public static Map<TileType, Tile> Map { get; set; }
     public static int TileSize { get; set; }

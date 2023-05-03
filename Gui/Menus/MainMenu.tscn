@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj8loufbngjxq"]
+[gd_scene load_steps=6 format=3 uid="uid://cj8loufbngjxq"]
 
 [ext_resource type="Script" path="res://Gui/Menus/MainMenu.cs" id="1_uyw2n"]
 [ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="3_qacy0"]
 [ext_resource type="PackedScene" uid="uid://cx3j0ojyc6skp" path="res://Gui/Menus/TitleControl.tscn" id="3_xny2s"]
+[ext_resource type="PackedScene" uid="uid://bvh43lwac40iv" path="res://Gui/Menus/HelpControl.tscn" id="4_30oqe"]
 [ext_resource type="Theme" uid="uid://dukrcqa657jnc" path="res://Gui/MyTheme.tres" id="4_wh4us"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_uyw2n")
 _sceneSettingsControl = ExtResource("3_qacy0")
 _titleControl = ExtResource("3_xny2s")
+_helpControl = ExtResource("4_30oqe")
 
 [node name="ButtonBar" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -26,6 +28,11 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "Start Game"
+
+[node name="HelpButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tutorial"
 
 [node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true

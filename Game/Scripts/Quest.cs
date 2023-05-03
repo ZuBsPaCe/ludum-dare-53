@@ -1,9 +1,11 @@
 ﻿using Godot;
+using Godot.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Quest
 {
-    public static List<string> _easyQuests = new()
+    private static List<string> _easyQuestsOrig = new()
     {
         "Please deliver this letter to Grandma. She lives nearby.",
         "My dog needs to poo-poo. Could you go for a short walk?",
@@ -15,7 +17,7 @@ public class Quest
         "You wan't to know what's in it? Nah, can't tell you. Yes it's alive! Don't open it!"
     };
 
-    public static List<string> _mediumQuests = new()
+    private static List<string> _mediumQuestsOrig = new()
     {
         "I made the laundry for my son. He never has time for it and always sits in front of his computer doing God knows what. He lives a few blocks away. Thanks.",
         "Please tell my boss that I quit. I can give you his Adress.",
@@ -28,7 +30,7 @@ public class Quest
         "I don't need this stuff anymore. You can dump them there."
     };
 
-    public static List<string> _hardQuests = new()
+    private static List<string> _hardQuestsOrig = new()
     {
         "Pssst, listen... You take care of this and I promise, you won't regret it. But don't tell anyone.",
         "Secret, shall I tell you? Grand Master of Jedi Order am I. Important this job is.",
@@ -39,12 +41,18 @@ public class Quest
         "They say you're fast. But are you *that* fast? I wanna see it!"
     };
 
+    private static Array<string> _easyQuests = new();
+    private static Array<string> _mediumQuests = new();
+    private static Array<string> _hardQuests = new();
+
+    private string _label;
+
     public Quest(Vector2I startCoord, Vector2I targetCoord)
     {
         StartCoord = startCoord;
         TargetCoord = targetCoord;
 
-        Label = GetLabel((targetCoord - startCoord).Length(), out int secs, out int money, out QuestLevel level);
+        GetInfo((targetCoord - startCoord).Length(), out int secs, out int money, out QuestLevel level);
         Seconds = secs;
         Money = money;
         QuestLevel = level;
@@ -62,39 +70,96 @@ public class Quest
     public QuestMarker QuestMarker { get; set; }
     public Sprite2D QuestSprite { get; set; }
 
-    public string Label { get; }
+    public string Label
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_label))
+            {
+                _label = GetLabel();
+            }
+
+            return _label;
+        }
+    }
+
     public int Seconds { get; }
     public int Money { get; }
     public QuestLevel QuestLevel { get; }
 
-    private string GetLabel(float distance, out int secs, out int money, out QuestLevel level)
+    private void GetInfo(float distance, out int secs, out int money, out QuestLevel level)
     {
-        List<int> shortMoney = new() { 30, 40, 50, 80 };
-        List<int> mediumMoney = new() { 80, 100, 120 };
-        List<int> largeMoney = new() { 150, 200, 250 };
+        List<int> shortMoney = new() { 50, 70, 90 };
+        List<int> mediumMoney = new() { 120, 140, 160 };
+        List<int> largeMoney = new() { 200, 250, 300 };
 
 
-        float support = 1f - Mathf.Clamp(State.QuestsDone / 8f, 0, 1);
 
         if (distance < 12)
         {
-            secs = 20 + (int)(30 * support);
+            float support = 1f - Mathf.Clamp(State.EasyQuestsDone / 5f, 0, 1);
+
+            secs = 20 + (int)(20 * support);
             money = shortMoney.GetRandomItem();
             level = QuestLevel.Easy;
-            return _easyQuests.GetRandomItem();
         }
-        
-        if (distance < 25)
+        else if (distance < 25)
         {
-            secs = 30 + (int)(30 * support);
+            float support = 1f - Mathf.Clamp(State.MediumQuestsDone / 5f, 0, 1);
+
+            secs = 20 + (int)(20 * support);
             level = QuestLevel.Medium;
             money = mediumMoney.GetRandomItem();
-            return _mediumQuests.GetRandomItem();
+        }
+        else
+        {
+            float support = 1f - Mathf.Clamp(State.HardQuestsDone / 5f, 0, 1);
+
+            secs = 20 + (int)(20 * support);
+            level = QuestLevel.Hard;
+            money = largeMoney.GetRandomItem();
         }
 
-        secs = 40 + (int)(30 * support);
-        level = QuestLevel.Hard;
-        money = largeMoney.GetRandomItem();
-        return _hardQuests.GetRandomItem();
+        if (UserSettings.EasyMode)
+        {
+            secs += 20;
+        }
+    }
+
+    private string GetLabel()
+    {
+        Array<string> fromArray;
+        List<string> origArray;
+
+        switch (QuestLevel)
+        {
+            case QuestLevel.Easy:
+                fromArray = _easyQuests;
+                origArray = _easyQuestsOrig;
+                break;
+
+            case QuestLevel.Medium:
+                fromArray = _mediumQuests;
+                origArray = _mediumQuestsOrig;
+                break;
+
+            case QuestLevel.Hard:
+                fromArray = _hardQuests;
+                origArray = _hardQuestsOrig;
+                break;
+
+            default:
+                return "...";
+        }
+                    
+        if (fromArray.Count == 0)
+        {
+            fromArray.AddRange(origArray);
+        }
+        int i = GD.RandRange(0, fromArray.Count - 1);
+        string label = fromArray[i];
+        fromArray.RemoveAt(i);
+
+        return label;
     }
 }

@@ -1,7 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public partial class ShopControl : MarginContainer
+public partial class ShopControl : MenuControlBase
 {
     private Label _grip1Label;
     private Label _grip1Cost;
@@ -26,6 +28,8 @@ public partial class ShopControl : MarginContainer
     private Label _shopLabel;
 
     private bool _boughtSomething;
+
+    List<Button> _allButtons = new();
 
     public override void _Ready()
     {
@@ -57,6 +61,12 @@ public partial class ShopControl : MarginContainer
         _speed1Button.Pressed += Speed1ButtonPressed;
         _speed2Button.Pressed += Speed2ButtonPressed;
 
+        _allButtons.Add(_grip1Button);
+        _allButtons.Add(_grip2Button);
+        _allButtons.Add(_speed1Button);
+        _allButtons.Add(_speed2Button);
+        _allButtons.Add(_winButton);
+
         UpdateContent();
 
         if (!HasItems())
@@ -67,39 +77,57 @@ public partial class ShopControl : MarginContainer
 
     private void UpdateContent()
     {
+        Button currentFocusButton = _allButtons.Find(button => button.HasFocus());
+
         _grip1Label.Visible = !State.GripUpgrade1;
         _grip1Cost.Visible = !State.GripUpgrade1;
         _grip1Button.Visible = !State.GripUpgrade1;
-
-        _grip1Button.Disabled = State.Money < 30;
 
 
         _grip2Label.Visible = !State.GripUpgrade2;
         _grip2Cost.Visible = !State.GripUpgrade2;
         _grip2Button.Visible = !State.GripUpgrade2;
 
-        _grip2Button.Disabled = State.Money < 60;
-
 
         _speed1Label.Visible = !State.SpeedUpgrade1;
         _speed1Cost.Visible = !State.SpeedUpgrade1;
         _speed1Button.Visible = !State.SpeedUpgrade1;
 
-        _speed1Button.Disabled = State.Money < 80;
-
-
         _speed2Label.Visible = !State.SpeedUpgrade2;
         _speed2Cost.Visible = !State.SpeedUpgrade2;
         _speed2Button.Visible = !State.SpeedUpgrade2;
-
-        _speed2Button.Disabled = State.Money < 120;
 
 
         _winLabel.Visible = !State.ShopWinBought;
         _winCost.Visible = !State.ShopWinBought;
         _winButton.Visible = !State.ShopWinBought;
 
-        _winButton.Disabled = State.Money < 999;
+        if (currentFocusButton != null && currentFocusButton.Visible == false)
+        {
+            List<Button> buttons = _allButtons.ToList();
+            int currentIndex = buttons.IndexOf(currentFocusButton);
+
+            // GrabFocus on next button. If there are no buttons visible, MenuBase.UpdateFocusToLeft()
+            // will grab focus on the menu bar button itself.
+
+            while (buttons.Count > 0)
+            {
+                if (buttons[currentIndex].Visible == false)
+                {
+                    buttons.RemoveAt(currentIndex);
+
+                    if (currentIndex >= buttons.Count)
+                    {
+                        currentIndex -= 1;
+                    }
+                }
+                else
+                {
+                    buttons[currentIndex].GrabFocus();
+                    break;
+                }
+            }
+        }
     }
 
     private bool HasItems()
@@ -109,6 +137,12 @@ public partial class ShopControl : MarginContainer
 
     private void WinButtonPressed()
     {
+        if (State.Money < 999)
+        {
+            _shopLabel.Text = "Are you dying to get away? The Florida Keys are waiting for you...";
+            return;
+        }
+
         State.Money -= 999;
         State.ShopWinBought = true;
 
@@ -123,6 +157,12 @@ public partial class ShopControl : MarginContainer
 
     private void Grip1ButtonPressed()
     {
+        if (State.Money < 30)
+        {
+            _shopLabel.Text = "I'm not doing this for free...";
+            return;
+        }
+
         State.Money -= 30;
         State.GripUpgrade1 = true;
 
@@ -144,6 +184,12 @@ public partial class ShopControl : MarginContainer
 
     private void Grip2ButtonPressed()
     {
+        if (State.Money < 60)
+        {
+            _shopLabel.Text = "Great tires, ain't them?";
+            return;
+        }
+
         State.Money -= 60;
         State.GripUpgrade2 = true;
 
@@ -167,6 +213,12 @@ public partial class ShopControl : MarginContainer
 
     private void Speed1ButtonPressed()
     {
+        if (State.Money < 80)
+        {
+            _shopLabel.Text = "Yeah, your truck could need that...";
+            return;
+        }
+
         State.Money -= 80;
         State.SpeedUpgrade1 = true;
 
@@ -188,6 +240,12 @@ public partial class ShopControl : MarginContainer
 
     private void Speed2ButtonPressed()
     {
+        if (State.Money < 120)
+        {
+            _shopLabel.Text = "Don't know if that's a good idea for a truck...";
+            return;
+        }
+
         State.Money -= 120;
         State.SpeedUpgrade2 = true;
 

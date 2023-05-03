@@ -81,7 +81,6 @@ public partial class DrivingOverlay : MenuBase
 
         _quest = quest;
         ShowButtonBar();
-        SetCurrentButton(_questInfoButton);
     }
 
     private void EventHub_MoneyChanged(int amount)
@@ -144,7 +143,7 @@ public partial class DrivingOverlay : MenuBase
         }
     }
 
-    protected override Control InstantiateMenuButtonControl(int state)
+    protected override MenuControlBase InstantiateMenuButtonControl(int state)
     {
         switch ((IngameMenuState)state)
         {
@@ -154,7 +153,7 @@ public partial class DrivingOverlay : MenuBase
                 return questControl;
 
             case IngameMenuState.Settings:
-                return _sceneSettingsControl.Instantiate<Control>();
+                return _sceneSettingsControl.Instantiate<SettingsControl>();
         }
 
         return null;

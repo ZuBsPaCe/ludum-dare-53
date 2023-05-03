@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class QuestControl : MarginContainer
+public partial class QuestControl : MenuControlBase
 {
 	private Label _questLabel;
 	private Quest _quest;

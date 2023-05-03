@@ -7,8 +7,6 @@ public partial class FuelStationMenu : MenuBase
     [Export] private PackedScene _fuelControl;
     [Export] private PackedScene _shopControl;
 
-    private TextureRect _mapTextureRect;
-
     private Label _fuelLabel;
     private Label _moneyLabel;
 
@@ -20,8 +18,6 @@ public partial class FuelStationMenu : MenuBase
 
     public override void _Ready()
     {
-        _mapTextureRect = GetNode<TextureRect>("%MapTextureRect");
-
         Control buttonBar = GetNode<MarginContainer>("%ButtonBar");
         InitButtonBar(buttonBar);
 
@@ -40,7 +36,7 @@ public partial class FuelStationMenu : MenuBase
         ShowButtonBar();
     }
 
-    protected override Control InstantiateMenuButtonControl(int state)
+    protected override MenuControlBase InstantiateMenuButtonControl(int state)
     {
         switch ((FuelStationMenuState)state)
         {
@@ -51,7 +47,7 @@ public partial class FuelStationMenu : MenuBase
                 return _shopControl.Instantiate<ShopControl>();
 
             case FuelStationMenuState.Settings:
-                return _sceneSettingsControl.Instantiate<Control>();
+                return _sceneSettingsControl.Instantiate<SettingsControl>();
         }
 
         return null;

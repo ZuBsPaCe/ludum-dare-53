@@ -68,8 +68,11 @@ thickness = 30
 [resource]
 default_font = ExtResource("1_8xmxb")
 default_font_size = 48
-Button/colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
-Button/colors/font_hover_color = Color(0.74902, 0.74902, 0.74902, 1)
+Button/colors/font_color = Color(0.705882, 0.705882, 0.705882, 1)
+Button/colors/font_focus_color = Color(0.705882, 0.705882, 0.705882, 1)
+Button/colors/font_hover_color = Color(0.862745, 0.862745, 0.862745, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
 CheckBox/icons/checked = SubResource("ImageTexture_vu643")
 CheckBox/icons/checked_disabled = SubResource("ImageTexture_lbrr8")
 CheckBox/icons/radio_checked = SubResource("ImageTexture_24d62")

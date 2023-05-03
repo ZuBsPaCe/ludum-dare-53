@@ -9,7 +9,6 @@ public partial class PauseMenu : MenuBase
         Control buttonBar = GetNode<MarginContainer>("%ButtonBar");
 
         InitButtonBar(buttonBar);
-        ShowButtonBar();
 
         Button continueButton = GetNode<Button>("%ContinueButton");
         Button settingsButton = GetNode<Button>("%SettingsButton");
@@ -18,14 +17,16 @@ public partial class PauseMenu : MenuBase
         InitButton(continueButton, PauseMenuState.Continue);
         InitButton(settingsButton, PauseMenuState.Settings);
         InitButton(mainMenuButton, PauseMenuState.MainMenu);
+
+        ShowButtonBar();
     }
 
-    protected override Control InstantiateMenuButtonControl(int state)
+    protected override MenuControlBase InstantiateMenuButtonControl(int state)
     {
         switch ((PauseMenuState)state)
         {
             case PauseMenuState.Settings:
-                return _sceneSettingsControl.Instantiate<Control>();
+                return _sceneSettingsControl.Instantiate<SettingsControl>();
         }
 
         return null;

@@ -28,14 +28,17 @@ text = "Music"
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="MusicMinus" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer"]
+[node name="MusicMinusButton" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-focus_neighbor_right = NodePath("../MusicPlus")
-focus_neighbor_bottom = NodePath("../../HBoxContainer2/SoundMinus")
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../MusicPlusButton")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/SoundMinusButton")
 text = "-"
 
 [node name="MusicSlider" type="HSlider" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer"]
@@ -43,19 +46,21 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_vertical = 4
-focus_mode = 0
+focus_mode = 1
 max_value = 1.0
 step = 0.05
 value = 0.8
 
-[node name="MusicPlus" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer"]
+[node name="MusicPlusButton" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../MusicMinus")
-focus_neighbor_bottom = NodePath("../../HBoxContainer2/SoundPlus")
+focus_neighbor_left = NodePath("../MusicMinusButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/SoundPlusButton")
 text = "+"
 
 [node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
@@ -66,14 +71,16 @@ text = "Sound
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="SoundMinus" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer2"]
+[node name="SoundMinusButton" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer2"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-focus_neighbor_top = NodePath("../../HBoxContainer/MusicMinus")
-focus_neighbor_right = NodePath("../SoundPlus")
+focus_neighbor_left = NodePath("../../HBoxContainer/MusicMinusButton")
+focus_neighbor_top = NodePath("../../HBoxContainer/MusicMinusButton")
+focus_neighbor_right = NodePath("../SoundPlusButton")
 focus_neighbor_bottom = NodePath("../../FullscreenCheckBox")
 text = "-"
 
@@ -82,20 +89,21 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_vertical = 4
-focus_mode = 0
+focus_mode = 1
 max_value = 1.0
 step = 0.05
 value = 0.8
 
-[node name="SoundPlus" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer2"]
+[node name="SoundPlusButton" type="Button" parent="PanelContainer/MarginContainer/GridContainer/HBoxContainer2"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../SoundMinus")
-focus_neighbor_top = NodePath("../../HBoxContainer/MusicPlus")
-focus_neighbor_bottom = NodePath("../../FullscreenLabel")
+focus_neighbor_left = NodePath("../SoundMinusButton")
+focus_neighbor_top = NodePath("../../HBoxContainer/MusicPlusButton")
+focus_neighbor_bottom = NodePath("../../FullscreenCheckBox")
 text = "+"
 
 [node name="FullscreenLabel" type="Label" parent="PanelContainer/MarginContainer/GridContainer"]
@@ -108,4 +116,6 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_top = NodePath("../HBoxContainer2/SoundMinus")
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../HBoxContainer2/SoundMinusButton")
+focus_neighbor_bottom = NodePath(".")

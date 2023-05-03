@@ -21,16 +21,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_otjna")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="MapTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Control"]
+[node name="MapTextureRect" type="TextureRect" parent="MarginContainer/Control"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 1
@@ -42,6 +39,10 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -65,7 +66,6 @@ size_flags_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
 text = "Counter"
 
 [node name="Spacer6" type="Control" parent="MarginContainer/HBoxContainer"]
@@ -90,7 +90,6 @@ size_flags_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
 text = "Fuel"
 
 [node name="Spacer2" type="Control" parent="MarginContainer/HBoxContainer"]
@@ -115,7 +114,6 @@ size_flags_vertical = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
 text = "Money"
 
 [node name="ButtonBar" type="MarginContainer" parent="."]
@@ -137,19 +135,16 @@ layout_mode = 2
 [node name="QuestInfoButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Quest Info"
 
 [node name="AcceptButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Accept Quest"
 
 [node name="DenyButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../MainMenuButton")
 text = "Skip Quest"
 
 [node name="Spacer2" type="Control" parent="ButtonBar/VBoxContainer"]
@@ -159,7 +154,6 @@ layout_mode = 2
 [node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../MainMenuButton")
 text = "Settings"
 
 [node name="Spacer" type="Control" parent="ButtonBar/VBoxContainer"]
@@ -169,6 +163,4 @@ layout_mode = 2
 [node name="MainMenuButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../SettingsButton")
-focus_neighbor_bottom = NodePath("../AcceptButton")
 text = "Exit to MainMenu"

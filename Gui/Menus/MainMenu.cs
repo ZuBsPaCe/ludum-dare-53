@@ -9,7 +9,6 @@ public partial class MainMenu : MenuBase
     {
         Control buttonBar = GetNode<MarginContainer>("%ButtonBar");
         InitButtonBar(buttonBar);
-        ShowButtonBar(0.25f);
 
         Button startButton = GetNode<Button>("%StartButton");
         Button settingsButton = GetNode<Button>("%SettingsButton");
@@ -19,18 +18,18 @@ public partial class MainMenu : MenuBase
         InitButton(settingsButton, MainMenuState.Settings);
         InitButton(exitButton, MainMenuState.Exit);
 
-        SetCurrentButton(startButton);
+        ShowButtonBar(0.25f);
     }
 
-    protected override Control InstantiateMenuButtonControl(int state)
+    protected override MenuControlBase InstantiateMenuButtonControl(int state)
     {
         switch ((MainMenuState) state)
         {
             case MainMenuState.Start:
-                return _titleControl.Instantiate<Control>();
+                return _titleControl.Instantiate<TitleControl>();
 
             case MainMenuState.Settings:
-                return _sceneSettingsControl.Instantiate<Control>();
+                return _sceneSettingsControl.Instantiate<SettingsControl>();
         }
 
         return null;

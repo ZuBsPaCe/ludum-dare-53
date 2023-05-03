@@ -1,12 +1,13 @@
 using Godot;
 using System;
 
-public partial class FuelControl : MarginContainer
+public partial class FuelControl : MenuControlBase
 {
     private Label _fuelLabel;
     private Button _buyFuelButton;
 
     private bool _boughtSome;
+    private bool _canBuy;
 
     public override void _Ready()
     {
@@ -29,7 +30,7 @@ public partial class FuelControl : MarginContainer
         if (State.Fuel >= 65)
         {
             _fuelLabel.Text = "Your truck is fully fueled. Please come back later.";
-            _buyFuelButton.Disabled = true;
+            _canBuy = false;
         }
         else if (State.Money > 0)
         {
@@ -41,22 +42,28 @@ public partial class FuelControl : MarginContainer
             {
                 _fuelLabel.Text = "10 fuel for 10 bucks. Ok?";
             }
-            _buyFuelButton.Disabled = false;
+
+            _canBuy = true;
         }
         else if (State.Fuel > 0)
         {
             _fuelLabel.Text = "You are broke. Better earn some money!";
-            _buyFuelButton.Disabled = true;
+            _canBuy = false;
         }
         else
         {
             _fuelLabel.Text = "You are broke and have no fuel. Game over.";
-            _buyFuelButton.Disabled = true;
+            _canBuy = false;
         }
     }
 
     private void BuyFuelButtonPressed()
     {
+        if (!_canBuy)
+        {
+            return;
+        }
+
         int buyFuel = Mathf.Min(State.Money, 10);
 
         if (State.Fuel + buyFuel > 65)

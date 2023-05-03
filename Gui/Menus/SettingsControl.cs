@@ -1,9 +1,12 @@
 using Godot;
 
-public partial class SettingsControl : MarginContainer
+public partial class SettingsControl : MenuControlBase
 {
+    private Button _musicMinusButton;
+
     public override void _Ready()
     {
+        _musicMinusButton = GetNode<Button>("%MusicMinusButton");
         var musicSlider = GetNode<HSlider>("%MusicSlider");
         var soundSlider = GetNode<HSlider>("%SoundSlider");
         var fullscreenCheckBox = GetNode<CheckBox>("%FullscreenCheckBox");

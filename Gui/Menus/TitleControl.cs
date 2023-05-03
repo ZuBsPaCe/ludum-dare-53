@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-public partial class TitleControl : MarginContainer
+public partial class TitleControl : MenuControlBase
 {
 	[Export] Texture2D _cloneTex;
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8tuljyi1sqsm"]
+[gd_scene load_steps=9 format=3 uid="uid://b8tuljyi1sqsm"]
 
 [ext_resource type="Script" path="res://Gui/Overlays/DrivingOverlay.cs" id="1_mqwa3"]
 [ext_resource type="PackedScene" uid="uid://uxxnejcqr03j" path="res://Gui/Menus/SettingsControl.tscn" id="2_8w3be"]
@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://rf506pc7k3ef" path="res://Gui/Icons/Fuel.png" id="5_k3xrc"]
 [ext_resource type="Texture2D" uid="uid://c3hsfuhvk8njl" path="res://Gui/Icons/Clock.png" id="5_rmbpw"]
 [ext_resource type="Texture2D" uid="uid://guwdb5kjwevp" path="res://Gui/Icons/Money.png" id="6_1m3ap"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjtfa"]
+bg_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="DrivingOverlay" type="CanvasLayer"]
 script = ExtResource("1_mqwa3")
@@ -22,20 +29,28 @@ grow_vertical = 2
 theme = ExtResource("2_otjna")
 
 [node name="Control" type="Control" parent="MarginContainer"]
-custom_minimum_size = Vector2(450, 450)
+custom_minimum_size = Vector2(450, 310)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="MapTextureRect" type="TextureRect" parent="MarginContainer/Control"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 300)
+[node name="Panel" type="Panel" parent="MarginContainer/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wjtfa")
+
+[node name="MapTextureRect" type="TextureRect" parent="MarginContainer/Control/Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 455.0
+offset_bottom = 455.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand_mode = 2

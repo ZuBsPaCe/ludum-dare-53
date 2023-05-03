@@ -105,7 +105,6 @@ public partial class Level : Node3D
 
         State.Fuel = State.TankMaxSize;
         State.Money = 100;
-        State.Money = 9999;
     }
 
     public override void _Process(double delta)

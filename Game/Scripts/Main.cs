@@ -149,7 +149,7 @@ public partial class Main : Node
         }
     }
 
-    public override void _UnhandledKeyInput(InputEvent ev)
+    public override void _UnhandledInput(InputEvent ev)
     {
         if (_gameStateMachine.IsState(GameState.Game) && !State.OverlayActive && ev.IsPressed() && !ev.IsEcho() && ev.IsAction("Pause"))
         {

@@ -52,6 +52,8 @@ public partial class Level : Node3D
         State.GripUpgrade2 = false;
         State.SpeedUpgrade1 = false;
         State.SpeedUpgrade2 = false;
+        State.TankUpgrade1 = false;
+        State.TankMaxSize = 65;
 
 
         _cityMap = GetNode<CityMap>("CityMap");
@@ -101,8 +103,9 @@ public partial class Level : Node3D
         State.Fuel = 1;
         State.Money = 1;
 
-        State.Fuel = 65;
+        State.Fuel = State.TankMaxSize;
         State.Money = 100;
+        State.Money = 9999;
     }
 
     public override void _Process(double delta)

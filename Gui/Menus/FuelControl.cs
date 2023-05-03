@@ -27,7 +27,7 @@ public partial class FuelControl : MenuControlBase
 
     private void UpdateMessage()
     {
-        if (State.Fuel >= 65)
+        if (State.Fuel >= State.TankMaxSize)
         {
             _fuelLabel.Text = "Your truck is fully fueled. Please come back later.";
             _canBuy = false;
@@ -66,9 +66,9 @@ public partial class FuelControl : MenuControlBase
 
         int buyFuel = Mathf.Min(State.Money, 10);
 
-        if (State.Fuel + buyFuel > 65)
+        if (State.Fuel + buyFuel > State.TankMaxSize)
         {
-            buyFuel = 65 - State.Fuel;
+            buyFuel = State.TankMaxSize - State.Fuel;
         }
 
         if (buyFuel > 0)

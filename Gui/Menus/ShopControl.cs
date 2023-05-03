@@ -21,6 +21,10 @@ public partial class ShopControl : MenuControlBase
     private Label _speed2Cost;
     private Button _speed2Button;
 
+    private Label _tank1Label;
+    private Label _tank1Cost;
+    private Button _tank1Button;
+
     private Label _winLabel;
     private Label _winCost;
     private Button _winButton;
@@ -49,6 +53,10 @@ public partial class ShopControl : MenuControlBase
         _speed2Cost = GetNode<Label>("%Speed2Cost");
         _speed2Button = GetNode<Button>("%Speed2Button");
 
+        _tank1Label = GetNode<Label>("%Tank1Label");
+        _tank1Cost = GetNode<Label>("%Tank1Cost");
+        _tank1Button = GetNode<Button>("%Tank1Button");
+
         _winLabel = GetNode<Label>("%WinLabel");
         _winCost = GetNode<Label>("%WinCost");
         _winButton = GetNode<Button>("%WinButton");
@@ -60,11 +68,13 @@ public partial class ShopControl : MenuControlBase
         _grip2Button.Pressed += Grip2ButtonPressed;
         _speed1Button.Pressed += Speed1ButtonPressed;
         _speed2Button.Pressed += Speed2ButtonPressed;
+        _tank1Button.Pressed += Tank1ButtonPressed;
 
         _allButtons.Add(_grip1Button);
         _allButtons.Add(_grip2Button);
         _allButtons.Add(_speed1Button);
         _allButtons.Add(_speed2Button);
+        _allButtons.Add(_tank1Button);
         _allButtons.Add(_winButton);
 
         UpdateContent();
@@ -97,6 +107,9 @@ public partial class ShopControl : MenuControlBase
         _speed2Cost.Visible = !State.SpeedUpgrade2;
         _speed2Button.Visible = !State.SpeedUpgrade2;
 
+        _tank1Label.Visible = !State.TankUpgrade1;
+        _tank1Cost.Visible = !State.TankUpgrade1;
+        _tank1Button.Visible = !State.TankUpgrade1;
 
         _winLabel.Visible = !State.ShopWinBought;
         _winCost.Visible = !State.ShopWinBought;
@@ -132,7 +145,7 @@ public partial class ShopControl : MenuControlBase
 
     private bool HasItems()
     {
-        return !State.GripUpgrade1 || !State.GripUpgrade2 || !State.SpeedUpgrade1 || !State.SpeedUpgrade2 || !State.ShopWinBought;
+        return !State.GripUpgrade1 || !State.GripUpgrade2 || !State.SpeedUpgrade1 || !State.SpeedUpgrade2 || !State.TankUpgrade1 || !State.ShopWinBought;
     }
 
     private void WinButtonPressed()
@@ -255,6 +268,35 @@ public partial class ShopControl : MenuControlBase
         if (HasItems())
         {
             _shopLabel.Text = $"Drive safely! Need something else?";
+        }
+        else
+        {
+            _shopLabel.Text = $"Thank you and good bye!";
+        }
+
+
+        UpdateContent();
+    }
+
+    private void Tank1ButtonPressed()
+    {
+        if (State.Money < 200)
+        {
+            _shopLabel.Text = "Driving a lot, ain't ya?";
+            return;
+        }
+
+        State.Money -= 200;
+        State.TankUpgrade1 = true;
+        State.TankMaxSize = 85;
+        State.Fuel = 85;
+
+        Sounds.PlaySound(SoundType.Money);
+
+
+        if (HasItems())
+        {
+            _shopLabel.Text = $"Fine choice! Need something else?";
         }
         else
         {

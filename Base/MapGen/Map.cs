@@ -167,11 +167,13 @@ public class Map<TYPE, ITEM> where TYPE : Enum where ITEM : class, new()
     // The coord must be valid
     public TYPE GetType(Vector2I coord)
     {
+        Debug.Assert(IsValid(coord));
         return _types[GetIndex(coord)];
     }
 
     public TYPE GetType(int x, int y)
     {
+        Debug.Assert(IsValid(x, y));
         return _types[GetIndex(x, y)];
     }
 

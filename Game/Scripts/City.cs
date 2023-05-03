@@ -190,7 +190,7 @@ public partial class City : Node3D
             int xTile = Mathf.RoundToInt(PlayerPos.X / State.TileSize);
             int yTile = Mathf.RoundToInt(PlayerPos.Z / State.TileSize);
 
-            if (State.Map.IsType(xTile, yTile, TileType.Street))
+            if (State.Map.IsValid(xTile, yTile) && State.Map.IsType(xTile, yTile, TileType.Street))
             {
 				var newResetPos = GetCenterPosInCoord(new Vector2I(xTile, yTile));
 				newResetPos.Y = _playerTruckResetPos.Y;

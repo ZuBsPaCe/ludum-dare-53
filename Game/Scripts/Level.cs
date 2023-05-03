@@ -39,6 +39,7 @@ public partial class Level : Node3D
     private bool _ranOutOfFuel;
     private float _ranOutOfFuelTimer;
 
+    private const float _markerEnterSpeed = 5f;
 
     public override void _Ready()
     {
@@ -212,12 +213,12 @@ public partial class Level : Node3D
         {
             if (!State.OverlayActive)
             {
-                if (_city.PlayerSpeed < 1)
+                if (_city.PlayerSpeed < _markerEnterSpeed)
                 {
                     if (_canEnterQuest != null || _canEnterShop)
                     {
                         string key = State.UsingJoypad ? "X" : "E";
-                        _notification.ShowNotification(NotificationType.Info, "Press X", true);
+                        _notification.ShowNotification(NotificationType.Info, $"Press {key}", true);
                         _enterNotificationShown = true;
                     }
                 }
@@ -225,7 +226,7 @@ public partial class Level : Node3D
         }
         else
         {
-            if (_city.PlayerSpeed >= 1)
+            if (_city.PlayerSpeed >= _markerEnterSpeed)
             {
                 _notification.Unhold();
                 _enterNotificationShown = false;

@@ -22,7 +22,7 @@ grow_vertical = 2
 theme = ExtResource("2_otjna")
 
 [node name="Control" type="Control" parent="MarginContainer"]
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(450, 450)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0

@@ -12,7 +12,7 @@ noise = SubResource("FastNoiseLite_t8f5g")
 [resource]
 render_priority = 0
 shader = ExtResource("1_6a1j3")
-shader_parameter/albedo = Color(1, 0.34, 0.12, 1)
+shader_parameter/albedo = Color(1, 0.054902, 0, 1)
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = Plane(1, 0, 0, 0)

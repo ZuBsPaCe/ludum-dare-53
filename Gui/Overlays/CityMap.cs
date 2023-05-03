@@ -95,13 +95,13 @@ public partial class CityMap : SubViewport
         switch (quest.QuestLevel)
         {
             case QuestLevel.Medium:
-                questSprite.Modulate = Colors.Orange;
+                questSprite.Modulate = Color.Color8(255, 165, 15);
                 break;
             case QuestLevel.Hard:
-                questSprite.Modulate = Colors.Red;
+                questSprite.Modulate = Color.Color8(255, 21, 0);
                 break;
             default:
-                questSprite.Modulate = Colors.Green;
+                questSprite.Modulate = Color.Color8(0, 147, 0);
                 Debug.Assert(quest.QuestLevel == QuestLevel.Easy);
                 break;
         }

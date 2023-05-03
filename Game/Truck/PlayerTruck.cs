@@ -125,6 +125,11 @@ public partial class PlayerTruck : VehicleBody3D
 		float forwardSpeed = vel.Project(forwardVec).Length();
 
 
+		if (Input.IsJoyButtonPressed(0, JoyButton.A))
+		{
+			State.UsingJoypad = true;
+		}
+		
 		float engineForce = 0;
 		float brakeForce = 0;
 

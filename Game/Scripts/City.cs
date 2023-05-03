@@ -99,6 +99,8 @@ public partial class City : Node3D
 
 	private Node3D _genRoot;
 
+	private const float _inSightRange = 300f;
+
     public override void _Ready()
     {
 		if (Engine.IsEditorHint())
@@ -175,7 +177,7 @@ public partial class City : Node3D
 			for (int j = 0; j < 10; ++j)
 			{
 				if (State.Map.TryGetRandomCoord(TileType.Street, out Vector2I coord) &&
-					(playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > 400)
+					(playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > _inSightRange)
 				{
 					CreateCar(_genRoot, State.Map, coord.X, coord.Y);
 					break;
@@ -787,7 +789,7 @@ public partial class City : Node3D
         for (int j = 0; j < 50; ++j)
         {
             if (map.TryGetRandomCoord(TileType.Street, out Vector2I coord) &&
-                (playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > 400)
+                (playerGlobalPosition - GetCenterPosInCoord(coord)).Length() > _inSightRange)
             {
                 Vector3 position = GetCenterPosInCoord(new Vector2I(coord.X, coord.Y)) + Vector3.Up * 2;
 

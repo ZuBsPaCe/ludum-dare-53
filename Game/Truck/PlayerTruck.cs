@@ -7,17 +7,24 @@ public partial class PlayerTruck : VehicleBody3D
 {
 	[Export] private float _maxForwardForce = 100;
 	[Export] private float _maxBackwardForce = 75;
+
+	[Export] private float _slowBrakeForce = 75;
+	[Export] private float _fastBrakeForce = 5;
+
 	[Export] private float _friction = 4;
 
 	[Export] private float _starForce = 300;
 	[Export] private float _starBackwardForce = 225;
 	[Export] private float _starFriction = 16;
 
+	[Export] private float _starSlowBrakeForce = 75;
+	[Export] private float _starFastBrakeForce = 25;
+
 	[Export] private float _speedUpgradeForce = 25;
-	[Export] private float _frictionUpgrade = 4;
+	[Export] private float _frictionUpgrade = 5;
 
 	[Export] private float _slowSteeringDeg = 45;
-	[Export] private float _fastSteeringDeg = 15;
+	[Export] private float _fastSteeringDeg = 10;
 	[Export] private float _fastSteeringVelocity = 30;
 
 	[Export] private float _steerSmoothing = 5f;
@@ -32,8 +39,13 @@ public partial class PlayerTruck : VehicleBody3D
 	private Area3D _starArea;
 
     private List<VehicleWheel3D> _wheels;
+	private VehicleWheel3D _wheelBackLeft;
+	private VehicleWheel3D _wheelBackRight;
 
 	private bool _updateFriction;
+
+	private bool _drivingBack;
+	private float _backPressTime;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -48,6 +60,8 @@ public partial class PlayerTruck : VehicleBody3D
         _starArea.BodyEntered += StarArea_BodyEntered;
 
 		_wheels = GetChildren().Where(child => child is VehicleWheel3D).Cast<VehicleWheel3D>().ToList();
+		_wheelBackLeft = GetNode<VehicleWheel3D>("WheelBackLeft");
+		_wheelBackRight = GetNode<VehicleWheel3D>("WheelBackRight");
 
 		GameEventHub.Instance.GripBought += GameEventHub_GripBought;
     }
@@ -104,65 +118,110 @@ public partial class PlayerTruck : VehicleBody3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
 	{
+		Vector3 forwardVec = Vector3.Forward.Rotated(Vector3.Up, GlobalRotation.Y);
+		Vector3 vel = LinearVelocity;
+		vel.Y = 0;
+
+		float forwardSpeed = vel.Project(forwardVec).Length();
+
+
 		float engineForce = 0;
+		float brakeForce = 0;
 
 		if (!State.OverlayActive)
 		{
 			if (State.Fuel > 0)
 			{
-				float engineForceForward = 0;
 				if (Input.IsActionPressed("Forward")) 
 				{
+					_drivingBack = false;
+
 					if (!_starred)
 					{
-                        engineForceForward += _maxForwardForce;
+                        engineForce += _maxForwardForce;
 
 						if (State.SpeedUpgrade1)
 						{
-                            engineForceForward += _speedUpgradeForce;
+                            engineForce += _speedUpgradeForce;
 						}
 
 						if (State.SpeedUpgrade2)
 						{
-                            engineForceForward += _speedUpgradeForce;
+                            engineForce += _speedUpgradeForce;
 						}
 					}
 					else
 					{
-                        engineForceForward += _starForce;
+                        engineForce += _starForce;
 					}
 
 					_fuelTime += (float)delta;
 				}
 
-				float engineForceBackward = 0;
-				if (Input.IsActionPressed("Backward"))
-                {
-					if (!_starred)
+				if (Input.IsActionJustPressed("Backward") && forwardSpeed <= 0.2f)
+				{
+					_drivingBack = true;
+				}
+                else if (Input.IsActionPressed("Backward"))
+				{
+					if (!_drivingBack && forwardSpeed <= 0.2f)
 					{
-                        engineForceBackward -= _maxBackwardForce;
+						_backPressTime += (float)delta;
 
-						if (State.SpeedUpgrade1)
+						if (_backPressTime > 0.5f)
 						{
-                            engineForceBackward -= _speedUpgradeForce;
-						}
-
-						if (State.SpeedUpgrade2)
-						{
-                            engineForceBackward -= _speedUpgradeForce;
+							_drivingBack = true;
 						}
 					}
-					else
-					{
-                        engineForceBackward -= _starBackwardForce;
-					}
-
-                    _fuelTime += (float)delta;
+                }
+				else
+				{
+					_drivingBack = false;
+					_backPressTime = 0;
 				}
 
-				engineForce = engineForceForward + engineForceBackward;
+				if (Input.IsActionPressed("Backward"))
+				{
+					if (!_drivingBack)
+					{
+						if (!_starred)
+						{
+							brakeForce += Mathf.Lerp(_slowBrakeForce, _fastBrakeForce, Mathf.Clamp(30f / LinearVelocity.Length(), 0, 1));
+						}
+						else
+						{
+							brakeForce += Mathf.Lerp(_starSlowBrakeForce, _starFastBrakeForce, Mathf.Clamp(30f / LinearVelocity.Length(), 0, 1));
+						}
+					}
+					else if (_drivingBack)
+					{
+						if (!_starred)
+						{
+							engineForce -= _maxBackwardForce;
+
+							if (State.SpeedUpgrade1)
+							{
+								engineForce -= _speedUpgradeForce;
+							}
+
+							if (State.SpeedUpgrade2)
+							{
+								engineForce -= _speedUpgradeForce;
+							}
+						}
+						else
+						{
+							engineForce -= _starBackwardForce;
+						}
+					}
+				}
 			}
 		}
+		else
+		{
+			brakeForce = 10;
+		}
+
 
 		if (State.StarTime > 0)
 		{
@@ -263,6 +322,9 @@ public partial class PlayerTruck : VehicleBody3D
 
 		EngineForce = engineForce;
 		Steering = steering;
+
+		_wheelBackLeft.Brake = brakeForce;
+		_wheelBackRight.Brake = brakeForce;
 
 
 		if (_fuelTime > 2.07f)

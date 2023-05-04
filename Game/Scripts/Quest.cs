@@ -115,7 +115,7 @@ public class Quest
         {
             float support = 1f - Mathf.Clamp(State.HardQuestsDone / 5f, 0, 1);
 
-            secs = 20 + (int)(20 * support);
+            secs = 25 + (int)(20 * support);
             level = QuestLevel.Hard;
             money = largeMoney.GetRandomItem();
         }

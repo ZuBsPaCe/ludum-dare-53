@@ -99,7 +99,7 @@ public class Quest
         {
             float support = 1f - Mathf.Clamp(State.EasyQuestsDone / 5f, 0, 1);
 
-            secs = 20 + (int)(20 * support);
+            secs = 20 + (int)(10 * support);
             money = shortMoney.GetRandomItem();
             level = QuestLevel.Easy;
         }
@@ -107,7 +107,7 @@ public class Quest
         {
             float support = 1f - Mathf.Clamp(State.MediumQuestsDone / 5f, 0, 1);
 
-            secs = 20 + (int)(20 * support);
+            secs = 25 + (int)(15 * support);
             level = QuestLevel.Medium;
             money = mediumMoney.GetRandomItem();
         }
@@ -115,7 +115,7 @@ public class Quest
         {
             float support = 1f - Mathf.Clamp(State.HardQuestsDone / 5f, 0, 1);
 
-            secs = 25 + (int)(20 * support);
+            secs = 40 + (int)(20 * support);
             level = QuestLevel.Hard;
             money = largeMoney.GetRandomItem();
         }

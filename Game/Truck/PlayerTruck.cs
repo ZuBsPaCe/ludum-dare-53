@@ -143,6 +143,7 @@ public partial class PlayerTruck : VehicleBody3D
 		{
 			if (State.Fuel > 0)
 			{
+				bool useFuel = false;
 				if (Input.IsActionPressed("Forward")) 
 				{
 					State.DrivingBack = false;
@@ -166,7 +167,7 @@ public partial class PlayerTruck : VehicleBody3D
                         engineForce += _starForce;
 					}
 
-					_fuelTime += (float)delta;
+					useFuel = true;
 				}
 
 				if (Input.IsActionJustPressed("Backward") && forwardSpeed <= 0.2f)
@@ -224,6 +225,20 @@ public partial class PlayerTruck : VehicleBody3D
 						{
 							engineForce -= _starBackwardForce;
 						}
+
+						useFuel = true;
+					}
+				}
+
+				if (useFuel)
+				{
+					if (State.FuelSaverUpgrade1)
+					{
+						_fuelTime += (float)delta / 3f;
+					}
+					else
+					{
+						_fuelTime += (float)delta;
 					}
 				}
 			}

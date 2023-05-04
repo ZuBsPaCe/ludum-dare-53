@@ -25,6 +25,10 @@ public partial class ShopControl : MenuControlBase
     private Label _tank1Cost;
     private Button _tank1Button;
 
+    private Label _fuelSaver1Label;
+    private Label _fuelSaver1Cost;
+    private Button _fuelSaver1Button;
+
     private Label _winLabel;
     private Label _winCost;
     private Button _winButton;
@@ -57,6 +61,10 @@ public partial class ShopControl : MenuControlBase
         _tank1Cost = GetNode<Label>("%Tank1Cost");
         _tank1Button = GetNode<Button>("%Tank1Button");
 
+        _fuelSaver1Label = GetNode<Label>("%FuelSaver1Label");
+        _fuelSaver1Cost = GetNode<Label>("%FuelSaver1Cost");
+        _fuelSaver1Button = GetNode<Button>("%FuelSaver1Button");
+
         _winLabel = GetNode<Label>("%WinLabel");
         _winCost = GetNode<Label>("%WinCost");
         _winButton = GetNode<Button>("%WinButton");
@@ -69,12 +77,14 @@ public partial class ShopControl : MenuControlBase
         _speed1Button.Pressed += Speed1ButtonPressed;
         _speed2Button.Pressed += Speed2ButtonPressed;
         _tank1Button.Pressed += Tank1ButtonPressed;
+        _fuelSaver1Button.Pressed += FuelSaver1ButtonPressed;
 
         _allButtons.Add(_grip1Button);
         _allButtons.Add(_grip2Button);
         _allButtons.Add(_speed1Button);
         _allButtons.Add(_speed2Button);
         _allButtons.Add(_tank1Button);
+        _allButtons.Add(_fuelSaver1Button);
         _allButtons.Add(_winButton);
 
         UpdateContent();
@@ -111,6 +121,10 @@ public partial class ShopControl : MenuControlBase
         _tank1Cost.Visible = !State.TankUpgrade1;
         _tank1Button.Visible = !State.TankUpgrade1;
 
+        _fuelSaver1Label.Visible = !State.FuelSaverUpgrade1;
+        _fuelSaver1Cost.Visible = !State.FuelSaverUpgrade1;
+        _fuelSaver1Button.Visible = !State.FuelSaverUpgrade1;
+
         _winLabel.Visible = !State.ShopWinBought;
         _winCost.Visible = !State.ShopWinBought;
         _winButton.Visible = !State.ShopWinBought;
@@ -145,7 +159,7 @@ public partial class ShopControl : MenuControlBase
 
     private bool HasItems()
     {
-        return !State.GripUpgrade1 || !State.GripUpgrade2 || !State.SpeedUpgrade1 || !State.SpeedUpgrade2 || !State.TankUpgrade1 || !State.ShopWinBought;
+        return !State.GripUpgrade1 || !State.GripUpgrade2 || !State.SpeedUpgrade1 || !State.SpeedUpgrade2 || !State.TankUpgrade1 || !State.FuelSaverUpgrade1 || !State.ShopWinBought;
     }
 
     private void WinButtonPressed()
@@ -297,6 +311,33 @@ public partial class ShopControl : MenuControlBase
         if (HasItems())
         {
             _shopLabel.Text = $"Fine choice! Need something else?";
+        }
+        else
+        {
+            _shopLabel.Text = $"Thank you and good bye!";
+        }
+
+
+        UpdateContent();
+    }
+
+    private void FuelSaver1ButtonPressed()
+    {
+        if (State.Money < int.Parse(_fuelSaver1Cost.Text.Replace("$ ", "")))
+        {
+            _shopLabel.Text = "Very good for the environment.";
+            return;
+        }
+
+        State.Money -= int.Parse(_fuelSaver1Cost.Text.Replace("$ ", ""));
+        State.FuelSaverUpgrade1 = true;
+
+        Sounds.PlaySound(SoundType.Money);
+
+
+        if (HasItems())
+        {
+            _shopLabel.Text = $"Awesome! Need something else?";
         }
         else
         {

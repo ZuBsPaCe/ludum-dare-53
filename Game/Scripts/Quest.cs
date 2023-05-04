@@ -93,8 +93,6 @@ public class Quest
         List<int> mediumMoney = new() { 120, 140, 160 };
         List<int> largeMoney = new() { 200, 250, 300 };
 
-
-
         if (distance < 12)
         {
             float support = 1f - Mathf.Clamp(State.EasyQuestsDone / 5f, 0, 1);
@@ -119,6 +117,10 @@ public class Quest
             level = QuestLevel.Hard;
             money = largeMoney.GetRandomItem();
         }
+
+        int totalQuestsDone = State.EasyQuestsDone + State.MediumQuestsDone + State.HardQuestsDone;
+        int addition = Mathf.Min(totalQuestsDone * 30, 200);
+        money += addition; 
 
         if (UserSettings.EasyMode)
         {

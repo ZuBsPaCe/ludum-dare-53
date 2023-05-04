@@ -35,6 +35,7 @@ public partial class Level : Node3D
 
     private float _flipTime;
     private bool _flipped;
+    private bool _forceResetTruck;
 
     private bool _ranOutOfFuel;
     private float _ranOutOfFuelTimer;
@@ -96,6 +97,8 @@ public partial class Level : Node3D
 		GameEventHub.Instance.StarPickedUp += GameEventHub_StarPickedUp;
 		GameEventHub.Instance.StarDone += GameEventHub_StarDone;
 
+        GameEventHub.Instance.ResetTruck += GameEventHub_ResetTruck;
+
 
         // Initialize LevelState StateMachine
         _levelStateMachine = _sceneStateMachine.Instantiate<StateMachine>();
@@ -113,7 +116,13 @@ public partial class Level : Node3D
     public override void _Process(double delta)
     {
         bool resetTruck = false;
-        if (_city.PlayerPos.Y < -20)
+
+        if (_forceResetTruck)
+        {
+            resetTruck = true;
+            _forceResetTruck = false;
+        }
+        else if (_city.PlayerPos.Y < -20)
         {
             resetTruck = true;
         }
@@ -431,6 +440,11 @@ public partial class Level : Node3D
     {
         _starMusic.Stop();
         PlayQuestMusic();
+    }
+
+    private void GameEventHub_ResetTruck()
+    {
+        _forceResetTruck = true;
     }
 
     private void SwitchLevelState(StateMachine stateMachine)

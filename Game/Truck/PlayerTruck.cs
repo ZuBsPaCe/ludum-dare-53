@@ -191,11 +191,11 @@ public partial class PlayerTruck : VehicleBody3D
 					{
 						if (!_starred)
 						{
-							brakeForce += Mathf.Lerp(_slowBrakeForce, _fastBrakeForce, Mathf.Clamp(30f / LinearVelocity.Length(), 0, 1));
+							brakeForce += Mathf.Lerp(_slowBrakeForce, _fastBrakeForce, Mathf.Clamp(LinearVelocity.Length() / 30f, 0, 1));
 						}
 						else
 						{
-							brakeForce += Mathf.Lerp(_starSlowBrakeForce, _starFastBrakeForce, Mathf.Clamp(30f / LinearVelocity.Length(), 0, 1));
+							brakeForce += Mathf.Lerp(_starSlowBrakeForce, _starFastBrakeForce, Mathf.Clamp(LinearVelocity.Length() / 30f, 0, 1));
 						}
 					}
 					else if (_drivingBack)

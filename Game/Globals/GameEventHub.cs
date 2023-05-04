@@ -25,6 +25,8 @@ public partial class GameEventHub : Node
 
     [Signal] public delegate void GripBoughtEventHandler();
 
+    [Signal] public delegate void ResetTruckEventHandler();
+
     public static void EmitSwitchLevelState(LevelState levelState)
     {
         Instance.EmitSignal(SignalName.SwitchLevelState, (int)levelState);
@@ -88,5 +90,10 @@ public partial class GameEventHub : Node
     internal static void EmitGripBought()
     {
         Instance.EmitSignal(SignalName.GripBought);
+    }
+
+    internal static void EmitResetTruck()
+    {
+        Instance.EmitSignal(SignalName.ResetTruck);
     }
 }

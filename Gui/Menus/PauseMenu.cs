@@ -11,11 +11,13 @@ public partial class PauseMenu : MenuBase
         InitButtonBar(buttonBar);
 
         Button continueButton = GetNode<Button>("%ContinueButton");
+        Button resetTruckButton = GetNode<Button>("%ResetTruckButton");
         Button settingsButton = GetNode<Button>("%SettingsButton");
         Button mainMenuButton = GetNode<Button>("%MainMenuButton");
 
         InitButton(continueButton, PauseMenuState.Continue);
-        InitButton(settingsButton, PauseMenuState.Settings);
+        InitButton(resetTruckButton, PauseMenuState.ResetTruck);
+        InitButton(settingsButton, PauseMenuState.ResetTruck);
         InitButton(mainMenuButton, PauseMenuState.MainMenu);
 
         ShowButtonBar();
@@ -25,7 +27,7 @@ public partial class PauseMenu : MenuBase
     {
         switch ((PauseMenuState)state)
         {
-            case PauseMenuState.Settings:
+            case PauseMenuState.ResetTruck:
                 return _sceneSettingsControl.Instantiate<SettingsControl>();
         }
 
@@ -40,6 +42,14 @@ public partial class PauseMenu : MenuBase
                 {
                     CloseMenu();
                     EventHub.EmitSwitchGameState(GameState.Game);
+                }
+                break;
+
+            case PauseMenuState.ResetTruck:
+                {
+                    CloseMenu();
+                    EventHub.EmitSwitchGameState(GameState.Game);
+                    GameEventHub.EmitResetTruck();
                 }
                 break;
 

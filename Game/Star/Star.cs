@@ -40,7 +40,7 @@ public partial class Star : Node3D
         albedo.A = 0;
         tween.Parallel().TweenProperty(material, "albedo_color", albedo, 0.5f);
 
-        _tween.TweenCallback(Callable.From(() => { QueueFree(); }));
+        tween.TweenCallback(Callable.From(() => { QueueFree(); }));
     }
 
     private void Area_BodyEntered(Node3D body)

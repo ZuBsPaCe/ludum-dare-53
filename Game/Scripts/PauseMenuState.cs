@@ -2,6 +2,6 @@
 {
     Init,
     Continue,
-    Settings,
+    ResetTruck,
     MainMenu
 }

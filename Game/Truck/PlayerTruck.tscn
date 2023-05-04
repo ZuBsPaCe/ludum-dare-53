@@ -26,11 +26,13 @@ size = Vector3(4, 3.5, 8)
 [node name="PlayerTruck" type="VehicleBody3D" groups=["Player"]]
 collision_layer = 10
 collision_mask = 15
+mass = 60.0
 physics_material_override = SubResource("PhysicsMaterial_km1iv")
 max_contacts_reported = 10
 contact_monitor = true
 can_sleep = false
 script = ExtResource("1_ojfq6")
+_speedUpgradeForce = 40.0
 
 [node name="WheelFrontLeft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, -7.8501, 5.6)
@@ -91,6 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.2501, 3.6)
 
 [node name="MotorSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_hmdn4")
+unit_size = 20.0
 autoplay = true
 bus = &"Motor"
 

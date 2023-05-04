@@ -25,6 +25,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
+[node name="ResetTruckButton" type="Button" parent="ButtonBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset Truck"
+
 [node name="SettingsButton" type="Button" parent="ButtonBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

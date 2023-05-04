@@ -107,7 +107,7 @@ public class Quest
         {
             float support = 1f - Mathf.Clamp(State.MediumQuestsDone / 5f, 0, 1);
 
-            secs = 25 + (int)(15 * support);
+            secs = 30 + (int)(15 * support);
             level = QuestLevel.Medium;
             money = mediumMoney.GetRandomItem();
         }

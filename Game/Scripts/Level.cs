@@ -58,6 +58,7 @@ public partial class Level : Node3D
         State.SpeedUpgrade2 = false;
         State.TankUpgrade1 = false;
         State.TankMaxSize = 65;
+        State.DrivingBack = false;
 
 
         _cityMap = GetNode<CityMap>("CityMap");

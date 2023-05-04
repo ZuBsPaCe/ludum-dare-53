@@ -105,4 +105,6 @@ public class State
     public static int TankMaxSize { get; set; }
 
     public static bool UsingJoypad { get; internal set; }
+
+    public static bool DrivingBack { get; set; }
 }

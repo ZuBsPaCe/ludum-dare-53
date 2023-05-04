@@ -44,7 +44,6 @@ public partial class PlayerTruck : VehicleBody3D
 
 	private bool _updateFriction;
 
-	private bool _drivingBack;
 	private float _backPressTime;
 
 
@@ -122,7 +121,14 @@ public partial class PlayerTruck : VehicleBody3D
 		Vector3 vel = LinearVelocity;
 		vel.Y = 0;
 
-		float forwardSpeed = vel.Project(forwardVec).Length();
+        float forwardSpeed = vel.Project(forwardVec).Length();
+		if (forwardVec.AngleTo(vel) < Mathf.Tau * 0.25f)
+		{
+			forwardSpeed *= -1;
+		}
+
+
+		GD.Print(forwardSpeed);
 
 
 		if (Input.IsJoyButtonPressed(0, JoyButton.A))
@@ -139,7 +145,7 @@ public partial class PlayerTruck : VehicleBody3D
 			{
 				if (Input.IsActionPressed("Forward")) 
 				{
-					_drivingBack = false;
+					State.DrivingBack = false;
 
 					if (!_starred)
 					{
@@ -165,29 +171,29 @@ public partial class PlayerTruck : VehicleBody3D
 
 				if (Input.IsActionJustPressed("Backward") && forwardSpeed <= 0.2f)
 				{
-					_drivingBack = true;
+					State.DrivingBack = true;
 				}
                 else if (Input.IsActionPressed("Backward"))
 				{
-					if (!_drivingBack && forwardSpeed <= 0.2f)
+					if (!State.DrivingBack && forwardSpeed <= 0.2f)
 					{
 						_backPressTime += (float)delta;
 
 						if (_backPressTime > 0.25f)
 						{
-							_drivingBack = true;
+							State.DrivingBack = true;
 						}
 					}
                 }
 				else
 				{
-					_drivingBack = false;
+					State.DrivingBack = false;
 					_backPressTime = 0;
 				}
 
 				if (Input.IsActionPressed("Backward"))
 				{
-					if (!_drivingBack)
+					if (!State.DrivingBack)
 					{
 						if (!_starred)
 						{
@@ -198,7 +204,7 @@ public partial class PlayerTruck : VehicleBody3D
 							brakeForce += Mathf.Lerp(_starSlowBrakeForce, _starFastBrakeForce, Mathf.Clamp(LinearVelocity.Length() / 30f, 0, 1));
 						}
 					}
-					else if (_drivingBack)
+					else if (State.DrivingBack)
 					{
 						if (!_starred)
 						{

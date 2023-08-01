@@ -17,7 +17,7 @@ public partial class PauseMenu : MenuBase
 
         InitButton(continueButton, PauseMenuState.Continue);
         InitButton(resetTruckButton, PauseMenuState.ResetTruck);
-        InitButton(settingsButton, PauseMenuState.ResetTruck);
+        InitButton(settingsButton, PauseMenuState.Settings);
         InitButton(mainMenuButton, PauseMenuState.MainMenu);
 
         ShowButtonBar();
@@ -27,7 +27,7 @@ public partial class PauseMenu : MenuBase
     {
         switch ((PauseMenuState)state)
         {
-            case PauseMenuState.ResetTruck:
+            case PauseMenuState.Settings:
                 return _sceneSettingsControl.Instantiate<SettingsControl>();
         }
 

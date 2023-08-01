@@ -3,5 +3,6 @@
     Init,
     Continue,
     ResetTruck,
-    MainMenu
+    MainMenu,
+    Settings
 }
